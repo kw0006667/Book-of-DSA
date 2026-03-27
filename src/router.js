@@ -61,6 +61,7 @@ async function loadChapter(id, sectionSlug) {
     if (home) home.style.display = 'none'
 
     article.innerHTML = content
+    wrapTables(article)
     currentChapterId = id
 
     // Re-run Prism
@@ -159,5 +160,16 @@ function addCopyButtons(container) {
       setTimeout(() => { btn.textContent = '複製'; btn.classList.remove('copied') }, 1800)
     })
     pre.appendChild(btn)
+  })
+}
+
+function wrapTables(container) {
+  container.querySelectorAll('table').forEach(table => {
+    if (table.parentElement?.classList.contains('chapter-table-wrap')) return
+
+    const wrapper = document.createElement('div')
+    wrapper.className = 'chapter-table-wrap'
+    table.parentNode?.insertBefore(wrapper, table)
+    wrapper.appendChild(table)
   })
 }
