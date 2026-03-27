@@ -4,6 +4,7 @@
  */
 
 import { setActive, setActiveSection } from './nav.js'
+import { enhanceProblemCards } from './leetcode/enhance-problems.js'
 
 const HASH_RE = /^ch(\d+)(?:-(.+))?$/
 
@@ -83,6 +84,7 @@ async function loadChapter(id, sectionSlug) {
 
     // Add copy buttons to standalone pre blocks
     addCopyButtons(article)
+    enhanceProblemCards(article)
 
     document.title = metadata?.title
       ? `${metadata.title} — Book of DSA`

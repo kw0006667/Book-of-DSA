@@ -13,8 +13,10 @@
 
 .chapter-content {
   min-width: 0;
-  padding: 48px max(24px, calc((100% - var(--content-max-width)) / 2));
-  max-width: calc(var(--content-max-width) + 96px);
+  width: 100%;
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: 48px clamp(20px, 3vw, 32px);
 }
 
 /* ---- Chapter Typography ---- */
@@ -215,10 +217,17 @@ html[data-theme="dark"] .callout-fe .callout-title { color: var(--tag-fe-text); 
   border-left: 3px solid var(--tag-lc-text);
   background: var(--color-bg-elevated);
   border-bottom: 1px solid var(--color-border-light);
-  transition: background var(--transition);
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+  cursor: pointer;
 }
 .problem-item:last-child { border-bottom: none; }
-.problem-item:hover { background: var(--color-bg-hover); }
+.problem-item:hover,
+.problem-item:focus-visible {
+  background: var(--color-bg-hover);
+  transform: translateX(4px);
+  box-shadow: inset 3px 0 0 var(--color-accent);
+  outline: none;
+}
 
 .problem-id {
   font-family: var(--font-mono);
@@ -232,6 +241,383 @@ html[data-theme="dark"] .callout-fe .callout-title { color: var(--tag-fe-text); 
   flex: 1;
   font-size: 0.9rem;
   color: var(--color-text);
+}
+
+body.leetcode-modal-open {
+  overflow: hidden;
+}
+
+.leetcode-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 320;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(26, 20, 15, 0.58);
+  backdrop-filter: blur(10px);
+}
+
+.leetcode-modal-backdrop[hidden] {
+  display: none !important;
+}
+
+.leetcode-modal {
+  width: min(870px, calc(100vw - 40px));
+  max-height: min(88vh, 920px);
+  background:
+    radial-gradient(circle at top right, color-mix(in srgb, var(--tag-lc-bg) 55%, transparent) 0, transparent 28%),
+    linear-gradient(180deg, color-mix(in srgb, var(--color-bg-elevated) 96%, #fff) 0%, color-mix(in srgb, var(--color-bg-elevated) 90%, var(--color-accent-light)) 100%);
+  border: 1px solid color-mix(in srgb, var(--color-border) 78%, var(--color-accent-light));
+  border-radius: 28px;
+  box-shadow: 0 30px 80px rgba(28, 22, 18, 0.22);
+  position: relative;
+  overflow: hidden;
+}
+
+.leetcode-modal-scroll {
+  overflow: auto;
+  max-height: min(88vh, 920px);
+}
+
+.leetcode-modal-content {
+  padding: 36px 38px 40px;
+}
+
+.leetcode-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+  border: 1px solid color-mix(in srgb, var(--color-border) 75%, var(--color-accent-light));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-bg-elevated) 88%, var(--tag-lc-bg));
+  color: var(--color-text);
+  cursor: pointer;
+  transition: transform var(--transition), background var(--transition), border-color var(--transition);
+}
+
+.leetcode-modal-close:hover {
+  transform: translateY(-1px);
+  border-color: var(--color-accent);
+  background: color-mix(in srgb, var(--color-bg-elevated) 72%, var(--tag-lc-bg));
+}
+
+.leetcode-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 28px;
+  padding-right: 48px;
+}
+
+.leetcode-modal-id {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 8px;
+}
+
+.leetcode-modal-header h2 {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(1.85rem, 3vw, 2.6rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.leetcode-overview-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(260px, 0.9fr);
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.leetcode-overview-card {
+  padding: 20px 22px;
+  border-radius: 22px;
+  border: 1px solid color-mix(in srgb, var(--color-border) 80%, var(--color-accent-light));
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--color-bg-elevated) 94%, #fff) 0%, color-mix(in srgb, var(--color-bg-elevated) 86%, var(--tag-lc-bg)) 100%);
+  box-shadow: 0 16px 36px rgba(42, 37, 32, 0.06);
+}
+
+.leetcode-overview-card h3 {
+  margin: 8px 0 10px;
+  font-size: 1.18rem;
+  line-height: 1.25;
+}
+
+.leetcode-overview-card p {
+  margin: 0;
+  color: var(--color-text-secondary);
+}
+
+.leetcode-overview-metrics {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+}
+
+.leetcode-overview-metrics strong {
+  display: block;
+  margin-top: 6px;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: var(--color-text);
+}
+
+.leetcode-overview-label {
+  display: inline-block;
+  font-size: 0.76rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.leetcode-section {
+  margin-top: 30px;
+}
+
+.leetcode-section h3 {
+  margin-bottom: 12px;
+  font-family: var(--font-serif);
+  font-size: 1.18rem;
+  line-height: 1.25;
+}
+
+.leetcode-section p {
+  font-size: 1rem;
+  line-height: 1.85;
+  color: var(--color-text-secondary);
+}
+
+.leetcode-examples,
+.leetcode-approach-list {
+  display: grid;
+  gap: 16px;
+}
+
+.leetcode-approach-table-wrap {
+  margin-bottom: 18px;
+  border: 1px solid color-mix(in srgb, var(--color-border) 80%, var(--color-accent-light));
+  border-radius: 18px;
+  overflow: auto;
+  background: color-mix(in srgb, var(--color-bg-elevated) 88%, var(--color-bg));
+  width: 100%;
+}
+
+.leetcode-approach-table {
+  width: 100%;
+  min-width: 760px;
+}
+
+.leetcode-approach-row {
+  display: grid;
+  grid-template-columns: minmax(220px, 1.5fr) minmax(110px, 0.8fr) minmax(110px, 0.8fr) minmax(280px, 2.4fr);
+}
+
+.leetcode-approach-row > div {
+  padding: 12px 14px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--color-border-light);
+  font-size: 0.92rem;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.leetcode-approach-row-head > div {
+  background: color-mix(in srgb, var(--color-bg-sidebar) 92%, var(--color-bg-elevated));
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.leetcode-approach-row:last-child > div {
+  border-bottom: none;
+}
+
+.leetcode-example,
+.leetcode-approach {
+  padding: 18px 20px;
+  border: 1px solid color-mix(in srgb, var(--color-border) 78%, var(--color-accent-light));
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--color-bg-elevated) 82%, var(--color-bg));
+  box-shadow: 0 8px 24px rgba(42, 37, 32, 0.05);
+}
+
+.leetcode-example p,
+.leetcode-approach p {
+  margin-top: 8px;
+}
+
+.leetcode-example code {
+  font-size: 0.9rem;
+}
+
+.leetcode-detail-list {
+  display: grid;
+  gap: 12px;
+  padding-left: 1.2rem;
+  color: var(--color-text-secondary);
+}
+
+.leetcode-detail-list li {
+  line-height: 1.8;
+}
+
+.leetcode-chip-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 0;
+}
+
+.leetcode-chip-list li,
+.leetcode-recommended {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  background: var(--tag-algo-bg);
+  color: var(--tag-algo-text);
+}
+
+.leetcode-approach.recommended {
+  border-color: color-mix(in srgb, var(--color-accent) 35%, var(--color-border));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-accent) 22%, transparent);
+}
+
+.leetcode-approach-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.leetcode-approach-head h4 {
+  margin: 0;
+  font-size: 1.02rem;
+  font-weight: 700;
+}
+
+.leetcode-complexities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+}
+
+.leetcode-approach-subsection {
+  margin-top: 14px;
+}
+
+.leetcode-approach-subsection h5 {
+  margin: 0 0 6px;
+  font-size: 0.83rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.leetcode-approach-subsection ul {
+  padding-left: 1.1rem;
+  color: var(--color-text-secondary);
+}
+
+.leetcode-approach-subsection li,
+.leetcode-approach-subsection p {
+  line-height: 1.75;
+}
+
+.leetcode-code-section dsa-code-block {
+  border-radius: 20px;
+  overflow: hidden;
+  border-color: color-mix(in srgb, var(--color-border) 82%, var(--color-accent-light));
+  box-shadow: 0 16px 32px rgba(42, 37, 32, 0.06);
+}
+
+.leetcode-code-section .code-tabs {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  padding: 8px 10px;
+  gap: 8px;
+  background: color-mix(in srgb, var(--color-bg-sidebar) 94%, var(--color-bg-elevated));
+  backdrop-filter: blur(8px);
+}
+
+.leetcode-code-section .code-tab {
+  border: 1px solid transparent;
+  border-bottom: none;
+  border-radius: 999px;
+  padding: 8px 12px;
+}
+
+.leetcode-code-section .code-tab.active {
+  background: var(--color-bg-elevated);
+  border-color: color-mix(in srgb, var(--color-border) 80%, var(--color-accent-light));
+}
+
+.leetcode-code-section .code-copy-btn {
+  background: var(--color-bg-elevated);
+}
+
+@media (max-width: 720px) {
+  .leetcode-modal-backdrop {
+    padding: 0;
+    align-items: flex-end;
+  }
+
+  .leetcode-modal {
+    width: 100%;
+    max-height: 92vh;
+    border-radius: 24px 24px 0 0;
+    border-bottom: none;
+  }
+
+  .leetcode-modal-scroll {
+    max-height: 92vh;
+  }
+
+  .leetcode-modal-content {
+    padding: 22px 16px 28px;
+  }
+
+  .leetcode-modal-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-right: 44px;
+  }
+
+  .leetcode-overview-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .leetcode-approach-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .leetcode-section p,
+  .leetcode-detail-list li,
+  .leetcode-approach-subsection li {
+    font-size: 0.96rem;
+  }
 }
 
 /* ---- Tables ---- */
@@ -355,8 +741,8 @@ html[data-theme="dark"] .callout-fe .callout-title { color: var(--tag-fe-text); 
 /* ---- Responsive ---- */
 @media (max-width: 768px) {
   .chapter-content {
-    padding: 24px 20px 40px;
     max-width: 100%;
+    padding: 24px 20px 40px;
   }
 
   .chapter-content h2 { margin-top: 36px; }
