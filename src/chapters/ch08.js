@@ -1,3 +1,5 @@
+import { getChapterProblemIds, renderProblemList } from '../leetcode/problem-catalog.js'
+
 export const metadata = {
   id: 8, part: 3,
   slug: 'heap-priority-queue',
@@ -216,14 +218,7 @@ function findKthLargest(nums: number[], k: number): number {
 </dsa-code-block>
 
 <h3>精選 LeetCode 題目</h3>
-<ul class="problem-list">
-  <li class="problem-item"><span class="problem-id">#215</span><span class="problem-name">Kth Largest Element in an Array</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#347</span><span class="problem-name">Top K Frequent Elements</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#23</span><span class="problem-name">Merge k Sorted Lists</span><span class="diff diff-hard">Hard</span></li>
-  <li class="problem-item"><span class="problem-id">#295</span><span class="problem-name">Find Median from Data Stream</span><span class="diff diff-hard">Hard</span></li>
-  <li class="problem-item"><span class="problem-id">#703</span><span class="problem-name">Kth Largest Element in a Stream</span><span class="diff diff-easy">Easy</span></li>
-  <li class="problem-item"><span class="problem-id">#373</span><span class="problem-name">Find K Pairs with Smallest Sums</span><span class="diff diff-medium">Medium</span></li>
-</ul>
+${renderProblemList(getChapterProblemIds(8))}
 
 <div class="chapter-footer">
   <a href="#ch7"><span class="footer-label">← 上一章</span><span class="footer-title">Binary Tree 與 BST</span></a>

@@ -1,3 +1,5 @@
+import { getChapterProblemIds, renderProblemList } from '../leetcode/problem-catalog.js'
+
 export const metadata = {
   id: 11, part: 3,
   slug: 'union-find',
@@ -124,12 +126,7 @@ function findCircleNum(isConnected: number[][]): number {
 </div>
 
 <h3>精選 LeetCode 題目</h3>
-<ul class="problem-list">
-  <li class="problem-item"><span class="problem-id">#547</span><span class="problem-name">Number of Provinces</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#684</span><span class="problem-name">Redundant Connection</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#128</span><span class="problem-name">Longest Consecutive Sequence</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#305</span><span class="problem-name">Number of Islands II</span><span class="diff diff-hard">Hard</span></li>
-</ul>
+${renderProblemList(getChapterProblemIds(11))}
 
 <div class="chapter-footer">
   <a href="#ch10"><span class="footer-label">← 上一章</span><span class="footer-title">Graph</span></a>

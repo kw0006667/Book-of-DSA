@@ -1,3 +1,5 @@
+import { getChapterProblemIds, renderProblemList } from '../leetcode/problem-catalog.js'
+
 export const metadata = {
   id: 19, part: 6,
   slug: 'divide-conquer',
@@ -157,12 +159,7 @@ function countInversions(nums: number[]): number {
 </dsa-code-block>
 
 <h3>精選 LeetCode 題目</h3>
-<ul class="problem-list">
-  <li class="problem-item"><span class="problem-id">#215</span><span class="problem-name">Kth Largest Element in an Array</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#23</span><span class="problem-name">Merge k Sorted Lists</span><span class="diff diff-hard">Hard</span></li>
-  <li class="problem-item"><span class="problem-id">#4</span><span class="problem-name">Median of Two Sorted Arrays</span><span class="diff diff-hard">Hard</span></li>
-  <li class="problem-item"><span class="problem-id">#315</span><span class="problem-name">Count of Smaller Numbers After Self</span><span class="diff diff-hard">Hard</span></li>
-</ul>
+${renderProblemList(getChapterProblemIds(19))}
 
 <div class="chapter-footer">
   <a href="#ch18"><span class="footer-label">← 上一章</span><span class="footer-title">Greedy</span></a>

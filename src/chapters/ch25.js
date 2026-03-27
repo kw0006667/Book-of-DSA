@@ -126,5 +126,9 @@ export const content = `
     <span class="footer-label">← 上一章</span>
     <span class="footer-title">System Design 中的 DSA</span>
   </a>
+  <a class="next" href="#ch26">
+    <span class="footer-label">下一章 →</span>
+    <span class="footer-title">全站 LeetCode 題庫索引</span>
+  </a>
 </div>
 `

@@ -1,3 +1,5 @@
+import { getChapterProblemIds, renderProblemList } from '../leetcode/problem-catalog.js'
+
 export const metadata = {
   id: 4, part: 2,
   slug: 'linked-list',
@@ -205,15 +207,7 @@ def find_middle(head: Optional[ListNode]) -> Optional[ListNode]:
 </div>
 
 <h3>精選 LeetCode 題目</h3>
-<ul class="problem-list">
-  <li class="problem-item"><span class="problem-id">#206</span><span class="problem-name">Reverse Linked List</span><span class="diff diff-easy">Easy</span></li>
-  <li class="problem-item"><span class="problem-id">#21</span><span class="problem-name">Merge Two Sorted Lists</span><span class="diff diff-easy">Easy</span></li>
-  <li class="problem-item"><span class="problem-id">#141</span><span class="problem-name">Linked List Cycle</span><span class="diff diff-easy">Easy</span></li>
-  <li class="problem-item"><span class="problem-id">#19</span><span class="problem-name">Remove Nth Node From End of List</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#143</span><span class="problem-name">Reorder List</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#146</span><span class="problem-name">LRU Cache</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#25</span><span class="problem-name">Reverse Nodes in k-Group</span><span class="diff diff-hard">Hard</span></li>
-</ul>
+${renderProblemList(getChapterProblemIds(4))}
 
 <div class="chapter-footer">
   <a href="#ch3">

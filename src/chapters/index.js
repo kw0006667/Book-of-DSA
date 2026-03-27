@@ -1,6 +1,6 @@
 /**
  * Book of DSA — Chapter & Part Metadata
- * 25 chapters across 7 parts
+ * 26 chapters across 8 parts
  */
 
 export const parts = [
@@ -11,6 +11,7 @@ export const parts = [
   { id: 5, label: 'Part V：演算法策略（上）' },
   { id: 6, label: 'Part VI：演算法策略（下）' },
   { id: 7, label: 'Part VII：實戰整合與面試策略' },
+  { id: 8, label: 'Part VIII：Appendix' },
 ]
 
 export const chapters = [
@@ -347,6 +348,20 @@ export const chapters = [
       { slug: 'blockers', title: '卡關應對' },
       { slug: 'edge-cases', title: 'Edge Cases & Testing' },
       { slug: 'followup', title: 'Follow-up 處理' },
+    ]
+  },
+  {
+    id: 26, part: 8,
+    slug: 'leetcode-problem-index',
+    title: 'Appendix · 全站 LeetCode 題庫索引',
+    tags: ['algo', 'ds'],
+    sections: [
+      { slug: 'overview', title: '總覽' },
+      { slug: 'linear-structures', title: '線性資料結構' },
+      { slug: 'trees-graphs', title: '樹與圖結構' },
+      { slug: 'sorting-searching', title: '排序與搜尋' },
+      { slug: 'strategy-core', title: '策略核心題型' },
+      { slug: 'strategy-advanced', title: '策略進階題型' },
     ]
   },
 ]

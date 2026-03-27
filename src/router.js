@@ -5,6 +5,7 @@
 
 import { setActive, setActiveSection } from './nav.js'
 import { enhanceProblemCards } from './leetcode/enhance-problems.js'
+import { chapters } from './chapters/index.js'
 
 const HASH_RE = /^ch(\d+)(?:-(.+))?$/
 
@@ -29,7 +30,7 @@ async function handleHash() {
   const chapterId = parseInt(match[1], 10)
   const sectionSlug = match[2] ?? null
 
-  if (isNaN(chapterId) || chapterId < 1 || chapterId > 25) {
+  if (isNaN(chapterId) || !chapters.some(ch => ch.id === chapterId)) {
     showHome()
     return
   }

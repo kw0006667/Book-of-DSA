@@ -1,3 +1,5 @@
+import { getChapterProblemIds, renderProblemList } from '../leetcode/problem-catalog.js'
+
 export const metadata = {
   id: 15, part: 5,
   slug: 'sliding-window',
@@ -174,13 +176,7 @@ def max_sliding_window(nums: list[int], k: int) -> list[int]:
 </div>
 
 <h3>精選 LeetCode 題目</h3>
-<ul class="problem-list">
-  <li class="problem-item"><span class="problem-id">#3</span><span class="problem-name">Longest Substring Without Repeating Characters</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#424</span><span class="problem-name">Longest Repeating Character Replacement</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#76</span><span class="problem-name">Minimum Window Substring</span><span class="diff diff-hard">Hard</span></li>
-  <li class="problem-item"><span class="problem-id">#239</span><span class="problem-name">Sliding Window Maximum</span><span class="diff diff-hard">Hard</span></li>
-  <li class="problem-item"><span class="problem-id">#567</span><span class="problem-name">Permutation in String</span><span class="diff diff-medium">Medium</span></li>
-</ul>
+${renderProblemList(getChapterProblemIds(15))}
 
 <div class="chapter-footer">
   <a href="#ch14"><span class="footer-label">← 上一章</span><span class="footer-title">Two Pointers</span></a>

@@ -1,3 +1,5 @@
+import { getChapterProblemIds, renderProblemList } from '../leetcode/problem-catalog.js'
+
 export const metadata = {
   id: 9, part: 3,
   slug: 'trie',
@@ -165,11 +167,7 @@ def char_idx(ch: str) -> int:
 </div>
 
 <h3>精選 LeetCode 題目</h3>
-<ul class="problem-list">
-  <li class="problem-item"><span class="problem-id">#208</span><span class="problem-name">Implement Trie (Prefix Tree)</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#212</span><span class="problem-name">Word Search II</span><span class="diff diff-hard">Hard</span></li>
-  <li class="problem-item"><span class="problem-id">#211</span><span class="problem-name">Design Add and Search Words Data Structure</span><span class="diff diff-medium">Medium</span></li>
-</ul>
+${renderProblemList(getChapterProblemIds(9))}
 
 <div class="chapter-footer">
   <a href="#ch8"><span class="footer-label">← 上一章</span><span class="footer-title">Heap 與 Priority Queue</span></a>

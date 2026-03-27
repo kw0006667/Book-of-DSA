@@ -1,3 +1,5 @@
+import { getChapterProblemIds, renderProblemList } from '../leetcode/problem-catalog.js'
+
 export const metadata = {
   id: 12, part: 4,
   slug: 'sorting',
@@ -185,13 +187,7 @@ tasks.sort(key=lambda t: (t.priority, t.created_at))</code></pre>
 </dsa-code-block>
 
 <h3>精選 LeetCode 題目</h3>
-<ul class="problem-list">
-  <li class="problem-item"><span class="problem-id">#912</span><span class="problem-name">Sort an Array</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#56</span><span class="problem-name">Merge Intervals</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#315</span><span class="problem-name">Count of Smaller Numbers After Self</span><span class="diff diff-hard">Hard</span></li>
-  <li class="problem-item"><span class="problem-id">#75</span><span class="problem-name">Sort Colors</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#179</span><span class="problem-name">Largest Number</span><span class="diff diff-medium">Medium</span></li>
-</ul>
+${renderProblemList(getChapterProblemIds(12))}
 
 <div class="chapter-footer">
   <a href="#ch11"><span class="footer-label">← 上一章</span><span class="footer-title">Union-Find</span></a>

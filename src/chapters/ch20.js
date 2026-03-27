@@ -1,3 +1,5 @@
+import { getChapterProblemIds, renderProblemList } from '../leetcode/problem-catalog.js'
+
 export const metadata = {
   id: 20, part: 6,
   slug: 'graph-advanced',
@@ -176,13 +178,7 @@ def network_delay_time(times: list[list[int]], n: int, k: int) -> int:
 </div>
 
 <h3>精選 LeetCode 題目</h3>
-<ul class="problem-list">
-  <li class="problem-item"><span class="problem-id">#207</span><span class="problem-name">Course Schedule</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#210</span><span class="problem-name">Course Schedule II</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#743</span><span class="problem-name">Network Delay Time</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#787</span><span class="problem-name">Cheapest Flights Within K Stops</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#1584</span><span class="problem-name">Min Cost to Connect All Points</span><span class="diff diff-medium">Medium</span></li>
-</ul>
+${renderProblemList(getChapterProblemIds(20))}
 
 <div class="chapter-footer">
   <a href="#ch19"><span class="footer-label">← 上一章</span><span class="footer-title">Divide and Conquer</span></a>

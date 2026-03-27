@@ -1,3 +1,5 @@
+import { getChapterProblemIds, renderProblemList } from '../leetcode/problem-catalog.js'
+
 export const metadata = {
   id: 10, part: 3,
   slug: 'graph',
@@ -151,14 +153,7 @@ def bfs(graph: dict, start: int) -> List[int]:
 </div>
 
 <h3>精選 LeetCode 題目</h3>
-<ul class="problem-list">
-  <li class="problem-item"><span class="problem-id">#200</span><span class="problem-name">Number of Islands</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#133</span><span class="problem-name">Clone Graph</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#207</span><span class="problem-name">Course Schedule</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#417</span><span class="problem-name">Pacific Atlantic Water Flow</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#994</span><span class="problem-name">Rotting Oranges</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#127</span><span class="problem-name">Word Ladder</span><span class="diff diff-hard">Hard</span></li>
-</ul>
+${renderProblemList(getChapterProblemIds(10))}
 
 <div class="chapter-footer">
   <a href="#ch9"><span class="footer-label">← 上一章</span><span class="footer-title">Trie</span></a>

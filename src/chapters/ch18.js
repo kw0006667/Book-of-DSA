@@ -1,3 +1,5 @@
+import { getChapterProblemIds, renderProblemList } from '../leetcode/problem-catalog.js'
+
 export const metadata = {
   id: 18, part: 6,
   slug: 'greedy',
@@ -108,14 +110,7 @@ def can_jump(nums: list[int]) -> bool:
 </div>
 
 <h3>精選 LeetCode 題目</h3>
-<ul class="problem-list">
-  <li class="problem-item"><span class="problem-id">#455</span><span class="problem-name">Assign Cookies</span><span class="diff diff-easy">Easy</span></li>
-  <li class="problem-item"><span class="problem-id">#55</span><span class="problem-name">Jump Game</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#435</span><span class="problem-name">Non-overlapping Intervals</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#134</span><span class="problem-name">Gas Station</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#621</span><span class="problem-name">Task Scheduler</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#45</span><span class="problem-name">Jump Game II</span><span class="diff diff-medium">Medium</span></li>
-</ul>
+${renderProblemList(getChapterProblemIds(18))}
 
 <div class="chapter-footer">
   <a href="#ch17"><span class="footer-label">← 上一章</span><span class="footer-title">Dynamic Programming</span></a>

@@ -1,3 +1,5 @@
+import { getChapterProblemIds, renderProblemList } from '../leetcode/problem-catalog.js'
+
 export const metadata = {
   id: 6, part: 2,
   slug: 'hash-table',
@@ -167,14 +169,7 @@ def subarray_sum(nums: list[int], k: int) -> int:
 </div>
 
 <h3>精選 LeetCode 題目</h3>
-<ul class="problem-list">
-  <li class="problem-item"><span class="problem-id">#1</span><span class="problem-name">Two Sum</span><span class="diff diff-easy">Easy</span></li>
-  <li class="problem-item"><span class="problem-id">#49</span><span class="problem-name">Group Anagrams</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#560</span><span class="problem-name">Subarray Sum Equals K</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#128</span><span class="problem-name">Longest Consecutive Sequence</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#146</span><span class="problem-name">LRU Cache</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#76</span><span class="problem-name">Minimum Window Substring</span><span class="diff diff-hard">Hard</span></li>
-</ul>
+${renderProblemList(getChapterProblemIds(6))}
 
 <div class="chapter-footer">
   <a href="#ch5">

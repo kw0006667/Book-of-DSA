@@ -1,0 +1,55 @@
+export const approach = (name, idea, time, space, recommended = false) => ({
+  name,
+  idea,
+  time,
+  space,
+  recommended,
+})
+
+export const detailedApproach = ({
+  name,
+  idea,
+  time,
+  space,
+  recommended = false,
+  pros = [],
+  cons = [],
+  whenToUse = '',
+}) => ({
+  name,
+  idea,
+  time,
+  space,
+  recommended,
+  pros,
+  cons,
+  whenToUse,
+})
+
+export const problem = ({
+  id,
+  title,
+  difficulty,
+  statement,
+  focus,
+  dataStructureChoice,
+  strategy,
+  examples,
+  techniques,
+  approaches,
+  python,
+  typescript,
+}) => ({
+  id,
+  title,
+  difficulty,
+  statement,
+  focus,
+  dataStructureChoice,
+  strategy,
+  examples,
+  techniques,
+  approaches,
+  python,
+  typescript,
+})
