@@ -156,58 +156,60 @@ class LeetCodeProblemModal extends HTMLElement {
         <span class="diff diff-${String(detail.difficulty).toLowerCase()}">${escapeHtml(detail.difficulty)}</span>
       </header>
 
-      ${renderOverview(detail)}
+      <div class="leetcode-modal-body">
+        ${renderOverview(detail)}
 
-      <section class="leetcode-section">
-        <h3>題目要做什麼</h3>
-        <p>${escapeHtml(detail.statement)}</p>
-      </section>
-
-      ${detail.focus ? `
         <section class="leetcode-section">
-          <h3>這題主要在考什麼</h3>
-          <p>${escapeHtml(detail.focus)}</p>
+          <h3>題目要做什麼</h3>
+          <p>${escapeHtml(detail.statement)}</p>
         </section>
-      ` : ''}
 
-      ${detail.dataStructureChoice ? `
+        ${detail.focus ? `
+          <section class="leetcode-section">
+            <h3>這題主要在考什麼</h3>
+            <p>${escapeHtml(detail.focus)}</p>
+          </section>
+        ` : ''}
+
+        ${detail.dataStructureChoice ? `
+          <section class="leetcode-section">
+            <h3>資料結構 / 演算法怎麼選</h3>
+            <p>${escapeHtml(detail.dataStructureChoice)}</p>
+          </section>
+        ` : ''}
+
+        ${renderBulletSection('解題思路拆解', detail.strategy)}
+
         <section class="leetcode-section">
-          <h3>資料結構 / 演算法怎麼選</h3>
-          <p>${escapeHtml(detail.dataStructureChoice)}</p>
+          <h3>Examples</h3>
+          <div class="leetcode-examples">
+            ${detail.examples.length ? detail.examples.map(renderExample).join('') : '<p>此題尚未補上 example。</p>'}
+          </div>
         </section>
-      ` : ''}
 
-      ${renderBulletSection('解題思路拆解', detail.strategy)}
+        <section class="leetcode-section">
+          <h3>解題技巧</h3>
+          <ul class="leetcode-chip-list">
+            ${detail.techniques.map(item => `<li>${escapeHtml(item)}</li>`).join('')}
+          </ul>
+        </section>
 
-      <section class="leetcode-section">
-        <h3>Examples</h3>
-        <div class="leetcode-examples">
-          ${detail.examples.length ? detail.examples.map(renderExample).join('') : '<p>此題尚未補上 example。</p>'}
-        </div>
-      </section>
+        <section class="leetcode-section">
+          <h3>不同解法與複雜度</h3>
+          ${renderApproachTable(detail.approaches)}
+          <div class="leetcode-approach-list">
+            ${detail.approaches.map(renderApproach).join('')}
+          </div>
+        </section>
 
-      <section class="leetcode-section">
-        <h3>解題技巧</h3>
-        <ul class="leetcode-chip-list">
-          ${detail.techniques.map(item => `<li>${escapeHtml(item)}</li>`).join('')}
-        </ul>
-      </section>
-
-      <section class="leetcode-section">
-        <h3>不同解法與複雜度</h3>
-        ${renderApproachTable(detail.approaches)}
-        <div class="leetcode-approach-list">
-          ${detail.approaches.map(renderApproach).join('')}
-        </div>
-      </section>
-
-      <section class="leetcode-section leetcode-code-section">
-        <h3>實作</h3>
-        <dsa-code-block>
-          <pre slot="python"><code class="language-python">${escapeHtml(detail.python)}</code></pre>
-          <pre slot="typescript"><code class="language-typescript">${escapeHtml(detail.typescript)}</code></pre>
-        </dsa-code-block>
-      </section>
+        <section class="leetcode-section leetcode-code-section">
+          <h3>實作</h3>
+          <dsa-code-block>
+            <pre slot="python"><code class="language-python">${escapeHtml(detail.python)}</code></pre>
+            <pre slot="typescript"><code class="language-typescript">${escapeHtml(detail.typescript)}</code></pre>
+          </dsa-code-block>
+        </section>
+      </div>
     `
 
     this._backdrop.hidden = false
