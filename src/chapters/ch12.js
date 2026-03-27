@@ -42,21 +42,22 @@ export const content = `
 
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">function mergeSort(arr: number[]): number[] {
-  if (arr.length <= 1) return arr
-  const mid = arr.length >> 1
-  const left = mergeSort(arr.slice(0, mid))
-  const right = mergeSort(arr.slice(mid))
-  return merge(left, right)
+  if (arr.length &lt;= 1) return arr;
+  const mid = arr.length &gt;&gt; 1;
+  const left = mergeSort(arr.slice(0, mid));
+  const right = mergeSort(arr.slice(mid));
+  return merge(left, right);
 }
 
 function merge(left: number[], right: number[]): number[] {
-  const result: number[] = []
-  let i = 0, j = 0
-  while (i < left.length && j < right.length) {
-    if (left[i] <= right[j]) result.push(left[i++])
-    else result.push(right[j++])
+  const result: number[] = [];
+  let i = 0,
+    j = 0;
+  while (i &lt; left.length &amp;&amp; j &lt; right.length) {
+    if (left[i] &lt;= right[j]) result.push(left[i++]);
+    else result.push(right[j++]);
   }
-  return result.concat(left.slice(i), right.slice(j))
+  return result.concat(left.slice(i), right.slice(j));
 }</code></pre>
   <pre slot="python"><code class="language-python">def merge_sort(arr: list[int]) -> list[int]:
     if len(arr) <= 1:
@@ -82,26 +83,26 @@ def merge(left: list[int], right: list[int]) -> list[int]:
 
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">function quickSort(arr: number[], lo = 0, hi = arr.length - 1): void {
-  if (lo >= hi) return
-  const pivotIdx = partition(arr, lo, hi)
-  quickSort(arr, lo, pivotIdx - 1)
-  quickSort(arr, pivotIdx + 1, hi)
+  if (lo &gt;= hi) return;
+  const pivotIdx = partition(arr, lo, hi);
+  quickSort(arr, lo, pivotIdx - 1);
+  quickSort(arr, pivotIdx + 1, hi);
 }
 
 function partition(arr: number[], lo: number, hi: number): number {
   // Randomize pivot to avoid O(n²) worst case
-  const randIdx = lo + Math.floor(Math.random() * (hi - lo + 1))
-  ;[arr[randIdx], arr[hi]] = [arr[hi], arr[randIdx]]
-  const pivot = arr[hi]
-  let i = lo - 1
-  for (let j = lo; j < hi; j++) {
-    if (arr[j] <= pivot) {
-      i++
-      ;[arr[i], arr[j]] = [arr[j], arr[i]]
+  const randIdx = lo + Math.floor(Math.random() * (hi - lo + 1));
+  [arr[randIdx], arr[hi]] = [arr[hi], arr[randIdx]];
+  const pivot = arr[hi];
+  let i = lo - 1;
+  for (let j = lo; j &lt; hi; j++) {
+    if (arr[j] &lt;= pivot) {
+      i++;
+      [arr[i], arr[j]] = [arr[j], arr[i]];
     }
   }
-  ;[arr[i + 1], arr[hi]] = [arr[hi], arr[i + 1]]
-  return i + 1
+  [arr[i + 1], arr[hi]] = [arr[hi], arr[i + 1]];
+  return i + 1;
 }</code></pre>
   <pre slot="python"><code class="language-python">import random
 
@@ -158,16 +159,20 @@ def partition(arr: list[int], lo: int, hi: int) -> int:
 
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// 自訂排序：按多個欄位
-interface Task { name: string; priority: number; createdAt: number }
+interface Task {
+  name: string;
+  priority: number;
+  createdAt: number;
+}
 
 const tasks: Task[] = [
   { name: 'A', priority: 1, createdAt: 200 },
   { name: 'B', priority: 1, createdAt: 100 },
   { name: 'C', priority: 2, createdAt: 300 },
-]
+];
 
 // 先按 priority 升序，再按 createdAt 升序
-tasks.sort((a, b) => a.priority - b.priority || a.createdAt - b.createdAt)</code></pre>
+tasks.sort((a, b) =&gt; a.priority - b.priority || a.createdAt - b.createdAt);</code></pre>
   <pre slot="python"><code class="language-python">from dataclasses import dataclass
 
 @dataclass

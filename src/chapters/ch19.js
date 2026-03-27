@@ -47,29 +47,30 @@ export const content = `
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// 第 K 大的元素 — LC #215
 function findKthLargest(nums: number[], k: number): number {
-  const target = nums.length - k  // k-th largest = (n-k)-th smallest
+  const target = nums.length - k; // k-th largest = (n-k)-th smallest
 
   function quickSelect(lo: number, hi: number): number {
-    const pivotIdx = partition(nums, lo, hi)
-    if (pivotIdx === target) return nums[pivotIdx]
-    return pivotIdx < target
-      ? quickSelect(pivotIdx + 1, hi)
-      : quickSelect(lo, pivotIdx - 1)
+    const pivotIdx = partition(nums, lo, hi);
+    if (pivotIdx === target) return nums[pivotIdx];
+    return pivotIdx &lt; target ? quickSelect(pivotIdx + 1, hi) : quickSelect(lo, pivotIdx - 1);
   }
 
   function partition(arr: number[], lo: number, hi: number): number {
-    const randIdx = lo + Math.floor(Math.random() * (hi - lo + 1))
-    ;[arr[randIdx], arr[hi]] = [arr[hi], arr[randIdx]]
-    const pivot = arr[hi]
-    let i = lo - 1
-    for (let j = lo; j < hi; j++) {
-      if (arr[j] <= pivot) { i++; [arr[i], arr[j]] = [arr[j], arr[i]] }
+    const randIdx = lo + Math.floor(Math.random() * (hi - lo + 1));
+    [arr[randIdx], arr[hi]] = [arr[hi], arr[randIdx]];
+    const pivot = arr[hi];
+    let i = lo - 1;
+    for (let j = lo; j &lt; hi; j++) {
+      if (arr[j] &lt;= pivot) {
+        i++;
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
     }
-    ;[arr[i+1], arr[hi]] = [arr[hi], arr[i+1]]
-    return i + 1
+    [arr[i + 1], arr[hi]] = [arr[hi], arr[i + 1]];
+    return i + 1;
   }
 
-  return quickSelect(0, nums.length - 1)
+  return quickSelect(0, nums.length - 1);
 }</code></pre>
   <pre slot="python"><code class="language-python">import random
 
@@ -105,32 +106,33 @@ def find_kth_largest(nums: list[int], k: int) -> int:
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// 計算陣列中的逆序對數（merge sort 過程中統計）
 function countInversions(nums: number[]): number {
-  let count = 0
+  let count = 0;
 
   function mergeSort(arr: number[]): number[] {
-    if (arr.length <= 1) return arr
-    const mid = arr.length >> 1
-    const left = mergeSort(arr.slice(0, mid))
-    const right = mergeSort(arr.slice(mid))
-    return merge(left, right)
+    if (arr.length &lt;= 1) return arr;
+    const mid = arr.length &gt;&gt; 1;
+    const left = mergeSort(arr.slice(0, mid));
+    const right = mergeSort(arr.slice(mid));
+    return merge(left, right);
   }
 
   function merge(left: number[], right: number[]): number[] {
-    const result: number[] = []
-    let i = 0, j = 0
-    while (i < left.length && j < right.length) {
-      if (left[i] <= right[j]) {
-        result.push(left[i++])
+    const result: number[] = [];
+    let i = 0,
+      j = 0;
+    while (i &lt; left.length &amp;&amp; j &lt; right.length) {
+      if (left[i] &lt;= right[j]) {
+        result.push(left[i++]);
       } else {
-        count += left.length - i  // 所有剩餘的 left 元素都比 right[j] 大
-        result.push(right[j++])
+        count += left.length - i; // 所有剩餘的 left 元素都比 right[j] 大
+        result.push(right[j++]);
       }
     }
-    return result.concat(left.slice(i), right.slice(j))
+    return result.concat(left.slice(i), right.slice(j));
   }
 
-  mergeSort(nums)
-  return count
+  mergeSort(nums);
+  return count;
 }</code></pre>
   <pre slot="python"><code class="language-python">def count_inversions(nums: list[int]) -> int:
     count = 0

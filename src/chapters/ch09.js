@@ -37,55 +37,55 @@ export const content = `
 
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">class TrieNode {
-  children: Map<string, TrieNode> = new Map()
-  isEnd = false
+  children: Map&lt;string, TrieNode&gt; = new Map();
+  isEnd = false;
 }
 
 class Trie {
-  private root = new TrieNode()
+  private root = new TrieNode();
 
   insert(word: string): void {
-    let node = this.root
+    let node = this.root;
     for (const ch of word) {
       if (!node.children.has(ch)) {
-        node.children.set(ch, new TrieNode())
+        node.children.set(ch, new TrieNode());
       }
-      node = node.children.get(ch)!
+      node = node.children.get(ch)!;
     }
-    node.isEnd = true
+    node.isEnd = true;
   }
 
   search(word: string): boolean {
-    const node = this._traverse(word)
-    return node !== null && node.isEnd
+    const node = this._traverse(word);
+    return node !== null &amp;&amp; node.isEnd;
   }
 
   startsWith(prefix: string): boolean {
-    return this._traverse(prefix) !== null
+    return this._traverse(prefix) !== null;
   }
 
   // 取得所有以 prefix 開頭的單字
   autocomplete(prefix: string): string[] {
-    const node = this._traverse(prefix)
-    if (!node) return []
-    const results: string[] = []
-    this._dfs(node, prefix, results)
-    return results
+    const node = this._traverse(prefix);
+    if (!node) return [];
+    const results: string[] = [];
+    this._dfs(node, prefix, results);
+    return results;
   }
 
   private _traverse(s: string): TrieNode | null {
-    let node = this.root
+    let node = this.root;
     for (const ch of s) {
-      if (!node.children.has(ch)) return null
-      node = node.children.get(ch)!
+      if (!node.children.has(ch)) return null;
+      node = node.children.get(ch)!;
     }
-    return node
+    return node;
   }
 
   private _dfs(node: TrieNode, current: string, results: string[]): void {
-    if (node.isEnd) results.push(current)
+    if (node.isEnd) results.push(current);
     for (const [ch, child] of node.children) {
-      this._dfs(child, current + ch, results)
+      this._dfs(child, current + ch, results);
     }
   }
 }</code></pre>
@@ -141,12 +141,12 @@ class Trie:
 
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">class TrieNodeCompact {
-  children: (TrieNodeCompact | null)[] = new Array(26).fill(null)
-  isEnd = false
+  children: (TrieNodeCompact | null)[] = new Array(26).fill(null);
+  isEnd = false;
 }
 
 // 字元 → index
-const idx = (ch: string) => ch.charCodeAt(0) - 'a'.charCodeAt(0)</code></pre>
+const idx = (ch: string) =&gt; ch.charCodeAt(0) - 'a'.charCodeAt(0);</code></pre>
   <pre slot="python"><code class="language-python">class TrieNodeCompact:
     def __init__(self):
         self.children = [None] * 26

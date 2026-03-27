@@ -94,15 +94,15 @@ export const additionalProblemDetails = Object.fromEntries([
 
         return best`,
     typescript: String.raw`function maxSubArray(nums: number[]): number {
-  let curr = nums[0]
-  let best = nums[0]
+  let curr = nums[0];
+  let best = nums[0];
 
   for (let i = 1; i < nums.length; i++) {
-    curr = Math.max(nums[i], curr + nums[i])
-    best = Math.max(best, curr)
+    curr = Math.max(nums[i], curr + nums[i]);
+    best = Math.max(best, curr);
   }
 
-  return best
+  return best;
 }`,
   }),
   buildProblem({
@@ -142,15 +142,15 @@ export const additionalProblemDetails = Object.fromEntries([
 
         return best`,
     typescript: String.raw`function maxProfit(prices: number[]): number {
-  let minPrice = Infinity
-  let best = 0
+  let minPrice = Infinity;
+  let best = 0;
 
   for (const price of prices) {
-    minPrice = Math.min(minPrice, price)
-    best = Math.max(best, price - minPrice)
+    minPrice = Math.min(minPrice, price);
+    best = Math.max(best, price - minPrice);
   }
 
-  return best
+  return best;
 }`,
   }),
   buildProblem({
@@ -191,19 +191,19 @@ export const additionalProblemDetails = Object.fromEntries([
 
         return best`,
     typescript: String.raw`function maxProduct(nums: number[]): number {
-  let maxEnding = nums[0]
-  let minEnding = nums[0]
-  let best = nums[0]
+  let maxEnding = nums[0];
+  let minEnding = nums[0];
+  let best = nums[0];
 
   for (let i = 1; i < nums.length; i++) {
-    const num = nums[i]
-    const candidates = [num, num * maxEnding, num * minEnding]
-    maxEnding = Math.max(...candidates)
-    minEnding = Math.min(...candidates)
-    best = Math.max(best, maxEnding)
+    const num = nums[i];
+    const candidates = [num, num * maxEnding, num * minEnding];
+    maxEnding = Math.max(...candidates);
+    minEnding = Math.min(...candidates);
+    best = Math.max(best, maxEnding);
   }
 
-  return best
+  return best;
 }`,
   }),
   buildProblem({
@@ -244,17 +244,17 @@ export const additionalProblemDetails = Object.fromEntries([
 
         return candidate`,
     typescript: String.raw`function majorityElement(nums: number[]): number {
-  let candidate = 0
-  let count = 0
+  let candidate = 0;
+  let count = 0;
 
   for (const num of nums) {
     if (count === 0) {
-      candidate = num
+      candidate = num;
     }
-    count += num === candidate ? 1 : -1
+    count += num === candidate ? 1 : -1;
   }
 
-  return candidate
+  return candidate;
 }`,
   }),
   buildProblem({
@@ -298,20 +298,20 @@ export const additionalProblemDetails = Object.fromEntries([
         reverse(0, k - 1)
         reverse(k, n - 1)`,
     typescript: String.raw`function rotate(nums: number[], k: number): void {
-  const n = nums.length
-  k %= n
+  const n = nums.length;
+  k %= n;
 
   const reverse = (left: number, right: number) => {
     while (left < right) {
-      ;[nums[left], nums[right]] = [nums[right], nums[left]]
-      left++
-      right--
+      [nums[left], nums[right]] = [nums[right], nums[left]];
+      left++;
+      right--;
     }
-  }
+  };
 
-  reverse(0, n - 1)
-  reverse(0, k - 1)
-  reverse(k, n - 1)
+  reverse(0, n - 1);
+  reverse(0, k - 1);
+  reverse(k, n - 1);
 }`,
   }),
   buildProblem({
@@ -360,24 +360,24 @@ export const additionalProblemDetails = Object.fromEntries([
 
         return dummy.next`,
     typescript: String.raw`function addTwoNumbers(l1: ListNode | null, l2: ListNode | null): ListNode | null {
-  const dummy = new ListNode(0)
-  let tail = dummy
-  let carry = 0
+  const dummy = new ListNode(0);
+  let tail = dummy;
+  let carry = 0;
 
   while (l1 || l2 || carry) {
-    const val1 = l1 ? l1.val : 0
-    const val2 = l2 ? l2.val : 0
-    const total = val1 + val2 + carry
-    carry = Math.floor(total / 10)
+    const val1 = l1 ? l1.val : 0;
+    const val2 = l2 ? l2.val : 0;
+    const total = val1 + val2 + carry;
+    carry = Math.floor(total / 10);
 
-    tail.next = new ListNode(total % 10)
-    tail = tail.next
+    tail.next = new ListNode(total % 10);
+    tail = tail.next;
 
-    l1 = l1 ? l1.next : null
-    l2 = l2 ? l2.next : null
+    l1 = l1 ? l1.next : null;
+    l2 = l2 ? l2.next : null;
   }
 
-  return dummy.next
+  return dummy.next;
 }`,
   }),
   buildProblem({
@@ -423,21 +423,21 @@ export const additionalProblemDetails = Object.fromEntries([
 
         return dummy.next`,
     typescript: String.raw`function swapPairs(head: ListNode | null): ListNode | null {
-  const dummy = new ListNode(0, head)
-  let prev: ListNode = dummy
+  const dummy = new ListNode(0, head);
+  let prev: ListNode = dummy;
 
   while (prev.next && prev.next.next) {
-    const first = prev.next
-    const second = first.next!
+    const first = prev.next;
+    const second = first.next!;
 
-    first.next = second.next
-    second.next = first
-    prev.next = second
+    first.next = second.next;
+    second.next = first;
+    prev.next = second;
 
-    prev = first
+    prev = first;
   }
 
-  return dummy.next
+  return dummy.next;
 }`,
   }),
   buildProblem({
@@ -491,28 +491,28 @@ export const additionalProblemDetails = Object.fromEntries([
         new_tail.next = None
         return new_head`,
     typescript: String.raw`function rotateRight(head: ListNode | null, k: number): ListNode | null {
-  if (!head || !head.next || k === 0) return head
+  if (!head || !head.next || k === 0) return head;
 
-  let length = 1
-  let tail = head
+  let length = 1;
+  let tail = head;
   while (tail.next) {
-    tail = tail.next
-    length++
+    tail = tail.next;
+    length++;
   }
 
-  k %= length
-  if (k === 0) return head
+  k %= length;
+  if (k === 0) return head;
 
-  tail.next = head
-  let steps = length - k - 1
-  let newTail = head
+  tail.next = head;
+  let steps = length - k - 1;
+  let newTail = head;
   while (steps-- > 0) {
-    newTail = newTail.next!
+    newTail = newTail.next!;
   }
 
-  const newHead = newTail.next
-  newTail.next = null
-  return newHead
+  const newHead = newTail.next;
+  newTail.next = null;
+  return newHead;
 }`,
   }),
   buildProblem({
@@ -553,17 +553,17 @@ export const additionalProblemDetails = Object.fromEntries([
 
         return head`,
     typescript: String.raw`function deleteDuplicates(head: ListNode | null): ListNode | null {
-  let current = head
+  let current = head;
 
   while (current && current.next) {
     if (current.val === current.next.val) {
-      current.next = current.next.next
+      current.next = current.next.next;
     } else {
-      current = current.next
+      current = current.next;
     }
   }
 
-  return head
+  return head;
 }`,
   }),
   buildProblem({
@@ -609,22 +609,22 @@ export const additionalProblemDetails = Object.fromEntries([
 
         return dummy.next`,
     typescript: String.raw`function reverseBetween(head: ListNode | null, left: number, right: number): ListNode | null {
-  const dummy = new ListNode(0, head)
-  let prev: ListNode = dummy
+  const dummy = new ListNode(0, head);
+  let prev: ListNode = dummy;
 
   for (let i = 0; i < left - 1; i++) {
-    prev = prev.next!
+    prev = prev.next!;
   }
 
-  let curr = prev.next!
+  let curr = prev.next!;
   for (let i = 0; i < right - left; i++) {
-    const next = curr.next!
-    curr.next = next.next
-    next.next = prev.next
-    prev.next = next
+    const next = curr.next!;
+    curr.next = next.next;
+    next.next = prev.next;
+    prev.next = next;
   }
 
-  return dummy.next
+  return dummy.next;
 }`,
   }),
   buildProblem({
@@ -674,22 +674,22 @@ export const additionalProblemDetails = Object.fromEntries([
 
         return stack[-1]`,
     typescript: String.raw`function evalRPN(tokens: string[]): number {
-  const stack: number[] = []
+  const stack: number[] = [];
 
   for (const token of tokens) {
     if ('+-*/'.includes(token)) {
-      const b = stack.pop()!
-      const a = stack.pop()!
-      if (token === '+') stack.push(a + b)
-      else if (token === '-') stack.push(a - b)
-      else if (token === '*') stack.push(a * b)
-      else stack.push(Math.trunc(a / b))
+      const b = stack.pop()!;
+      const a = stack.pop()!;
+      if (token === '+') stack.push(a + b);
+      else if (token === '-') stack.push(a - b);
+      else if (token === '*') stack.push(a * b);
+      else stack.push(Math.trunc(a / b));
     } else {
-      stack.push(Number(token))
+      stack.push(Number(token));
     }
   }
 
-  return stack[stack.length - 1]
+  return stack[stack.length - 1];
 }`,
   }),
   buildProblem({
@@ -738,25 +738,25 @@ class MyStack:
     def empty(self) -> bool:
         return not self.q`,
     typescript: String.raw`class MyStack {
-  private q: number[] = []
+  private q: number[] = [];
 
   push(x: number): void {
-    this.q.push(x)
+    this.q.push(x);
     for (let i = 0; i < this.q.length - 1; i++) {
-      this.q.push(this.q.shift()!)
+      this.q.push(this.q.shift()!);
     }
   }
 
   pop(): number {
-    return this.q.shift()!
+    return this.q.shift()!;
   }
 
   top(): number {
-    return this.q[0]
+    return this.q[0];
   }
 
   empty(): boolean {
-    return this.q.length === 0
+    return this.q.length === 0;
   }
 }`,
   }),
@@ -809,26 +809,26 @@ class Solution:
 
         return ''.join(current)`,
     typescript: String.raw`function decodeString(s: string): string {
-  const stack: Array<[string, number]> = []
-  let current = ''
-  let number = 0
+  const stack: Array<[string, number]> = [];
+  let current = '';
+  let number = 0;
 
   for (const ch of s) {
     if (/\d/.test(ch)) {
-      number = number * 10 + Number(ch)
+      number = number * 10 + Number(ch);
     } else if (ch === '[') {
-      stack.push([current, number])
-      current = ''
-      number = 0
+      stack.push([current, number]);
+      current = '';
+      number = 0;
     } else if (ch === ']') {
-      const [prev, repeat] = stack.pop()!
-      current = prev + current.repeat(repeat)
+      const [prev, repeat] = stack.pop()!;
+      current = prev + current.repeat(repeat);
     } else {
-      current += ch
+      current += ch;
     }
   }
 
-  return current
+  return current;
 }`,
   }),
   buildProblem({
@@ -876,22 +876,22 @@ class Solution:
         result = ''.join(stack).lstrip('0')
         return result or '0'`,
     typescript: String.raw`function removeKdigits(num: string, k: number): string {
-  const stack: string[] = []
+  const stack: string[] = [];
 
   for (const ch of num) {
     while (k > 0 && stack.length && stack[stack.length - 1] > ch) {
-      stack.pop()
-      k--
+      stack.pop();
+      k--;
     }
-    stack.push(ch)
+    stack.push(ch);
   }
 
   while (k-- > 0) {
-    stack.pop()
+    stack.pop();
   }
 
-  const result = stack.join('').replace(/^0+/, '')
-  return result === '' ? '0' : result
+  const result = stack.join('').replace(/^0+/, '');
+  return result === '' ? '0' : result;
 }`,
   }),
   buildProblem({
@@ -935,21 +935,21 @@ class Solution:
 
         return ans`,
     typescript: String.raw`function nextGreaterElements(nums: number[]): number[] {
-  const n = nums.length
-  const ans = new Array(n).fill(-1)
-  const stack: number[] = []
+  const n = nums.length;
+  const ans = new Array(n).fill(-1);
+  const stack: number[] = [];
 
   for (let i = 0; i < 2 * n; i++) {
-    const num = nums[i % n]
+    const num = nums[i % n];
     while (stack.length && nums[stack[stack.length - 1]] < num) {
-      ans[stack.pop()!] = num
+      ans[stack.pop()!] = num;
     }
     if (i < n) {
-      stack.push(i)
+      stack.push(i);
     }
   }
 
-  return ans
+  return ans;
 }`,
   }),
   buildProblem({
@@ -991,18 +991,18 @@ class Solution:
 
         return not stack`,
     typescript: String.raw`function validateStackSequences(pushed: number[], popped: number[]): boolean {
-  const stack: number[] = []
-  let j = 0
+  const stack: number[] = [];
+  let j = 0;
 
   for (const num of pushed) {
-    stack.push(num)
+    stack.push(num);
     while (stack.length && j < popped.length && stack[stack.length - 1] === popped[j]) {
-      stack.pop()
-      j++
+      stack.pop();
+      j++;
     }
   }
 
-  return stack.length === 0
+  return stack.length === 0;
 }`,
   }),
   buildProblem({
@@ -1051,27 +1051,27 @@ class Solution:
 
         return True`,
     typescript: String.raw`function isValidSudoku(board: string[][]): boolean {
-  const rows = Array.from({ length: 9 }, () => new Set<string>())
-  const cols = Array.from({ length: 9 }, () => new Set<string>())
-  const boxes = Array.from({ length: 9 }, () => new Set<string>())
+  const rows = Array.from({ length: 9 }, () => new Set<string>());
+  const cols = Array.from({ length: 9 }, () => new Set<string>());
+  const boxes = Array.from({ length: 9 }, () => new Set<string>());
 
   for (let r = 0; r < 9; r++) {
     for (let c = 0; c < 9; c++) {
-      const val = board[r][c]
-      if (val === '.') continue
+      const val = board[r][c];
+      if (val === '.') continue;
 
-      const box = Math.floor(r / 3) * 3 + Math.floor(c / 3)
+      const box = Math.floor(r / 3) * 3 + Math.floor(c / 3);
       if (rows[r].has(val) || cols[c].has(val) || boxes[box].has(val)) {
-        return false
+        return false;
       }
 
-      rows[r].add(val)
-      cols[c].add(val)
-      boxes[box].add(val)
+      rows[r].add(val);
+      cols[c].add(val);
+      boxes[box].add(val);
     }
   }
 
-  return true
+  return true;
 }`,
   }),
   buildProblem({
@@ -1115,19 +1115,19 @@ class Solution:
 
         return True`,
     typescript: String.raw`function isIsomorphic(s: string, t: string): boolean {
-  const sToT = new Map<string, string>()
-  const tToS = new Map<string, string>()
+  const sToT = new Map<string, string>();
+  const tToS = new Map<string, string>();
 
   for (let i = 0; i < s.length; i++) {
-    const a = s[i]
-    const b = t[i]
-    if (sToT.has(a) && sToT.get(a) !== b) return false
-    if (tToS.has(b) && tToS.get(b) !== a) return false
-    sToT.set(a, b)
-    tToS.set(b, a)
+    const a = s[i];
+    const b = t[i];
+    if (sToT.has(a) && sToT.get(a) !== b) return false;
+    if (tToS.has(b) && tToS.get(b) !== a) return false;
+    sToT.set(a, b);
+    tToS.set(b, a);
   }
 
-  return true
+  return true;
 }`,
   }),
   buildProblem({
@@ -1167,14 +1167,14 @@ class Solution:
 
         return False`,
     typescript: String.raw`function containsDuplicate(nums: number[]): boolean {
-  const seen = new Set<number>()
+  const seen = new Set<number>();
 
   for (const num of nums) {
-    if (seen.has(num)) return true
-    seen.add(num)
+    if (seen.has(num)) return true;
+    seen.add(num);
   }
 
-  return false
+  return false;
 }`,
   }),
   buildProblem({
@@ -1214,16 +1214,16 @@ class Solution:
 
         return False`,
     typescript: String.raw`function containsNearbyDuplicate(nums: number[], k: number): boolean {
-  const lastSeen = new Map<number, number>()
+  const lastSeen = new Map<number, number>();
 
   for (let i = 0; i < nums.length; i++) {
     if (lastSeen.has(nums[i]) && i - lastSeen.get(nums[i])! <= k) {
-      return true
+      return true;
     }
-    lastSeen.set(nums[i], i)
+    lastSeen.set(nums[i], i);
   }
 
-  return false
+  return false;
 }`,
   }),
   buildProblem({
@@ -1268,17 +1268,17 @@ class Solution:
 
         return True`,
     typescript: String.raw`function isAnagram(s: string, t: string): boolean {
-  if (s.length !== t.length) return false
+  if (s.length !== t.length) return false;
 
-  const counts = new Array(26).fill(0)
-  for (const ch of s) counts[ch.charCodeAt(0) - 97]++
+  const counts = new Array(26).fill(0);
+  for (const ch of s) counts[ch.charCodeAt(0) - 97]++;
   for (const ch of t) {
-    const idx = ch.charCodeAt(0) - 97
-    counts[idx]--
-    if (counts[idx] < 0) return false
+    const idx = ch.charCodeAt(0) - 97;
+    counts[idx]--;
+    if (counts[idx] < 0) return false;
   }
 
-  return true
+  return true;
 }`,
   }),
   buildProblem({
@@ -1337,32 +1337,32 @@ class RandomizedSet:
     def getRandom(self) -> int:
         return random.choice(self.values)`,
     typescript: String.raw`class RandomizedSet {
-  private values: number[] = []
-  private index = new Map<number, number>()
+  private values: number[] = [];
+  private index = new Map<number, number>();
 
   insert(val: number): boolean {
-    if (this.index.has(val)) return false
-    this.index.set(val, this.values.length)
-    this.values.push(val)
-    return true
+    if (this.index.has(val)) return false;
+    this.index.set(val, this.values.length);
+    this.values.push(val);
+    return true;
   }
 
   remove(val: number): boolean {
-    if (!this.index.has(val)) return false
+    if (!this.index.has(val)) return false;
 
-    const idx = this.index.get(val)!
-    const last = this.values[this.values.length - 1]
-    this.values[idx] = last
-    this.index.set(last, idx)
+    const idx = this.index.get(val)!;
+    const last = this.values[this.values.length - 1];
+    this.values[idx] = last;
+    this.index.set(last, idx);
 
-    this.values.pop()
-    this.index.delete(val)
-    return true
+    this.values.pop();
+    this.index.delete(val);
+    return true;
   }
 
   getRandom(): number {
-    const idx = Math.floor(Math.random() * this.values.length)
-    return this.values[idx]
+    const idx = Math.floor(Math.random() * this.values.length);
+    return this.values[idx];
   }
 }`,
   }),
@@ -1400,9 +1400,9 @@ class RandomizedSet:
             return False
         return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)`,
     typescript: String.raw`function isSameTree(p: TreeNode | null, q: TreeNode | null): boolean {
-  if (!p && !q) return true
-  if (!p || !q || p.val !== q.val) return false
-  return isSameTree(p.left, q.left) && isSameTree(p.right, q.right)
+  if (!p && !q) return true;
+  if (!p || !q || p.val !== q.val) return false;
+  return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
 }`,
   }),
   buildProblem({
@@ -1443,12 +1443,12 @@ class RandomizedSet:
         return mirror(root.left, root.right) if root else True`,
     typescript: String.raw`function isSymmetric(root: TreeNode | null): boolean {
   const mirror = (a: TreeNode | null, b: TreeNode | null): boolean => {
-    if (!a && !b) return true
-    if (!a || !b || a.val !== b.val) return false
-    return mirror(a.left, b.right) && mirror(a.right, b.left)
-  }
+    if (!a && !b) return true;
+    if (!a || !b || a.val !== b.val) return false;
+    return mirror(a.left, b.right) && mirror(a.right, b.left);
+  };
 
-  return root ? mirror(root.left, root.right) : true
+  return root ? mirror(root.left, root.right) : true;
 }`,
   }),
   buildProblem({
@@ -1486,10 +1486,10 @@ class RandomizedSet:
         remain = targetSum - root.val
         return self.hasPathSum(root.left, remain) or self.hasPathSum(root.right, remain)`,
     typescript: String.raw`function hasPathSum(root: TreeNode | null, targetSum: number): boolean {
-  if (!root) return false
-  if (!root.left && !root.right) return targetSum === root.val
-  const remain = targetSum - root.val
-  return hasPathSum(root.left, remain) || hasPathSum(root.right, remain)
+  if (!root) return false;
+  if (!root.left && !root.right) return targetSum === root.val;
+  const remain = targetSum - root.val;
+  return hasPathSum(root.left, remain) || hasPathSum(root.right, remain);
 }`,
   }),
   buildProblem({
@@ -1541,22 +1541,22 @@ class Solution:
 
         return result`,
     typescript: String.raw`function rightSideView(root: TreeNode | null): number[] {
-  if (!root) return []
+  if (!root) return [];
 
-  const result: number[] = []
-  const queue: TreeNode[] = [root]
+  const result: number[] = [];
+  const queue: TreeNode[] = [root];
 
   while (queue.length) {
-    const levelSize = queue.length
+    const levelSize = queue.length;
     for (let i = 0; i < levelSize; i++) {
-      const node = queue.shift()!
-      if (node.left) queue.push(node.left)
-      if (node.right) queue.push(node.right)
-      if (i === levelSize - 1) result.push(node.val)
+      const node = queue.shift()!;
+      if (node.left) queue.push(node.left);
+      if (node.right) queue.push(node.right);
+      if (i === levelSize - 1) result.push(node.val);
     }
   }
 
-  return result
+  return result;
 }`,
   }),
   buildProblem({
@@ -1597,16 +1597,16 @@ class Solution:
             else:
                 return root`,
     typescript: String.raw`function lowestCommonAncestor(root: TreeNode | null, p: TreeNode, q: TreeNode): TreeNode | null {
-  const small = Math.min(p.val, q.val)
-  const large = Math.max(p.val, q.val)
+  const small = Math.min(p.val, q.val);
+  const large = Math.max(p.val, q.val);
 
   while (root) {
-    if (root.val > large) root = root.left
-    else if (root.val < small) root = root.right
-    else return root
+    if (root.val > large) root = root.left;
+    else if (root.val < small) root = root.right;
+    else return root;
   }
 
-  return null
+  return null;
 }`,
   }),
   buildProblem({
@@ -1647,13 +1647,13 @@ class Solution:
             return root
         return left or right`,
     typescript: String.raw`function lowestCommonAncestor(root: TreeNode | null, p: TreeNode, q: TreeNode): TreeNode | null {
-  if (!root || root === p || root === q) return root
+  if (!root || root === p || root === q) return root;
 
-  const left = lowestCommonAncestor(root.left, p, q)
-  const right = lowestCommonAncestor(root.right, p, q)
+  const left = lowestCommonAncestor(root.left, p, q);
+  const right = lowestCommonAncestor(root.right, p, q);
 
-  if (left && right) return root
-  return left ?? right
+  if (left && right) return root;
+  return left ?? right;
 }`,
   }),
   buildProblem({
@@ -1691,15 +1691,15 @@ class Solution:
         return strs[0]`,
     typescript: String.raw`function longestCommonPrefix(strs: string[]): string {
   for (let i = 0; i < strs[0].length; i++) {
-    const ch = strs[0][i]
+    const ch = strs[0][i];
     for (let j = 1; j < strs.length; j++) {
       if (i === strs[j].length || strs[j][i] !== ch) {
-        return strs[0].slice(0, i)
+        return strs[0].slice(0, i);
       }
     }
   }
 
-  return strs[0]
+  return strs[0];
 }`,
   }),
   buildProblem({
@@ -1755,33 +1755,33 @@ class Solution:
 
         return ' '.join(find_root(word) for word in sentence.split())`,
     typescript: String.raw`class TrieNode {
-  children = new Map<string, TrieNode>()
-  word: string | null = null
+  children = new Map<string, TrieNode>();
+  word: string | null = null;
 }
 
 function replaceWords(dictionary: string[], sentence: string): string {
-  const root = new TrieNode()
+  const root = new TrieNode();
 
   for (const word of dictionary) {
-    let node = root
+    let node = root;
     for (const ch of word) {
-      if (!node.children.has(ch)) node.children.set(ch, new TrieNode())
-      node = node.children.get(ch)!
+      if (!node.children.has(ch)) node.children.set(ch, new TrieNode());
+      node = node.children.get(ch)!;
     }
-    node.word = word
+    node.word = word;
   }
 
   const findRoot = (word: string): string => {
-    let node = root
+    let node = root;
     for (const ch of word) {
-      if (!node.children.has(ch)) return word
-      node = node.children.get(ch)!
-      if (node.word) return node.word
+      if (!node.children.has(ch)) return word;
+      node = node.children.get(ch)!;
+      if (node.word) return node.word;
     }
-    return word
-  }
+    return word;
+  };
 
-  return sentence.split(' ').map(findRoot).join(' ')
+  return sentence.split(' ').map(findRoot).join(' ');
 }`,
   }),
   buildProblem({
@@ -1826,22 +1826,22 @@ function replaceWords(dictionary: string[], sentence: string): string {
 
         return best`,
     typescript: String.raw`function longestWord(words: string[]): string {
-  words.sort()
-  words.sort((a, b) => a.length - b.length)
+  words.sort();
+  words.sort((a, b) => a.length - b.length);
 
-  const built = new Set<string>()
-  let best = ''
+  const built = new Set<string>();
+  let best = '';
 
   for (const word of words) {
     if (word.length === 1 || built.has(word.slice(0, -1))) {
-      built.add(word)
+      built.add(word);
       if (word.length > best.length || (word.length === best.length && word < best)) {
-        best = word
+        best = word;
       }
     }
   }
 
-  return best
+  return best;
 }`,
   }),
   buildProblem({
@@ -1889,33 +1889,33 @@ class Solution:
 
         return result`,
     typescript: String.raw`function suggestedProducts(products: string[], searchWord: string): string[][] {
-  products.sort()
+  products.sort();
 
   const lowerBound = (target: string): number => {
-    let left = 0
-    let right = products.length
+    let left = 0;
+    let right = products.length;
     while (left < right) {
-      const mid = Math.floor((left + right) / 2)
-      if (products[mid] < target) left = mid + 1
-      else right = mid
+      const mid = Math.floor((left + right) / 2);
+      if (products[mid] < target) left = mid + 1;
+      else right = mid;
     }
-    return left
-  }
+    return left;
+  };
 
-  const result: string[][] = []
-  let prefix = ''
+  const result: string[][] = [];
+  let prefix = '';
 
   for (const ch of searchWord) {
-    prefix += ch
-    const start = lowerBound(prefix)
-    const suggestions: string[] = []
+    prefix += ch;
+    const start = lowerBound(prefix);
+    const suggestions: string[] = [];
     for (let i = start; i < Math.min(start + 3, products.length); i++) {
-      if (products[i].startsWith(prefix)) suggestions.push(products[i])
+      if (products[i].startsWith(prefix)) suggestions.push(products[i]);
     }
-    result.push(suggestions)
+    result.push(suggestions);
   }
 
-  return result
+  return result;
 }`,
   }),
   buildProblem({
@@ -1987,51 +1987,51 @@ class Trie:
             item.prefix_count -= 1
         path[-1].word_count -= 1`,
     typescript: String.raw`class TrieNode {
-  children = new Map<string, TrieNode>()
-  prefixCount = 0
-  wordCount = 0
+  children = new Map<string, TrieNode>();
+  prefixCount = 0;
+  wordCount = 0;
 }
 
 class Trie {
-  private root = new TrieNode()
+  private root = new TrieNode();
 
   insert(word: string): void {
-    let node = this.root
+    let node = this.root;
     for (const ch of word) {
-      if (!node.children.has(ch)) node.children.set(ch, new TrieNode())
-      node = node.children.get(ch)!
-      node.prefixCount++
+      if (!node.children.has(ch)) node.children.set(ch, new TrieNode());
+      node = node.children.get(ch)!;
+      node.prefixCount++;
     }
-    node.wordCount++
+    node.wordCount++;
   }
 
   countWordsEqualTo(word: string): number {
-    let node = this.root
+    let node = this.root;
     for (const ch of word) {
-      if (!node.children.has(ch)) return 0
-      node = node.children.get(ch)!
+      if (!node.children.has(ch)) return 0;
+      node = node.children.get(ch)!;
     }
-    return node.wordCount
+    return node.wordCount;
   }
 
   countWordsStartingWith(prefix: string): number {
-    let node = this.root
+    let node = this.root;
     for (const ch of prefix) {
-      if (!node.children.has(ch)) return 0
-      node = node.children.get(ch)!
+      if (!node.children.has(ch)) return 0;
+      node = node.children.get(ch)!;
     }
-    return node.prefixCount
+    return node.prefixCount;
   }
 
   erase(word: string): void {
-    let node = this.root
-    const path: TrieNode[] = []
+    let node = this.root;
+    const path: TrieNode[] = [];
     for (const ch of word) {
-      node = node.children.get(ch)!
-      path.push(node)
+      node = node.children.get(ch)!;
+      path.push(node);
     }
-    for (const item of path) item.prefixCount--
-    path[path.length - 1].wordCount--
+    for (const item of path) item.prefixCount--;
+    path[path.length - 1].wordCount--;
   }
 }`,
   }),
@@ -2078,23 +2078,23 @@ class Trie {
                     best = max(best, dfs(r, c))
         return best`,
     typescript: String.raw`function maxAreaOfIsland(grid: number[][]): number {
-  const rows = grid.length
-  const cols = grid[0].length
+  const rows = grid.length;
+  const cols = grid[0].length;
 
   const dfs = (r: number, c: number): number => {
-    if (r < 0 || r >= rows || c < 0 || c >= cols || grid[r][c] === 0) return 0
-    grid[r][c] = 0
-    return 1 + dfs(r + 1, c) + dfs(r - 1, c) + dfs(r, c + 1) + dfs(r, c - 1)
-  }
+    if (r < 0 || r >= rows || c < 0 || c >= cols || grid[r][c] === 0) return 0;
+    grid[r][c] = 0;
+    return 1 + dfs(r + 1, c) + dfs(r - 1, c) + dfs(r, c + 1) + dfs(r, c - 1);
+  };
 
-  let best = 0
+  let best = 0;
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < cols; c++) {
-      if (grid[r][c] === 1) best = Math.max(best, dfs(r, c))
+      if (grid[r][c] === 1) best = Math.max(best, dfs(r, c));
     }
   }
 
-  return best
+  return best;
 }`,
   }),
   buildProblem({
@@ -2142,22 +2142,22 @@ class Trie {
         dfs(sr, sc)
         return image`,
     typescript: String.raw`function floodFill(image: number[][], sr: number, sc: number, color: number): number[][] {
-  const rows = image.length
-  const cols = image[0].length
-  const original = image[sr][sc]
-  if (original === color) return image
+  const rows = image.length;
+  const cols = image[0].length;
+  const original = image[sr][sc];
+  if (original === color) return image;
 
   const dfs = (r: number, c: number): void => {
-    if (r < 0 || r >= rows || c < 0 || c >= cols || image[r][c] !== original) return
-    image[r][c] = color
-    dfs(r + 1, c)
-    dfs(r - 1, c)
-    dfs(r, c + 1)
-    dfs(r, c - 1)
-  }
+    if (r < 0 || r >= rows || c < 0 || c >= cols || image[r][c] !== original) return;
+    image[r][c] = color;
+    dfs(r + 1, c);
+    dfs(r - 1, c);
+    dfs(r, c + 1);
+    dfs(r, c - 1);
+  };
 
-  dfs(sr, sc)
-  return image
+  dfs(sr, sc);
+  return image;
 }`,
   }),
   buildProblem({
@@ -2210,27 +2210,27 @@ class Solution:
 
         return True`,
     typescript: String.raw`function isBipartite(graph: number[][]): boolean {
-  const color = new Array(graph.length).fill(0)
+  const color = new Array(graph.length).fill(0);
 
   for (let start = 0; start < graph.length; start++) {
-    if (color[start] !== 0) continue
-    const queue = [start]
-    color[start] = 1
+    if (color[start] !== 0) continue;
+    const queue = [start];
+    color[start] = 1;
 
     while (queue.length) {
-      const node = queue.shift()!
+      const node = queue.shift()!;
       for (const nei of graph[node]) {
         if (color[nei] === 0) {
-          color[nei] = -color[node]
-          queue.push(nei)
+          color[nei] = -color[node];
+          queue.push(nei);
         } else if (color[nei] === color[node]) {
-          return false
+          return false;
         }
       }
     }
   }
 
-  return true
+  return true;
 }`,
   }),
   buildProblem({
@@ -2277,24 +2277,24 @@ class Solution:
         dfs(0)
         return result`,
     typescript: String.raw`function allPathsSourceTarget(graph: number[][]): number[][] {
-  const target = graph.length - 1
-  const result: number[][] = []
-  const path = [0]
+  const target = graph.length - 1;
+  const result: number[][] = [];
+  const path = [0];
 
   const dfs = (node: number) => {
     if (node === target) {
-      result.push([...path])
-      return
+      result.push([...path]);
+      return;
     }
     for (const nei of graph[node]) {
-      path.push(nei)
-      dfs(nei)
-      path.pop()
+      path.push(nei);
+      dfs(nei);
+      path.pop();
     }
-  }
+  };
 
-  dfs(0)
-  return result
+  dfs(0);
+  return result;
 }`,
   }),
   buildProblem({
@@ -2337,20 +2337,20 @@ class Solution:
 
         return len(visited) == len(rooms)`,
     typescript: String.raw`function canVisitAllRooms(rooms: number[][]): boolean {
-  const visited = new Set<number>([0])
-  const stack = [0]
+  const visited = new Set<number>([0]);
+  const stack = [0];
 
   while (stack.length) {
-    const room = stack.pop()!
+    const room = stack.pop()!;
     for (const key of rooms[room]) {
       if (!visited.has(key)) {
-        visited.add(key)
-        stack.push(key)
+        visited.add(key);
+        stack.push(key);
       }
     }
   }
 
-  return visited.size === rooms.length
+  return visited.size === rooms.length;
 }`,
   }),
   buildProblem({
@@ -2398,20 +2398,20 @@ class Solution:
         return [left, right]`,
     typescript: String.raw`function searchRange(nums: number[], target: number): number[] {
   const lowerBound = (x: number): number => {
-    let left = 0
-    let right = nums.length
+    let left = 0;
+    let right = nums.length;
     while (left < right) {
-      const mid = Math.floor((left + right) / 2)
-      if (nums[mid] < x) left = mid + 1
-      else right = mid
+      const mid = Math.floor((left + right) / 2);
+      if (nums[mid] < x) left = mid + 1;
+      else right = mid;
     }
-    return left
-  }
+    return left;
+  };
 
-  const left = lowerBound(target)
-  const right = lowerBound(target + 1) - 1
-  if (left === nums.length || nums[left] !== target) return [-1, -1]
-  return [left, right]
+  const left = lowerBound(target);
+  const right = lowerBound(target + 1) - 1;
+  if (left === nums.length || nums[left] !== target) return [-1, -1];
+  return [left, right];
 }`,
   }),
   buildProblem({
@@ -2451,16 +2451,16 @@ class Solution:
                 right = mid
         return left`,
     typescript: String.raw`function searchInsert(nums: number[], target: number): number {
-  let left = 0
-  let right = nums.length
+  let left = 0;
+  let right = nums.length;
 
   while (left < right) {
-    const mid = Math.floor((left + right) / 2)
-    if (nums[mid] < target) left = mid + 1
-    else right = mid
+    const mid = Math.floor((left + right) / 2);
+    if (nums[mid] < target) left = mid + 1;
+    else right = mid;
   }
 
-  return left
+  return left;
 }`,
   }),
   buildProblem({
@@ -2504,21 +2504,21 @@ class Solution:
 
         return ans`,
     typescript: String.raw`function mySqrt(x: number): number {
-  let left = 0
-  let right = x
-  let ans = 0
+  let left = 0;
+  let right = x;
+  let ans = 0;
 
   while (left <= right) {
-    const mid = Math.floor((left + right) / 2)
+    const mid = Math.floor((left + right) / 2);
     if (mid * mid <= x) {
-      ans = mid
-      left = mid + 1
+      ans = mid;
+      left = mid + 1;
     } else {
-      right = mid - 1
+      right = mid - 1;
     }
   }
 
-  return ans
+  return ans;
 }`,
   }),
   buildProblem({
@@ -2572,26 +2572,26 @@ class Solution:
 
         return False`,
     typescript: String.raw`function search(nums: number[], target: number): boolean {
-  let left = 0
-  let right = nums.length - 1
+  let left = 0;
+  let right = nums.length - 1;
 
   while (left <= right) {
-    const mid = Math.floor((left + right) / 2)
-    if (nums[mid] === target) return true
+    const mid = Math.floor((left + right) / 2);
+    if (nums[mid] === target) return true;
 
     if (nums[left] === nums[mid] && nums[mid] === nums[right]) {
-      left++
-      right--
+      left++;
+      right--;
     } else if (nums[left] <= nums[mid]) {
-      if (nums[left] <= target && target < nums[mid]) right = mid - 1
-      else left = mid + 1
+      if (nums[left] <= target && target < nums[mid]) right = mid - 1;
+      else left = mid + 1;
     } else {
-      if (nums[mid] < target && target <= nums[right]) left = mid + 1
-      else right = mid - 1
+      if (nums[mid] < target && target <= nums[right]) left = mid + 1;
+      else right = mid - 1;
     }
   }
 
-  return false
+  return false;
 }`,
   }),
   buildProblem({
@@ -2633,16 +2633,16 @@ class Solution:
 
         return left`,
     typescript: String.raw`function findPeakElement(nums: number[]): number {
-  let left = 0
-  let right = nums.length - 1
+  let left = 0;
+  let right = nums.length - 1;
 
   while (left < right) {
-    const mid = Math.floor((left + right) / 2)
-    if (nums[mid] < nums[mid + 1]) left = mid + 1
-    else right = mid
+    const mid = Math.floor((left + right) / 2);
+    if (nums[mid] < nums[mid + 1]) left = mid + 1;
+    else right = mid;
   }
 
-  return left
+  return left;
 }`,
   }),
   buildProblem({
@@ -2686,17 +2686,17 @@ class Solution:
 
         return nums[left]`,
     typescript: String.raw`function singleNonDuplicate(nums: number[]): number {
-  let left = 0
-  let right = nums.length - 1
+  let left = 0;
+  let right = nums.length - 1;
 
   while (left < right) {
-    let mid = Math.floor((left + right) / 2)
-    if (mid % 2 === 1) mid--
-    if (nums[mid] === nums[mid + 1]) left = mid + 2
-    else right = mid
+    let mid = Math.floor((left + right) / 2);
+    if (mid % 2 === 1) mid--;
+    if (nums[mid] === nums[mid + 1]) left = mid + 2;
+    else right = mid;
   }
 
-  return nums[left]
+  return nums[left];
 }`,
   }),
   buildProblem({
@@ -2738,17 +2738,17 @@ class Solution:
 
         return slow + 1`,
     typescript: String.raw`function removeDuplicates(nums: number[]): number {
-  if (nums.length === 0) return 0
+  if (nums.length === 0) return 0;
 
-  let slow = 0
+  let slow = 0;
   for (let fast = 1; fast < nums.length; fast++) {
     if (nums[fast] !== nums[slow]) {
-      slow++
-      nums[slow] = nums[fast]
+      slow++;
+      nums[slow] = nums[fast];
     }
   }
 
-  return slow + 1
+  return slow + 1;
 }`,
   }),
   buildProblem({
@@ -2786,11 +2786,11 @@ class Solution:
                 write += 1
         return write`,
     typescript: String.raw`function removeElement(nums: number[], val: number): number {
-  let write = 0
+  let write = 0;
   for (const num of nums) {
-    if (num !== val) nums[write++] = num
+    if (num !== val) nums[write++] = num;
   }
-  return write
+  return write;
 }`,
   }),
   buildProblem({
@@ -2835,20 +2835,20 @@ class Solution:
 
         return True`,
     typescript: String.raw`function isPalindrome(s: string): boolean {
-  let left = 0
-  let right = s.length - 1
+  let left = 0;
+  let right = s.length - 1;
 
-  const isAlphaNum = (ch: string) => /[a-z0-9]/i.test(ch)
+  const isAlphaNum = (ch: string) => /[a-z0-9]/i.test(ch);
 
   while (left < right) {
-    while (left < right && !isAlphaNum(s[left])) left++
-    while (left < right && !isAlphaNum(s[right])) right--
-    if (s[left].toLowerCase() !== s[right].toLowerCase()) return false
-    left++
-    right--
+    while (left < right && !isAlphaNum(s[left])) left++;
+    while (left < right && !isAlphaNum(s[right])) right--;
+    if (s[left].toLowerCase() !== s[right].toLowerCase()) return false;
+    left++;
+    right--;
   }
 
-  return true
+  return true;
 }`,
   }),
   buildProblem({
@@ -2888,12 +2888,12 @@ class Solution:
             nums[write] = 0
             write += 1`,
     typescript: String.raw`function moveZeroes(nums: number[]): void {
-  let write = 0
+  let write = 0;
   for (const num of nums) {
-    if (num !== 0) nums[write++] = num
+    if (num !== 0) nums[write++] = num;
   }
   while (write < nums.length) {
-    nums[write++] = 0
+    nums[write++] = 0;
   }
 }`,
   }),
@@ -2931,13 +2931,13 @@ class Solution:
             left += 1
             right -= 1`,
     typescript: String.raw`function reverseString(s: string[]): void {
-  let left = 0
-  let right = s.length - 1
+  let left = 0;
+  let right = s.length - 1;
 
   while (left < right) {
-    ;[s[left], s[right]] = [s[right], s[left]]
-    left++
-    right--
+    [s[left], s[right]] = [s[right], s[left]];
+    left++;
+    right--;
   }
 }`,
   }),
@@ -2975,11 +2975,11 @@ class Solution:
                 i += 1
         return i == len(s)`,
     typescript: String.raw`function isSubsequence(s: string, t: string): boolean {
-  let i = 0
+  let i = 0;
   for (const ch of t) {
-    if (i < s.length && s[i] === ch) i++
+    if (i < s.length && s[i] === ch) i++;
   }
-  return i === s.length
+  return i === s.length;
 }`,
   }),
   buildProblem({
@@ -3023,19 +3023,19 @@ class Solution:
 
         return 0 if best == float('inf') else best`,
     typescript: String.raw`function minSubArrayLen(target: number, nums: number[]): number {
-  let left = 0
-  let total = 0
-  let best = Infinity
+  let left = 0;
+  let total = 0;
+  let best = Infinity;
 
   for (let right = 0; right < nums.length; right++) {
-    total += nums[right]
+    total += nums[right];
     while (total >= target) {
-      best = Math.min(best, right - left + 1)
-      total -= nums[left++]
+      best = Math.min(best, right - left + 1);
+      total -= nums[left++];
     }
   }
 
-  return best === Infinity ? 0 : best
+  return best === Infinity ? 0 : best;
 }`,
   }),
   buildProblem({
@@ -3085,24 +3085,24 @@ class Solution:
 
         return result`,
     typescript: String.raw`function findAnagrams(s: string, p: string): number[] {
-  if (p.length > s.length) return []
+  if (p.length > s.length) return [];
 
-  const need = new Array(26).fill(0)
-  const window = new Array(26).fill(0)
-  for (const ch of p) need[ch.charCodeAt(0) - 97]++
+  const need = new Array(26).fill(0);
+  const window = new Array(26).fill(0);
+  for (const ch of p) need[ch.charCodeAt(0) - 97]++;
 
-  const result: number[] = []
-  const k = p.length
+  const result: number[] = [];
+  const k = p.length;
 
   for (let i = 0; i < s.length; i++) {
-    window[s.charCodeAt(i) - 97]++
-    if (i >= k) window[s.charCodeAt(i - k) - 97]--
+    window[s.charCodeAt(i) - 97]++;
+    if (i >= k) window[s.charCodeAt(i - k) - 97]--;
     if (window.every((count, idx) => count === need[idx])) {
-      result.push(i - k + 1)
+      result.push(i - k + 1);
     }
   }
 
-  return result
+  return result;
 }`,
   }),
   buildProblem({
@@ -3142,16 +3142,16 @@ class Solution:
 
         return best / k`,
     typescript: String.raw`function findMaxAverage(nums: number[], k: number): number {
-  let window = 0
-  for (let i = 0; i < k; i++) window += nums[i]
-  let best = window
+  let window = 0;
+  for (let i = 0; i < k; i++) window += nums[i];
+  let best = window;
 
   for (let i = k; i < nums.length; i++) {
-    window += nums[i] - nums[i - k]
-    best = Math.max(best, window)
+    window += nums[i] - nums[i - k];
+    best = Math.max(best, window);
   }
 
-  return best / k
+  return best / k;
 }`,
   }),
   buildProblem({
@@ -3197,20 +3197,20 @@ class Solution:
 
         return best`,
     typescript: String.raw`function longestOnes(nums: number[], k: number): number {
-  let left = 0
-  let zeros = 0
-  let best = 0
+  let left = 0;
+  let zeros = 0;
+  let best = 0;
 
   for (let right = 0; right < nums.length; right++) {
-    if (nums[right] === 0) zeros++
+    if (nums[right] === 0) zeros++;
     while (zeros > k) {
-      if (nums[left] === 0) zeros--
-      left++
+      if (nums[left] === 0) zeros--;
+      left++;
     }
-    best = Math.max(best, right - left + 1)
+    best = Math.max(best, right - left + 1);
   }
 
-  return best
+  return best;
 }`,
   }),
   buildProblem({
@@ -3252,21 +3252,21 @@ class Solution:
 
         return best`,
     typescript: String.raw`function maxVowels(s: string, k: number): number {
-  const vowels = new Set(['a', 'e', 'i', 'o', 'u'])
-  let count = 0
+  const vowels = new Set(['a', 'e', 'i', 'o', 'u']);
+  let count = 0;
 
   for (let i = 0; i < k; i++) {
-    if (vowels.has(s[i])) count++
+    if (vowels.has(s[i])) count++;
   }
 
-  let best = count
+  let best = count;
   for (let i = k; i < s.length; i++) {
-    if (vowels.has(s[i])) count++
-    if (vowels.has(s[i - k])) count--
-    best = Math.max(best, count)
+    if (vowels.has(s[i])) count++;
+    if (vowels.has(s[i - k])) count--;
+    best = Math.max(best, count);
   }
 
-  return best
+  return best;
 }`,
   }),
   buildProblem({
@@ -3319,30 +3319,36 @@ class Solution:
         dfs(0)
         return result`,
     typescript: String.raw`function letterCombinations(digits: string): string[] {
-  if (!digits) return []
+  if (!digits) return [];
 
   const phone: Record<string, string> = {
-    '2': 'abc', '3': 'def', '4': 'ghi', '5': 'jkl',
-    '6': 'mno', '7': 'pqrs', '8': 'tuv', '9': 'wxyz',
-  }
+    '2': 'abc',
+    '3': 'def',
+    '4': 'ghi',
+    '5': 'jkl',
+    '6': 'mno',
+    '7': 'pqrs',
+    '8': 'tuv',
+    '9': 'wxyz',
+  };
 
-  const result: string[] = []
-  const path: string[] = []
+  const result: string[] = [];
+  const path: string[] = [];
 
   const dfs = (index: number) => {
     if (index === digits.length) {
-      result.push(path.join(''))
-      return
+      result.push(path.join(''));
+      return;
     }
     for (const ch of phone[digits[index]]) {
-      path.push(ch)
-      dfs(index + 1)
-      path.pop()
+      path.push(ch);
+      dfs(index + 1);
+      path.pop();
     }
-  }
+  };
 
-  dfs(0)
-  return result
+  dfs(0);
+  return result;
 }`,
   }),
   buildProblem({
@@ -3392,28 +3398,28 @@ class Solution:
         dfs(0, 0)
         return result`,
     typescript: String.raw`function generateParenthesis(n: number): string[] {
-  const result: string[] = []
-  const path: string[] = []
+  const result: string[] = [];
+  const path: string[] = [];
 
   const dfs = (left: number, right: number) => {
     if (path.length === 2 * n) {
-      result.push(path.join(''))
-      return
+      result.push(path.join(''));
+      return;
     }
     if (left < n) {
-      path.push('(')
-      dfs(left + 1, right)
-      path.pop()
+      path.push('(');
+      dfs(left + 1, right);
+      path.pop();
     }
     if (right < left) {
-      path.push(')')
-      dfs(left, right + 1)
-      path.pop()
+      path.push(')');
+      dfs(left, right + 1);
+      path.pop();
     }
-  }
+  };
 
-  dfs(0, 0)
-  return result
+  dfs(0, 0);
+  return result;
 }`,
   }),
   buildProblem({
@@ -3459,23 +3465,23 @@ class Solution:
         dfs(1)
         return result`,
     typescript: String.raw`function combine(n: number, k: number): number[][] {
-  const result: number[][] = []
-  const path: number[] = []
+  const result: number[][] = [];
+  const path: number[] = [];
 
   const dfs = (start: number) => {
     if (path.length === k) {
-      result.push([...path])
-      return
+      result.push([...path]);
+      return;
     }
     for (let num = start; num <= n; num++) {
-      path.push(num)
-      dfs(num + 1)
-      path.pop()
+      path.push(num);
+      dfs(num + 1);
+      path.pop();
     }
-  }
+  };
 
-  dfs(1)
-  return result
+  dfs(1);
+  return result;
 }`,
   }),
   buildProblem({
@@ -3522,22 +3528,22 @@ class Solution:
         dfs(0)
         return result`,
     typescript: String.raw`function subsetsWithDup(nums: number[]): number[][] {
-  nums.sort((a, b) => a - b)
-  const result: number[][] = []
-  const path: number[] = []
+  nums.sort((a, b) => a - b);
+  const result: number[][] = [];
+  const path: number[] = [];
 
   const dfs = (start: number) => {
-    result.push([...path])
+    result.push([...path]);
     for (let i = start; i < nums.length; i++) {
-      if (i > start && nums[i] === nums[i - 1]) continue
-      path.push(nums[i])
-      dfs(i + 1)
-      path.pop()
+      if (i > start && nums[i] === nums[i - 1]) continue;
+      path.push(nums[i]);
+      dfs(i + 1);
+      path.pop();
     }
-  }
+  };
 
-  dfs(0)
-  return result
+  dfs(0);
+  return result;
 }`,
   }),
   buildProblem({
@@ -3586,24 +3592,24 @@ class Solution:
         dfs(1, n)
         return result`,
     typescript: String.raw`function combinationSum3(k: number, n: number): number[][] {
-  const result: number[][] = []
-  const path: number[] = []
+  const result: number[][] = [];
+  const path: number[] = [];
 
   const dfs = (start: number, remain: number) => {
     if (path.length === k) {
-      if (remain === 0) result.push([...path])
-      return
+      if (remain === 0) result.push([...path]);
+      return;
     }
     for (let num = start; num <= 9; num++) {
-      if (num > remain) break
-      path.push(num)
-      dfs(num + 1, remain - num)
-      path.pop()
+      if (num > remain) break;
+      path.push(num);
+      dfs(num + 1, remain - num);
+      path.pop();
     }
-  }
+  };
 
-  dfs(1, n)
-  return result
+  dfs(1, n);
+  return result;
 }`,
   }),
   buildProblem({
@@ -3657,31 +3663,31 @@ class Solution:
         dfs(0)
         return result`,
     typescript: String.raw`function letterCasePermutation(s: string): string[] {
-  const result: string[] = []
-  const path: string[] = []
+  const result: string[] = [];
+  const path: string[] = [];
 
   const dfs = (index: number) => {
     if (index === s.length) {
-      result.push(path.join(''))
-      return
+      result.push(path.join(''));
+      return;
     }
-    const ch = s[index]
+    const ch = s[index];
     if (/[a-z]/i.test(ch)) {
-      path.push(ch.toLowerCase())
-      dfs(index + 1)
-      path.pop()
-      path.push(ch.toUpperCase())
-      dfs(index + 1)
-      path.pop()
+      path.push(ch.toLowerCase());
+      dfs(index + 1);
+      path.pop();
+      path.push(ch.toUpperCase());
+      dfs(index + 1);
+      path.pop();
     } else {
-      path.push(ch)
-      dfs(index + 1)
-      path.pop()
+      path.push(ch);
+      dfs(index + 1);
+      path.pop();
     }
-  }
+  };
 
-  dfs(0)
-  return result
+  dfs(0);
+  return result;
 }`,
   }),
   buildProblem({
@@ -3718,13 +3724,13 @@ class Solution:
                 dp[r][c] = dp[r - 1][c] + dp[r][c - 1]
         return dp[-1][-1]`,
     typescript: String.raw`function uniquePaths(m: number, n: number): number {
-  const dp = Array.from({ length: m }, () => new Array(n).fill(1))
+  const dp = Array.from({ length: m }, () => new Array(n).fill(1));
   for (let r = 1; r < m; r++) {
     for (let c = 1; c < n; c++) {
-      dp[r][c] = dp[r - 1][c] + dp[r][c - 1]
+      dp[r][c] = dp[r - 1][c] + dp[r][c - 1];
     }
   }
-  return dp[m - 1][n - 1]
+  return dp[m - 1][n - 1];
 }`,
   }),
   buildProblem({
@@ -3772,24 +3778,24 @@ class Solution:
                         dp[r][c] += dp[r][c - 1]
         return dp[-1][-1]`,
     typescript: String.raw`function uniquePathsWithObstacles(obstacleGrid: number[][]): number {
-  const rows = obstacleGrid.length
-  const cols = obstacleGrid[0].length
-  const dp = Array.from({ length: rows }, () => new Array(cols).fill(0))
-  if (obstacleGrid[0][0] === 1) return 0
-  dp[0][0] = 1
+  const rows = obstacleGrid.length;
+  const cols = obstacleGrid[0].length;
+  const dp = Array.from({ length: rows }, () => new Array(cols).fill(0));
+  if (obstacleGrid[0][0] === 1) return 0;
+  dp[0][0] = 1;
 
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < cols; c++) {
       if (obstacleGrid[r][c] === 1) {
-        dp[r][c] = 0
+        dp[r][c] = 0;
       } else {
-        if (r > 0) dp[r][c] += dp[r - 1][c]
-        if (c > 0) dp[r][c] += dp[r][c - 1]
+        if (r > 0) dp[r][c] += dp[r - 1][c];
+        if (c > 0) dp[r][c] += dp[r][c - 1];
       }
     }
   }
 
-  return dp[rows - 1][cols - 1]
+  return dp[rows - 1][cols - 1];
 }`,
   }),
   buildProblem({
@@ -3834,21 +3840,21 @@ class Solution:
 
         return dp[-1][-1]`,
     typescript: String.raw`function minPathSum(grid: number[][]): number {
-  const rows = grid.length
-  const cols = grid[0].length
-  const dp = Array.from({ length: rows }, () => new Array(cols).fill(0))
-  dp[0][0] = grid[0][0]
+  const rows = grid.length;
+  const cols = grid[0].length;
+  const dp = Array.from({ length: rows }, () => new Array(cols).fill(0));
+  dp[0][0] = grid[0][0];
 
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < cols; c++) {
-      if (r === 0 && c === 0) continue
-      const up = r > 0 ? dp[r - 1][c] : Infinity
-      const left = c > 0 ? dp[r][c - 1] : Infinity
-      dp[r][c] = Math.min(up, left) + grid[r][c]
+      if (r === 0 && c === 0) continue;
+      const up = r > 0 ? dp[r - 1][c] : Infinity;
+      const left = c > 0 ? dp[r][c - 1] : Infinity;
+      dp[r][c] = Math.min(up, left) + grid[r][c];
     }
   }
 
-  return dp[rows - 1][cols - 1]
+  return dp[rows - 1][cols - 1];
 }`,
   }),
   buildProblem({
@@ -3894,19 +3900,19 @@ class Solution:
 
         return dp[-1]`,
     typescript: String.raw`function numDecodings(s: string): number {
-  if (!s || s[0] === '0') return 0
+  if (!s || s[0] === '0') return 0;
 
-  const dp = new Array(s.length + 1).fill(0)
-  dp[0] = 1
-  dp[1] = 1
+  const dp = new Array(s.length + 1).fill(0);
+  dp[0] = 1;
+  dp[1] = 1;
 
   for (let i = 2; i <= s.length; i++) {
-    if (s[i - 1] !== '0') dp[i] += dp[i - 1]
-    const two = Number(s.slice(i - 2, i))
-    if (two >= 10 && two <= 26) dp[i] += dp[i - 2]
+    if (s[i - 1] !== '0') dp[i] += dp[i - 1];
+    const two = Number(s.slice(i - 2, i));
+    if (two >= 10 && two <= 26) dp[i] += dp[i - 2];
   }
 
-  return dp[s.length]
+  return dp[s.length];
 }`,
   }),
   buildProblem({
@@ -3949,20 +3955,20 @@ class Solution:
 
         return dp[-1]`,
     typescript: String.raw`function wordBreak(s: string, wordDict: string[]): boolean {
-  const words = new Set(wordDict)
-  const dp = new Array(s.length + 1).fill(false)
-  dp[0] = true
+  const words = new Set(wordDict);
+  const dp = new Array(s.length + 1).fill(false);
+  dp[0] = true;
 
   for (let i = 1; i <= s.length; i++) {
     for (let j = 0; j < i; j++) {
       if (dp[j] && words.has(s.slice(j, i))) {
-        dp[i] = true
-        break
+        dp[i] = true;
+        break;
       }
     }
   }
 
-  return dp[s.length]
+  return dp[s.length];
 }`,
   }),
   buildProblem({
@@ -4004,20 +4010,20 @@ class Solution:
 
         return dp[n]`,
     typescript: String.raw`function numSquares(n: number): number {
-  const squares: number[] = []
-  for (let i = 1; i * i <= n; i++) squares.push(i * i)
+  const squares: number[] = [];
+  for (let i = 1; i * i <= n; i++) squares.push(i * i);
 
-  const dp = new Array(n + 1).fill(Infinity)
-  dp[0] = 0
+  const dp = new Array(n + 1).fill(Infinity);
+  dp[0] = 0;
 
   for (let total = 1; total <= n; total++) {
     for (const square of squares) {
-      if (square > total) break
-      dp[total] = Math.min(dp[total], dp[total - square] + 1)
+      if (square > total) break;
+      dp[total] = Math.min(dp[total], dp[total - square] + 1);
     }
   }
 
-  return dp[n]
+  return dp[n];
 }`,
   }),
   buildProblem({
@@ -4054,13 +4060,13 @@ class Solution:
                 profit += prices[i] - prices[i - 1]
         return profit`,
     typescript: String.raw`function maxProfit(prices: number[]): number {
-  let profit = 0
+  let profit = 0;
   for (let i = 1; i < prices.length; i++) {
     if (prices[i] > prices[i - 1]) {
-      profit += prices[i] - prices[i - 1]
+      profit += prices[i] - prices[i - 1];
     }
   }
-  return profit
+  return profit;
 }`,
   }),
   buildProblem({
@@ -4104,19 +4110,19 @@ class Solution:
 
         return sum(candies)`,
     typescript: String.raw`function candy(ratings: number[]): number {
-  const candies = new Array(ratings.length).fill(1)
+  const candies = new Array(ratings.length).fill(1);
 
   for (let i = 1; i < ratings.length; i++) {
-    if (ratings[i] > ratings[i - 1]) candies[i] = candies[i - 1] + 1
+    if (ratings[i] > ratings[i - 1]) candies[i] = candies[i - 1] + 1;
   }
 
   for (let i = ratings.length - 2; i >= 0; i--) {
     if (ratings[i] > ratings[i + 1]) {
-      candies[i] = Math.max(candies[i], candies[i + 1] + 1)
+      candies[i] = Math.max(candies[i], candies[i + 1] + 1);
     }
   }
 
-  return candies.reduce((sum, value) => sum + value, 0)
+  return candies.reduce((sum, value) => sum + value, 0);
 }`,
   }),
   buildProblem({
@@ -4157,16 +4163,16 @@ class Solution:
                 down = up + 1
         return max(up, down)`,
     typescript: String.raw`function wiggleMaxLength(nums: number[]): number {
-  if (nums.length === 0) return 0
-  let up = 1
-  let down = 1
+  if (nums.length === 0) return 0;
+  let up = 1;
+  let down = 1;
 
   for (let i = 1; i < nums.length; i++) {
-    if (nums[i] > nums[i - 1]) up = down + 1
-    else if (nums[i] < nums[i - 1]) down = up + 1
+    if (nums[i] > nums[i - 1]) up = down + 1;
+    else if (nums[i] < nums[i - 1]) down = up + 1;
   }
 
-  return Math.max(up, down)
+  return Math.max(up, down);
 }`,
   }),
   buildProblem({
@@ -4209,22 +4215,22 @@ class Solution:
 
         return result`,
     typescript: String.raw`function partitionLabels(s: string): number[] {
-  const last = new Map<string, number>()
-  for (let i = 0; i < s.length; i++) last.set(s[i], i)
+  const last = new Map<string, number>();
+  for (let i = 0; i < s.length; i++) last.set(s[i], i);
 
-  const result: number[] = []
-  let start = 0
-  let end = 0
+  const result: number[] = [];
+  let start = 0;
+  let end = 0;
 
   for (let i = 0; i < s.length; i++) {
-    end = Math.max(end, last.get(s[i])!)
+    end = Math.max(end, last.get(s[i])!);
     if (i === end) {
-      result.push(end - start + 1)
-      start = i + 1
+      result.push(end - start + 1);
+      start = i + 1;
     }
   }
 
-  return result
+  return result;
 }`,
   }),
   buildProblem({
@@ -4264,14 +4270,14 @@ class Solution:
             total += costs[i][1]
         return total`,
     typescript: String.raw`function twoCitySchedCost(costs: number[][]): number {
-  costs.sort((a, b) => (a[0] - a[1]) - (b[0] - b[1]))
-  const n = costs.length / 2
-  let total = 0
+  costs.sort((a, b) => a[0] - a[1] - (b[0] - b[1]));
+  const n = costs.length / 2;
+  let total = 0;
 
-  for (let i = 0; i < n; i++) total += costs[i][0]
-  for (let i = n; i < costs.length; i++) total += costs[i][1]
+  for (let i = 0; i < n; i++) total += costs[i][0];
+  for (let i = n; i < costs.length; i++) total += costs[i][1];
 
-  return total
+  return total;
 }`,
   }),
   buildProblem({
@@ -4308,12 +4314,12 @@ class Solution:
             n >>= 1
         return result`,
     typescript: String.raw`function reverseBits(n: number): number {
-  let result = 0
+  let result = 0;
   for (let i = 0; i < 32; i++) {
-    result = (result << 1) | (n & 1)
-    n >>>= 1
+    result = (result << 1) | (n & 1);
+    n >>>= 1;
   }
-  return result >>> 0
+  return result >>> 0;
 }`,
   }),
   buildProblem({
@@ -4346,7 +4352,7 @@ class Solution:
     def isPowerOfTwo(self, n: int) -> bool:
         return n > 0 and (n & (n - 1)) == 0`,
     typescript: String.raw`function isPowerOfTwo(n: number): boolean {
-  return n > 0 && (n & (n - 1)) === 0
+  return n > 0 && (n & (n - 1)) === 0;
 }`,
   }),
   buildProblem({
@@ -4391,19 +4397,19 @@ class Solution:
 
         return [a, b]`,
     typescript: String.raw`function singleNumber(nums: number[]): number[] {
-  let xorAll = 0
-  for (const num of nums) xorAll ^= num
+  let xorAll = 0;
+  for (const num of nums) xorAll ^= num;
 
-  const diff = xorAll & -xorAll
-  let a = 0
-  let b = 0
+  const diff = xorAll & -xorAll;
+  let a = 0;
+  let b = 0;
 
   for (const num of nums) {
-    if (num & diff) a ^= num
-    else b ^= num
+    if (num & diff) a ^= num;
+    else b ^= num;
   }
 
-  return [a, b]
+  return [a, b];
 }`,
   }),
   buildProblem({
@@ -4439,9 +4445,9 @@ class Solution:
             value ^= ord(ch)
         return chr(value)`,
     typescript: String.raw`function findTheDifference(s: string, t: string): string {
-  let value = 0
-  for (const ch of s + t) value ^= ch.charCodeAt(0)
-  return String.fromCharCode(value)
+  let value = 0;
+  for (const ch of s + t) value ^= ch.charCodeAt(0);
+  return String.fromCharCode(value);
 }`,
   }),
   buildProblem({
@@ -4479,13 +4485,13 @@ class Solution:
             count += 1
         return count`,
     typescript: String.raw`function hammingDistance(x: number, y: number): number {
-  let diff = x ^ y
-  let count = 0
+  let diff = x ^ y;
+  let count = 0;
   while (diff !== 0) {
-    diff &= diff - 1
-    count++
+    diff &= diff - 1;
+    count++;
   }
-  return count
+  return count;
 }`,
   }),
   buildProblem({
@@ -4543,38 +4549,38 @@ class Solution:
         tail.next = a or b
         return dummy.next`,
     typescript: String.raw`function sortList(head: ListNode | null): ListNode | null {
-  if (!head || !head.next) return head
+  if (!head || !head.next) return head;
 
-  let slow = head
-  let fast = head.next
+  let slow = head;
+  let fast = head.next;
   while (fast && fast.next) {
-    slow = slow.next!
-    fast = fast.next.next
+    slow = slow.next!;
+    fast = fast.next.next;
   }
 
-  const mid = slow.next
-  slow.next = null
+  const mid = slow.next;
+  slow.next = null;
 
-  return merge(sortList(head), sortList(mid))
+  return merge(sortList(head), sortList(mid));
 }
 
 function merge(a: ListNode | null, b: ListNode | null): ListNode | null {
-  const dummy = new ListNode(0)
-  let tail = dummy
+  const dummy = new ListNode(0);
+  let tail = dummy;
 
   while (a && b) {
     if (a.val < b.val) {
-      tail.next = a
-      a = a.next
+      tail.next = a;
+      a = a.next;
     } else {
-      tail.next = b
-      b = b.next
+      tail.next = b;
+      b = b.next;
     }
-    tail = tail.next
+    tail = tail.next;
   }
 
-  tail.next = a ?? b
-  return dummy.next
+  tail.next = a ?? b;
+  return dummy.next;
 }`,
   }),
   buildProblem({
@@ -4614,13 +4620,13 @@ function merge(a: ListNode | null, b: ListNode | null): ListNode | null {
                 break
         return h`,
     typescript: String.raw`function hIndex(citations: number[]): number {
-  citations.sort((a, b) => b - a)
-  let h = 0
+  citations.sort((a, b) => b - a);
+  let h = 0;
   for (let i = 0; i < citations.length; i++) {
-    if (citations[i] >= i + 1) h = i + 1
-    else break
+    if (citations[i] >= i + 1) h = i + 1;
+    else break;
   }
-  return h
+  return h;
 }`,
   }),
   buildProblem({
@@ -4654,13 +4660,13 @@ function merge(a: ListNode | null, b: ListNode | null): ListNode | null {
         counts = Counter(s)
         return ''.join(ch * freq for ch, freq in sorted(counts.items(), key=lambda item: item[1], reverse=True))`,
     typescript: String.raw`function frequencySort(s: string): string {
-  const counts = new Map<string, number>()
-  for (const ch of s) counts.set(ch, (counts.get(ch) ?? 0) + 1)
+  const counts = new Map<string, number>();
+  for (const ch of s) counts.set(ch, (counts.get(ch) ?? 0) + 1);
 
   return [...counts.entries()]
     .sort((a, b) => b[1] - a[1])
     .map(([ch, freq]) => ch.repeat(freq))
-    .join('')
+    .join('');
 }`,
   }),
   buildProblem({
@@ -4701,16 +4707,16 @@ function merge(a: ListNode | null, b: ListNode | null): ListNode | null {
                 nums[left], nums[right] = nums[right], nums[left]
         return nums`,
     typescript: String.raw`function sortArrayByParity(nums: number[]): number[] {
-  let left = 0
-  let right = nums.length - 1
+  let left = 0;
+  let right = nums.length - 1;
 
   while (left < right) {
-    if (nums[left] % 2 === 0) left++
-    else if (nums[right] % 2 === 1) right--
-    else [nums[left], nums[right]] = [nums[right], nums[left]]
+    if (nums[left] % 2 === 0) left++;
+    else if (nums[right] % 2 === 1) right--;
+    else [nums[left], nums[right]] = [nums[right], nums[left]];
   }
 
-  return nums
+  return nums;
 }`,
   }),
   buildProblem({
@@ -4744,15 +4750,15 @@ function merge(a: ListNode | null, b: ListNode | null): ListNode | null {
         rank = {num: i for i, num in enumerate(arr2)}
         return sorted(arr1, key=lambda x: (rank.get(x, len(arr2)), x))`,
     typescript: String.raw`function relativeSortArray(arr1: number[], arr2: number[]): number[] {
-  const rank = new Map<number, number>()
-  arr2.forEach((num, index) => rank.set(num, index))
+  const rank = new Map<number, number>();
+  arr2.forEach((num, index) => rank.set(num, index));
 
   return arr1.sort((a, b) => {
-    const rankA = rank.has(a) ? rank.get(a)! : arr2.length
-    const rankB = rank.has(b) ? rank.get(b)! : arr2.length
-    if (rankA !== rankB) return rankA - rankB
-    return a - b
-  })
+    const rankA = rank.has(a) ? rank.get(a)! : arr2.length;
+    const rankB = rank.has(b) ? rank.get(b)! : arr2.length;
+    if (rankA !== rankB) return rankA - rankB;
+    return a - b;
+  });
 }`,
   }),
   buildProblem({
@@ -4796,16 +4802,16 @@ class Solution:
 
         return -heap[0] if heap else 0`,
     typescript: String.raw`function lastStoneWeight(stones: number[]): number {
-  const pq = new MaxPriorityQueue<number>()
-  for (const stone of stones) pq.enqueue(stone)
+  const pq = new MaxPriorityQueue<number>();
+  for (const stone of stones) pq.enqueue(stone);
 
   while (pq.size() > 1) {
-    const y = pq.dequeue().element
-    const x = pq.dequeue().element
-    if (y !== x) pq.enqueue(y - x)
+    const y = pq.dequeue().element;
+    const x = pq.dequeue().element;
+    if (y !== x) pq.enqueue(y - x);
   }
 
-  return pq.isEmpty() ? 0 : pq.front().element
+  return pq.isEmpty() ? 0 : pq.front().element;
 }`,
   }),
   buildProblem({
@@ -4847,18 +4853,18 @@ class Solution:
         return [point for _, point in heap]`,
     typescript: String.raw`function kClosest(points: number[][], k: number): number[][] {
   const pq = new MaxPriorityQueue<{ point: number[]; dist: number }>({
-    priority: item => item.dist,
-  })
+    priority: (item) => item.dist,
+  });
 
   for (const point of points) {
-    const dist = point[0] * point[0] + point[1] * point[1]
-    pq.enqueue({ point, dist })
-    if (pq.size() > k) pq.dequeue()
+    const dist = point[0] * point[0] + point[1] * point[1];
+    pq.enqueue({ point, dist });
+    if (pq.size() > k) pq.dequeue();
   }
 
-  const result: number[][] = []
-  while (!pq.isEmpty()) result.push(pq.dequeue().element.point)
-  return result
+  const result: number[][] = [];
+  while (!pq.isEmpty()) result.push(pq.dequeue().element.point);
+  return result;
 }`,
   }),
   buildProblem({
@@ -4901,17 +4907,17 @@ class Solution:
 
         return cost`,
     typescript: String.raw`function connectSticks(sticks: number[]): number {
-  const pq = new MinPriorityQueue<number>()
-  for (const stick of sticks) pq.enqueue(stick)
+  const pq = new MinPriorityQueue<number>();
+  for (const stick of sticks) pq.enqueue(stick);
 
-  let cost = 0
+  let cost = 0;
   while (pq.size() > 1) {
-    const merged = pq.dequeue().element + pq.dequeue().element
-    cost += merged
-    pq.enqueue(merged)
+    const merged = pq.dequeue().element + pq.dequeue().element;
+    cost += merged;
+    pq.enqueue(merged);
   }
 
-  return cost
+  return cost;
 }`,
   }),
   buildProblem({
@@ -4954,17 +4960,17 @@ class Solution:
 
         return -sum(heap)`,
     typescript: String.raw`function minStoneSum(piles: number[], k: number): number {
-  const pq = new MaxPriorityQueue<number>()
-  for (const pile of piles) pq.enqueue(pile)
+  const pq = new MaxPriorityQueue<number>();
+  for (const pile of piles) pq.enqueue(pile);
 
   for (let i = 0; i < k; i++) {
-    const pile = pq.dequeue().element
-    pq.enqueue(pile - Math.floor(pile / 2))
+    const pile = pq.dequeue().element;
+    pq.enqueue(pile - Math.floor(pile / 2));
   }
 
-  let total = 0
-  while (!pq.isEmpty()) total += pq.dequeue().element
-  return total
+  let total = 0;
+  while (!pq.isEmpty()) total += pq.dequeue().element;
+  return total;
 }`,
   }),
   buildProblem({
@@ -5009,17 +5015,17 @@ class Solution:
 
         return score`,
     typescript: String.raw`function maxKelements(nums: number[], k: number): number {
-  const pq = new MaxPriorityQueue<number>()
-  for (const num of nums) pq.enqueue(num)
+  const pq = new MaxPriorityQueue<number>();
+  for (const num of nums) pq.enqueue(num);
 
-  let score = 0
+  let score = 0;
   for (let i = 0; i < k; i++) {
-    const value = pq.dequeue().element
-    score += value
-    pq.enqueue(Math.ceil(value / 3))
+    const value = pq.dequeue().element;
+    score += value;
+    pq.enqueue(Math.ceil(value / 3));
   }
 
-  return score
+  return score;
 }`,
   }),
   buildProblem({
@@ -5068,23 +5074,23 @@ class Solution:
 
         return True`,
     typescript: String.raw`function validTree(n: number, edges: number[][]): boolean {
-  if (edges.length !== n - 1) return false
+  if (edges.length !== n - 1) return false;
 
-  const parent = Array.from({ length: n }, (_, i) => i)
+  const parent = Array.from({ length: n }, (_, i) => i);
 
   const find = (x: number): number => {
-    if (parent[x] !== x) parent[x] = find(parent[x])
-    return parent[x]
-  }
+    if (parent[x] !== x) parent[x] = find(parent[x]);
+    return parent[x];
+  };
 
   for (const [a, b] of edges) {
-    const pa = find(a)
-    const pb = find(b)
-    if (pa === pb) return false
-    parent[pa] = pb
+    const pa = find(a);
+    const pb = find(b);
+    if (pa === pb) return false;
+    parent[pa] = pb;
   }
 
-  return true
+  return true;
 }`,
   }),
   buildProblem({
@@ -5131,24 +5137,24 @@ class Solution:
 
         return components`,
     typescript: String.raw`function countComponents(n: number, edges: number[][]): number {
-  const parent = Array.from({ length: n }, (_, i) => i)
-  let components = n
+  const parent = Array.from({ length: n }, (_, i) => i);
+  let components = n;
 
   const find = (x: number): number => {
-    if (parent[x] !== x) parent[x] = find(parent[x])
-    return parent[x]
-  }
+    if (parent[x] !== x) parent[x] = find(parent[x]);
+    return parent[x];
+  };
 
   for (const [a, b] of edges) {
-    const pa = find(a)
-    const pb = find(b)
+    const pa = find(a);
+    const pb = find(b);
     if (pa !== pb) {
-      parent[pa] = pb
-      components--
+      parent[pa] = pb;
+      components--;
     }
   }
 
-  return components
+  return components;
 }`,
   }),
   buildProblem({
@@ -5206,34 +5212,34 @@ class Solution:
             result.append([accounts[root][0]] + sorted(emails))
         return result`,
     typescript: String.raw`function accountsMerge(accounts: string[][]): string[][] {
-  const parent = Array.from({ length: accounts.length }, (_, i) => i)
-  const emailOwner = new Map<string, number>()
+  const parent = Array.from({ length: accounts.length }, (_, i) => i);
+  const emailOwner = new Map<string, number>();
 
   const find = (x: number): number => {
-    if (parent[x] !== x) parent[x] = find(parent[x])
-    return parent[x]
-  }
+    if (parent[x] !== x) parent[x] = find(parent[x]);
+    return parent[x];
+  };
 
   const union = (a: number, b: number) => {
-    parent[find(a)] = find(b)
-  }
+    parent[find(a)] = find(b);
+  };
 
   accounts.forEach((account, index) => {
     for (let i = 1; i < account.length; i++) {
-      const email = account[i]
-      if (emailOwner.has(email)) union(index, emailOwner.get(email)!)
-      else emailOwner.set(email, index)
+      const email = account[i];
+      if (emailOwner.has(email)) union(index, emailOwner.get(email)!);
+      else emailOwner.set(email, index);
     }
-  })
+  });
 
-  const groups = new Map<number, string[]>()
+  const groups = new Map<number, string[]>();
   for (const [email, owner] of emailOwner.entries()) {
-    const root = find(owner)
-    if (!groups.has(root)) groups.set(root, [])
-    groups.get(root)!.push(email)
+    const root = find(owner);
+    if (!groups.has(root)) groups.set(root, []);
+    groups.get(root)!.push(email);
   }
 
-  return [...groups.entries()].map(([root, emails]) => [accounts[root][0], ...emails.sort()])
+  return [...groups.entries()].map(([root, emails]) => [accounts[root][0], ...emails.sort()]);
 }`,
   }),
   buildProblem({
@@ -5283,28 +5289,28 @@ class Solution:
         roots = {find(i) for i in range(n)}
         return n - len(roots)`,
     typescript: String.raw`function removeStones(stones: number[][]): number {
-  const parent = Array.from({ length: stones.length }, (_, i) => i)
+  const parent = Array.from({ length: stones.length }, (_, i) => i);
 
   const find = (x: number): number => {
-    if (parent[x] !== x) parent[x] = find(parent[x])
-    return parent[x]
-  }
+    if (parent[x] !== x) parent[x] = find(parent[x]);
+    return parent[x];
+  };
 
   const union = (a: number, b: number) => {
-    parent[find(a)] = find(b)
-  }
+    parent[find(a)] = find(b);
+  };
 
   for (let i = 0; i < stones.length; i++) {
     for (let j = i + 1; j < stones.length; j++) {
       if (stones[i][0] === stones[j][0] || stones[i][1] === stones[j][1]) {
-        union(i, j)
+        union(i, j);
       }
     }
   }
 
-  const roots = new Set<number>()
-  for (let i = 0; i < stones.length; i++) roots.add(find(i))
-  return stones.length - roots.size
+  const roots = new Set<number>();
+  for (let i = 0; i < stones.length; i++) roots.add(find(i));
+  return stones.length - roots.size;
 }`,
   }),
   buildProblem({
@@ -5348,16 +5354,16 @@ class Solution:
 
         return False`,
     typescript: String.raw`function searchMatrix(matrix: number[][], target: number): boolean {
-  let r = 0
-  let c = matrix[0].length - 1
+  let r = 0;
+  let c = matrix[0].length - 1;
 
   while (r < matrix.length && c >= 0) {
-    if (matrix[r][c] === target) return true
-    if (matrix[r][c] > target) c--
-    else r++
+    if (matrix[r][c] === target) return true;
+    if (matrix[r][c] > target) c--;
+    else r++;
   }
 
-  return false
+  return false;
 }`,
   }),
   buildProblem({
@@ -5411,31 +5417,31 @@ class Solution:
 
         return solve(expression)`,
     typescript: String.raw`function diffWaysToCompute(expression: string): number[] {
-  const memo = new Map<string, number[]>()
+  const memo = new Map<string, number[]>();
 
   const solve = (expr: string): number[] => {
-    if (memo.has(expr)) return memo.get(expr)!
-    const result: number[] = []
+    if (memo.has(expr)) return memo.get(expr)!;
+    const result: number[] = [];
 
     for (let i = 0; i < expr.length; i++) {
-      const ch = expr[i]
+      const ch = expr[i];
       if ('+-*'.includes(ch)) {
         for (const left of solve(expr.slice(0, i))) {
           for (const right of solve(expr.slice(i + 1))) {
-            if (ch === '+') result.push(left + right)
-            else if (ch === '-') result.push(left - right)
-            else result.push(left * right)
+            if (ch === '+') result.push(left + right);
+            else if (ch === '-') result.push(left - right);
+            else result.push(left * right);
           }
         }
       }
     }
 
-    if (result.length === 0) result.push(Number(expr))
-    memo.set(expr, result)
-    return result
-  }
+    if (result.length === 0) result.push(Number(expr));
+    memo.set(expr, result);
+    return result;
+  };
 
-  return solve(expression)
+  return solve(expression);
 }`,
   }),
   buildProblem({
@@ -5478,18 +5484,18 @@ class Solution:
 
         return len(s)`,
     typescript: String.raw`function longestSubstring(s: string, k: number): number {
-  if (s.length < k) return 0
+  if (s.length < k) return 0;
 
-  const counts = new Map<string, number>()
-  for (const ch of s) counts.set(ch, (counts.get(ch) ?? 0) + 1)
+  const counts = new Map<string, number>();
+  for (const ch of s) counts.set(ch, (counts.get(ch) ?? 0) + 1);
 
   for (const [ch, freq] of counts.entries()) {
     if (freq < k) {
-      return Math.max(...s.split(ch).map(part => longestSubstring(part, k)), 0)
+      return Math.max(...s.split(ch).map((part) => longestSubstring(part, k)), 0);
     }
   }
 
-  return s.length
+  return s.length;
 }`,
   }),
   buildProblem({
@@ -5537,22 +5543,22 @@ class Solution:
 
         return build(0, len(preorder) - 1, 0, len(postorder) - 1)`,
     typescript: String.raw`function constructFromPrePost(preorder: number[], postorder: number[]): TreeNode | null {
-  const index = new Map<number, number>()
-  postorder.forEach((value, i) => index.set(value, i))
+  const index = new Map<number, number>();
+  postorder.forEach((value, i) => index.set(value, i));
 
   const build = (preL: number, preR: number, postL: number, postR: number): TreeNode | null => {
-    if (preL > preR) return null
-    const root = new TreeNode(preorder[preL])
-    if (preL === preR) return root
+    if (preL > preR) return null;
+    const root = new TreeNode(preorder[preL]);
+    if (preL === preR) return root;
 
-    const leftRoot = preorder[preL + 1]
-    const leftSize = index.get(leftRoot)! - postL + 1
-    root.left = build(preL + 1, preL + leftSize, postL, postL + leftSize - 1)
-    root.right = build(preL + leftSize + 1, preR, postL + leftSize, postR - 1)
-    return root
-  }
+    const leftRoot = preorder[preL + 1];
+    const leftSize = index.get(leftRoot)! - postL + 1;
+    root.left = build(preL + 1, preL + leftSize, postL, postL + leftSize - 1);
+    root.right = build(preL + leftSize + 1, preR, postL + leftSize, postR - 1);
+    return root;
+  };
 
-  return build(0, preorder.length - 1, 0, postorder.length - 1)
+  return build(0, preorder.length - 1, 0, postorder.length - 1);
 }`,
   }),
   buildProblem({
@@ -5599,23 +5605,23 @@ class Solution:
         dfs('JFK')
         return route[::-1]`,
     typescript: String.raw`function findItinerary(tickets: string[][]): string[] {
-  const graph = new Map<string, string[]>()
+  const graph = new Map<string, string[]>();
 
-  tickets.sort((a, b) => (a[0] === b[0] ? b[1].localeCompare(a[1]) : b[0].localeCompare(a[0])))
+  tickets.sort((a, b) => (a[0] === b[0] ? b[1].localeCompare(a[1]) : b[0].localeCompare(a[0])));
   for (const [src, dst] of tickets) {
-    if (!graph.has(src)) graph.set(src, [])
-    graph.get(src)!.push(dst)
+    if (!graph.has(src)) graph.set(src, []);
+    graph.get(src)!.push(dst);
   }
 
-  const route: string[] = []
+  const route: string[] = [];
   const dfs = (airport: string) => {
-    const next = graph.get(airport) ?? []
-    while (next.length) dfs(next.pop()!)
-    route.push(airport)
-  }
+    const next = graph.get(airport) ?? [];
+    while (next.length) dfs(next.pop()!);
+    route.push(airport);
+  };
 
-  dfs('JFK')
-  return route.reverse()
+  dfs('JFK');
+  return route.reverse();
 }`,
   }),
   buildProblem({
@@ -5670,29 +5676,29 @@ class Solution:
 
         return [i for i, ok in enumerate(safe) if ok]`,
     typescript: String.raw`function eventualSafeNodes(graph: number[][]): number[] {
-  const n = graph.length
-  const reverseGraph = Array.from({ length: n }, () => [] as number[])
-  const outdegree = new Array(n).fill(0)
+  const n = graph.length;
+  const reverseGraph = Array.from({ length: n }, () => [] as number[]);
+  const outdegree = new Array(n).fill(0);
 
   for (let node = 0; node < n; node++) {
-    outdegree[node] = graph[node].length
-    for (const nei of graph[node]) reverseGraph[nei].push(node)
+    outdegree[node] = graph[node].length;
+    for (const nei of graph[node]) reverseGraph[nei].push(node);
   }
 
-  const queue: number[] = []
-  for (let i = 0; i < n; i++) if (outdegree[i] === 0) queue.push(i)
+  const queue: number[] = [];
+  for (let i = 0; i < n; i++) if (outdegree[i] === 0) queue.push(i);
 
-  const safe = new Array(n).fill(false)
+  const safe = new Array(n).fill(false);
   while (queue.length) {
-    const node = queue.shift()!
-    safe[node] = true
+    const node = queue.shift()!;
+    safe[node] = true;
     for (const prev of reverseGraph[node]) {
-      outdegree[prev]--
-      if (outdegree[prev] === 0) queue.push(prev)
+      outdegree[prev]--;
+      if (outdegree[prev] === 0) queue.push(prev);
     }
   }
 
-  return safe.map((ok, index) => (ok ? index : -1)).filter(index => index !== -1)
+  return safe.map((ok, index) => (ok ? index : -1)).filter((index) => index !== -1);
 }`,
   }),
   buildProblem({
@@ -5756,35 +5762,35 @@ class Solution:
   start: number,
   end: number,
 ): number {
-  const graph = Array.from({ length: n }, () => [] as Array<[number, number]>)
+  const graph = Array.from({ length: n }, () => [] as Array<[number, number]>);
   for (let i = 0; i < edges.length; i++) {
-    const [a, b] = edges[i]
-    const prob = succProb[i]
-    graph[a].push([b, prob])
-    graph[b].push([a, prob])
+    const [a, b] = edges[i];
+    const prob = succProb[i];
+    graph[a].push([b, prob]);
+    graph[b].push([a, prob]);
   }
 
   const pq = new MaxPriorityQueue<{ node: number; prob: number }>({
-    priority: item => item.prob,
-  })
-  const best = new Array(n).fill(0)
-  best[start] = 1
-  pq.enqueue({ node: start, prob: 1 })
+    priority: (item) => item.prob,
+  });
+  const best = new Array(n).fill(0);
+  best[start] = 1;
+  pq.enqueue({ node: start, prob: 1 });
 
   while (!pq.isEmpty()) {
-    const { node, prob } = pq.dequeue().element
-    if (node === end) return prob
-    if (prob < best[node]) continue
+    const { node, prob } = pq.dequeue().element;
+    if (node === end) return prob;
+    if (prob < best[node]) continue;
     for (const [nei, edgeProb] of graph[node]) {
-      const nextProb = prob * edgeProb
+      const nextProb = prob * edgeProb;
       if (nextProb > best[nei]) {
-        best[nei] = nextProb
-        pq.enqueue({ node: nei, prob: nextProb })
+        best[nei] = nextProb;
+        pq.enqueue({ node: nei, prob: nextProb });
       }
     }
   }
 
-  return 0
+  return 0;
 }`,
   }),
   buildProblem({
@@ -5839,36 +5845,41 @@ class Solution:
 
         return 0`,
     typescript: String.raw`function minimumEffortPath(heights: number[][]): number {
-  const rows = heights.length
-  const cols = heights[0].length
-  const dist = Array.from({ length: rows }, () => new Array(cols).fill(Infinity))
-  dist[0][0] = 0
+  const rows = heights.length;
+  const cols = heights[0].length;
+  const dist = Array.from({ length: rows }, () => new Array(cols).fill(Infinity));
+  dist[0][0] = 0;
 
   const pq = new MinPriorityQueue<{ r: number; c: number; effort: number }>({
-    priority: item => item.effort,
-  })
-  pq.enqueue({ r: 0, c: 0, effort: 0 })
+    priority: (item) => item.effort,
+  });
+  pq.enqueue({ r: 0, c: 0, effort: 0 });
 
-  const dirs = [[1, 0], [-1, 0], [0, 1], [0, -1]]
+  const dirs = [
+    [1, 0],
+    [-1, 0],
+    [0, 1],
+    [0, -1],
+  ];
 
   while (!pq.isEmpty()) {
-    const { r, c, effort } = pq.dequeue().element
-    if (r === rows - 1 && c === cols - 1) return effort
-    if (effort > dist[r][c]) continue
+    const { r, c, effort } = pq.dequeue().element;
+    if (r === rows - 1 && c === cols - 1) return effort;
+    if (effort > dist[r][c]) continue;
 
     for (const [dr, dc] of dirs) {
-      const nr = r + dr
-      const nc = c + dc
-      if (nr < 0 || nr >= rows || nc < 0 || nc >= cols) continue
-      const nextEffort = Math.max(effort, Math.abs(heights[r][c] - heights[nr][nc]))
+      const nr = r + dr;
+      const nc = c + dc;
+      if (nr < 0 || nr >= rows || nc < 0 || nc >= cols) continue;
+      const nextEffort = Math.max(effort, Math.abs(heights[r][c] - heights[nr][nc]));
       if (nextEffort < dist[nr][nc]) {
-        dist[nr][nc] = nextEffort
-        pq.enqueue({ r: nr, c: nc, effort: nextEffort })
+        dist[nr][nc] = nextEffort;
+        pq.enqueue({ r: nr, c: nc, effort: nextEffort });
       }
     }
   }
 
-  return 0
+  return 0;
 }`,
   }),
 ].map(item => [item.id, item]))

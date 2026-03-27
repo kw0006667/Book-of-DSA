@@ -28,46 +28,46 @@ export const content = `
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// 深度序列化 DOM 結構
 interface VNode {
-  tag: string
-  children: VNode[]
-  attrs?: Record<string, string>
+  tag: string;
+  children: VNode[];
+  attrs?: Record&lt;string, string&gt;;
 }
 
 // Flatten DOM tree（DFS）
 function flattenDOM(root: Element): Element[] {
-  const result: Element[] = []
-  const stack: Element[] = [root]
+  const result: Element[] = [];
+  const stack: Element[] = [root];
   while (stack.length) {
-    const node = stack.pop()!
-    result.push(node)
+    const node = stack.pop()!;
+    result.push(node);
     // 逆序推入，保證左子節點先處理
-    for (let i = node.children.length - 1; i >= 0; i--) {
-      stack.push(node.children[i] as Element)
+    for (let i = node.children.length - 1; i &gt;= 0; i--) {
+      stack.push(node.children[i] as Element);
     }
   }
-  return result
+  return result;
 }
 
 // 找到 DOM 中所有特定類型節點
 function findAllByTag(root: Element, tag: string): Element[] {
-  const result: Element[] = []
+  const result: Element[] = [];
   function dfs(node: Element) {
     if (node.tagName.toLowerCase() === tag.toLowerCase()) {
-      result.push(node)
+      result.push(node);
     }
     for (const child of Array.from(node.children)) {
-      dfs(child as Element)
+      dfs(child as Element);
     }
   }
-  dfs(root)
-  return result
+  dfs(root);
+  return result;
 }
 
 // Virtual DOM Diff（簡化版）
 function diff(oldVNode: VNode, newVNode: VNode): Patch[] {
-  const patches: Patch[] = []
+  const patches: Patch[] = [];
   // ... 比較 tag、attrs、children
-  return patches
+  return patches;
 }</code></pre>
   <pre slot="python"><code class="language-python"># Python 不常見 DOM 操作
 # 但樹結構的 serialize/deserialize 常考
@@ -98,54 +98,49 @@ def serialize(root: Optional[Node]) -> str:
 
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// 實作 Promise.all
-function promiseAll<T>(promises: Promise<T>[]): Promise<T[]> {
-  return new Promise((resolve, reject) => {
-    const results: T[] = new Array(promises.length)
-    let completed = 0
-    if (promises.length === 0) resolve([])
+function promiseAll&lt;T&gt;(promises: Promise&lt;T&gt;[]): Promise&lt;T[]&gt; {
+  return new Promise((resolve, reject) =&gt; {
+    const results: T[] = new Array(promises.length);
+    let completed = 0;
+    if (promises.length === 0) resolve([]);
 
-    promises.forEach((p, i) => {
+    promises.forEach((p, i) =&gt; {
       Promise.resolve(p)
-        .then(val => {
-          results[i] = val
-          if (++completed === promises.length) resolve(results)
+        .then((val) =&gt; {
+          results[i] = val;
+          if (++completed === promises.length) resolve(results);
         })
-        .catch(reject)
-    })
-  })
+        .catch(reject);
+    });
+  });
 }
 
 // 實作 Promise.allSettled
-function promiseAllSettled<T>(
-  promises: Promise<T>[]
-): Promise<PromiseSettledResult<T>[]> {
+function promiseAllSettled&lt;T&gt;(promises: Promise&lt;T&gt;[]): Promise&lt;PromiseSettledResult&lt;T&gt;[]&gt; {
   return Promise.all(
-    promises.map(p =>
+    promises.map((p) =&gt;
       Promise.resolve(p)
-        .then(value => ({ status: 'fulfilled' as const, value }))
-        .catch(reason => ({ status: 'rejected' as const, reason }))
-    )
-  )
+        .then((value) =&gt; ({ status: 'fulfilled' as const, value }))
+        .catch((reason) =&gt; ({ status: 'rejected' as const, reason })),
+    ),
+  );
 }
 
 // 並發控制：最多 n 個同時執行
-async function parallelLimit<T>(
-  tasks: (() => Promise<T>)[],
-  limit: number
-): Promise<T[]> {
-  const results: T[] = []
-  const executing = new Set<Promise<void>>()
+async function parallelLimit&lt;T&gt;(tasks: (() =&gt; Promise&lt;T&gt;)[], limit: number): Promise&lt;T[]&gt; {
+  const results: T[] = [];
+  const executing = new Set&lt;Promise&lt;void&gt;&gt;();
 
   for (const task of tasks) {
-    const p: Promise<void> = task().then(r => {
-      results.push(r)
-      executing.delete(p)
-    })
-    executing.add(p)
-    if (executing.size >= limit) await Promise.race(executing)
+    const p: Promise&lt;void&gt; = task().then((r) =&gt; {
+      results.push(r);
+      executing.delete(p);
+    });
+    executing.add(p);
+    if (executing.size &gt;= limit) await Promise.race(executing);
   }
-  await Promise.all(executing)
-  return results
+  await Promise.all(executing);
+  return results;
 }</code></pre>
   <pre slot="python"><code class="language-python">import asyncio
 from typing import Coroutine, TypeVar, Any
@@ -172,50 +167,50 @@ async def gather_limited(
 
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// 實作 debounce
-function debounce<T extends (...args: any[]) => any>(
+function debounce&lt;T extends (...args: any[]) =&gt; any&gt;(
   fn: T,
-  delay: number
-): (...args: Parameters<T>) => void {
-  let timer: ReturnType<typeof setTimeout>
+  delay: number,
+): (...args: Parameters&lt;T&gt;) =&gt; void {
+  let timer: ReturnType&lt;typeof setTimeout&gt;;
   return function (...args) {
-    clearTimeout(timer)
-    timer = setTimeout(() => fn(...args), delay)
-  }
+    clearTimeout(timer);
+    timer = setTimeout(() =&gt; fn(...args), delay);
+  };
 }
 
 // 實作 throttle
-function throttle<T extends (...args: any[]) => any>(
+function throttle&lt;T extends (...args: any[]) =&gt; any&gt;(
   fn: T,
-  limit: number
-): (...args: Parameters<T>) => void {
-  let lastRun = 0
+  limit: number,
+): (...args: Parameters&lt;T&gt;) =&gt; void {
+  let lastRun = 0;
   return function (...args) {
-    const now = Date.now()
-    if (now - lastRun >= limit) {
-      lastRun = now
-      fn(...args)
+    const now = Date.now();
+    if (now - lastRun &gt;= limit) {
+      lastRun = now;
+      fn(...args);
     }
-  }
+  };
 }
 
 // 實作 memoize（支援多參數）
-function memoize<T extends (...args: any[]) => any>(fn: T): T {
-  const cache = new Map<string, ReturnType<T>>()
-  return function (...args: Parameters<T>): ReturnType<T> {
-    const key = JSON.stringify(args)
-    if (cache.has(key)) return cache.get(key)!
-    const result = fn(...args)
-    cache.set(key, result)
-    return result
-  } as T
+function memoize&lt;T extends (...args: any[]) =&gt; any&gt;(fn: T): T {
+  const cache = new Map&lt;string, ReturnType&lt;T&gt;&gt;();
+  return function (...args: Parameters&lt;T&gt;): ReturnType&lt;T&gt; {
+    const key = JSON.stringify(args);
+    if (cache.has(key)) return cache.get(key)!;
+    const result = fn(...args);
+    cache.set(key, result);
+    return result;
+  } as T;
 }
 
 // 實作 curry
 function curry(fn: Function) {
   return function curried(...args: any[]): any {
-    if (args.length >= fn.length) return fn(...args)
-    return (...moreArgs: any[]) => curried(...args, ...moreArgs)
-  }
+    if (args.length &gt;= fn.length) return fn(...args);
+    return (...moreArgs: any[]) =&gt; curried(...args, ...moreArgs);
+  };
 }</code></pre>
   <pre slot="python"><code class="language-python">import time
 from functools import wraps
@@ -251,27 +246,24 @@ def memoize(fn: F) -> F:
 
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// 實作簡易 Store（Pub/Sub + Reducer）
-type Reducer<S, A> = (state: S, action: A) => S
-type Listener = () => void
+type Reducer&lt;S, A&gt; = (state: S, action: A) =&gt; S;
+type Listener = () =&gt; void;
 
-function createStore<S, A>(
-  reducer: Reducer<S, A>,
-  initialState: S
-) {
-  let state = initialState
-  const listeners = new Set<Listener>()
+function createStore&lt;S, A&gt;(reducer: Reducer&lt;S, A&gt;, initialState: S) {
+  let state = initialState;
+  const listeners = new Set&lt;Listener&gt;();
 
   return {
-    getState: () => state,
-    dispatch: (action: A) => {
-      state = reducer(state, action)
-      listeners.forEach(l => l())
+    getState: () =&gt; state,
+    dispatch: (action: A) =&gt; {
+      state = reducer(state, action);
+      listeners.forEach((l) =&gt; l());
     },
-    subscribe: (listener: Listener) => {
-      listeners.add(listener)
-      return () => listeners.delete(listener)
-    }
-  }
+    subscribe: (listener: Listener) =&gt; {
+      listeners.add(listener);
+      return () =&gt; listeners.delete(listener);
+    },
+  };
 }</code></pre>
   <pre slot="python"><code class="language-python">from typing import TypeVar, Callable, Generic
 
@@ -312,73 +304,77 @@ class Store(Generic[S, A]):
 
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">class VirtualList extends HTMLElement {
-  private items: string[] = []
-  private itemHeight = 48
-  private overscan = 5
-  private viewport!: HTMLDivElement
-  private spacer!: HTMLDivElement
-  private content!: HTMLDivElement
+  private items: string[] = [];
+  private itemHeight = 48;
+  private overscan = 5;
+  private viewport!: HTMLDivElement;
+  private spacer!: HTMLDivElement;
+  private content!: HTMLDivElement;
 
   set data(value: string[]) {
-    this.items = value
-    this.renderVisibleItems()
+    this.items = value;
+    this.renderVisibleItems();
   }
 
   connectedCallback() {
-    const shadow = this.attachShadow({ mode: 'open' })
+    const shadow = this.attachShadow({ mode: 'open' });
 
-    this.viewport = document.createElement('div')
-    this.spacer = document.createElement('div')
-    this.content = document.createElement('div')
+    this.viewport = document.createElement('div');
+    this.spacer = document.createElement('div');
+    this.content = document.createElement('div');
 
-    this.viewport.style.cssText = 'height: 320px; overflow: auto; position: relative;'
-    this.content.style.cssText = 'position: absolute; inset: 0 auto auto 0; width: 100%;'
+    this.viewport.style.cssText = 'height: 320px; overflow: auto; position: relative;';
+    this.content.style.cssText = 'position: absolute; inset: 0 auto auto 0; width: 100%;';
 
-    this.viewport.addEventListener('scroll', () => this.renderVisibleItems())
-    this.viewport.append(this.spacer, this.content)
-    shadow.append(this.viewport)
+    this.viewport.addEventListener('scroll', () =&gt; this.renderVisibleItems());
+    this.viewport.append(this.spacer, this.content);
+    shadow.append(this.viewport);
 
-    const attrHeight = Number(this.getAttribute('item-height'))
-    if (attrHeight > 0) this.itemHeight = attrHeight
+    const attrHeight = Number(this.getAttribute('item-height'));
+    if (attrHeight &gt; 0) this.itemHeight = attrHeight;
 
-    this.renderVisibleItems()
+    this.renderVisibleItems();
   }
 
   private renderVisibleItems() {
-    if (!this.viewport || !this.content || !this.spacer) return
+    if (!this.viewport || !this.content || !this.spacer) return;
 
-    const viewportHeight = this.viewport.clientHeight
-    const start = Math.max(0, Math.floor(this.viewport.scrollTop / this.itemHeight) - this.overscan)
-    const visibleCount = Math.ceil(viewportHeight / this.itemHeight) + this.overscan * 2
-    const end = Math.min(this.items.length, start + visibleCount)
+    const viewportHeight = this.viewport.clientHeight;
+    const start = Math.max(
+      0,
+      Math.floor(this.viewport.scrollTop / this.itemHeight) - this.overscan,
+    );
+    const visibleCount = Math.ceil(viewportHeight / this.itemHeight) + this.overscan * 2;
+    const end = Math.min(this.items.length, start + visibleCount);
 
-    this.spacer.style.height = String(this.items.length * this.itemHeight) + 'px'
-    this.content.style.transform = 'translateY(' + start * this.itemHeight + 'px)'
-    this.content.replaceChildren()
+    this.spacer.style.height = String(this.items.length * this.itemHeight) + 'px';
+    this.content.style.transform = 'translateY(' + start * this.itemHeight + 'px)';
+    this.content.replaceChildren();
 
-    for (let i = start; i < end; i++) {
-      const row = document.createElement('div')
-      row.textContent = this.items[i]
-      row.style.cssText = 'height: 48px; display: flex; align-items: center; border-bottom: 1px solid #eee;'
-      this.content.append(row)
+    for (let i = start; i &lt; end; i++) {
+      const row = document.createElement('div');
+      row.textContent = this.items[i];
+      row.style.cssText =
+        'height: 48px; display: flex; align-items: center; border-bottom: 1px solid #eee;';
+      this.content.append(row);
     }
   }
 }
 
-customElements.define('virtual-list', VirtualList)
+customElements.define('virtual-list', VirtualList);
 
 // 若是動態高度列表，可先算 prefixHeights，再 Binary Search 找 start index
 function findStartIndex(prefixHeights: number[], scrollTop: number): number {
-  let left = 0
-  let right = prefixHeights.length - 1
+  let left = 0;
+  let right = prefixHeights.length - 1;
 
-  while (left < right) {
-    const mid = Math.floor((left + right) / 2)
-    if (prefixHeights[mid] < scrollTop) left = mid + 1
-    else right = mid
+  while (left &lt; right) {
+    const mid = Math.floor((left + right) / 2);
+    if (prefixHeights[mid] &lt; scrollTop) left = mid + 1;
+    else right = mid;
   }
 
-  return left
+  return left;
 }</code></pre>
 </dsa-code-block>
 
@@ -392,92 +388,90 @@ function findStartIndex(prefixHeights: number[], scrollTop: number): number {
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// search-worker.ts
 type SearchJob = {
-  jobId: number
-  items: string[]
-  keyword: string
-}
+  jobId: number;
+  items: string[];
+  keyword: string;
+};
 
-self.onmessage = (event: MessageEvent&lt;SearchJob&gt;) => {
-  const { jobId, items, keyword } = event.data
-  const result: string[] = []
-  const chunkSize = 1000
-  let index = 0
+self.onmessage = (event: MessageEvent&lt;SearchJob&gt;) =&gt; {
+  const { jobId, items, keyword } = event.data;
+  const result: string[] = [];
+  const chunkSize = 1000;
+  let index = 0;
 
   function processChunk() {
-    const end = Math.min(index + chunkSize, items.length)
-    for (let i = index; i < end; i++) {
-      if (items[i].includes(keyword)) result.push(items[i])
+    const end = Math.min(index + chunkSize, items.length);
+    for (let i = index; i &lt; end; i++) {
+      if (items[i].includes(keyword)) result.push(items[i]);
     }
 
-    index = end
-    self.postMessage({ jobId, type: 'progress', value: index / items.length })
+    index = end;
+    self.postMessage({ jobId, type: 'progress', value: index / items.length });
 
-    if (index < items.length) {
-      setTimeout(processChunk, 0)
+    if (index &lt; items.length) {
+      setTimeout(processChunk, 0);
     } else {
-      self.postMessage({ jobId, type: 'done', value: result })
+      self.postMessage({ jobId, type: 'done', value: result });
     }
   }
 
-  processChunk()
-}
+  processChunk();
+};
 
 // search-panel.ts
 class SearchPanel extends HTMLElement {
-  private items: string[] = []
-  private latestJobId = 0
+  private items: string[] = [];
+  private latestJobId = 0;
   private worker = new Worker(new URL('./search-worker.ts', import.meta.url), {
-    type: 'module'
-  })
+    type: 'module',
+  });
 
   connectedCallback() {
-    const shadow = this.attachShadow({ mode: 'open' })
+    const shadow = this.attachShadow({ mode: 'open' });
     shadow.innerHTML =
-      '&lt;input placeholder="search" /&gt;' +
-      '&lt;div id="status"&gt;&lt;/div&gt;' +
-      '&lt;ul id="result"&gt;&lt;/ul&gt;'
+      '&lt;input placeholder="search" /&gt;' + '&lt;div id="status"&gt;&lt;/div&gt;' + '&lt;ul id="result"&gt;&lt;/ul&gt;';
 
-    const input = shadow.querySelector('input')!
-    const status = shadow.querySelector('#status') as HTMLDivElement
-    const result = shadow.querySelector('#result') as HTMLUListElement
+    const input = shadow.querySelector('input')!;
+    const status = shadow.querySelector('#status') as HTMLDivElement;
+    const result = shadow.querySelector('#result') as HTMLUListElement;
 
-    input.addEventListener('input', () => {
-      this.latestJobId += 1
-      status.textContent = 'Searching...'
+    input.addEventListener('input', () =&gt; {
+      this.latestJobId += 1;
+      status.textContent = 'Searching...';
       this.worker.postMessage({
         jobId: this.latestJobId,
         items: this.items,
-        keyword: input.value.trim()
-      })
-    })
+        keyword: input.value.trim(),
+      });
+    });
 
-    this.worker.onmessage = (event) => {
-      const { jobId, type, value } = event.data
-      if (jobId !== this.latestJobId) return
+    this.worker.onmessage = (event) =&gt; {
+      const { jobId, type, value } = event.data;
+      if (jobId !== this.latestJobId) return;
 
       if (type === 'progress') {
-        status.textContent = 'Progress: ' + Math.round(value * 100) + '%'
+        status.textContent = 'Progress: ' + Math.round(value * 100) + '%';
       }
 
       if (type === 'done') {
-        status.textContent = 'Done: ' + value.length + ' matches'
+        status.textContent = 'Done: ' + value.length + ' matches';
         result.replaceChildren(
-          ...value.slice(0, 50).map((text: string) => {
-            const li = document.createElement('li')
-            li.textContent = text
-            return li
-          })
-        )
+          ...value.slice(0, 50).map((text: string) =&gt; {
+            const li = document.createElement('li');
+            li.textContent = text;
+            return li;
+          }),
+        );
       }
-    }
+    };
   }
 
   disconnectedCallback() {
-    this.worker.terminate()
+    this.worker.terminate();
   }
 }
 
-customElements.define('search-panel', SearchPanel)</code></pre>
+customElements.define('search-panel', SearchPanel);</code></pre>
 </dsa-code-block>
 
 <p><strong>實際應用場景</strong>：大檔案全文搜尋、CSV / JSON 匯入後清洗資料、語法高亮、圖片處理、報表聚合、離線索引建立。若資料量更大，還可以搭配 <code>TypedArray</code> 或 transferable objects，減少複製成本。</p>
@@ -489,61 +483,61 @@ customElements.define('search-panel', SearchPanel)</code></pre>
 
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">type IdleTask = {
-  priority: number
-  run: () => void
-}
+  priority: number;
+  run: () =&gt; void;
+};
 
 class SmartFeed extends HTMLElement {
-  private queue: IdleTask[] = []
-  private idleId: number | null = null
+  private queue: IdleTask[] = [];
+  private idleId: number | null = null;
 
   connectedCallback() {
-    this.renderShell()
+    this.renderShell();
 
-    this.scheduleIdleTask(() => this.buildSearchIndex(), 1)
-    this.scheduleIdleTask(() => this.prefetchNextPage(), 5)
-    this.scheduleIdleTask(() => this.sendAnalytics(), 10)
+    this.scheduleIdleTask(() =&gt; this.buildSearchIndex(), 1);
+    this.scheduleIdleTask(() =&gt; this.prefetchNextPage(), 5);
+    this.scheduleIdleTask(() =&gt; this.sendAnalytics(), 10);
   }
 
   disconnectedCallback() {
-    if (this.idleId !== null && 'cancelIdleCallback' in window) {
-      window.cancelIdleCallback(this.idleId)
+    if (this.idleId !== null &amp;&amp; 'cancelIdleCallback' in window) {
+      window.cancelIdleCallback(this.idleId);
     }
   }
 
-  private scheduleIdleTask(run: () => void, priority: number) {
-    this.queue.push({ run, priority })
-    this.queue.sort((a, b) => a.priority - b.priority)
-    this.requestFlush()
+  private scheduleIdleTask(run: () =&gt; void, priority: number) {
+    this.queue.push({ run, priority });
+    this.queue.sort((a, b) =&gt; a.priority - b.priority);
+    this.requestFlush();
   }
 
   private requestFlush() {
-    if (this.idleId !== null) return
+    if (this.idleId !== null) return;
 
-    const flush = (deadline: IdleDeadline) => {
-      while (this.queue.length > 0 && deadline.timeRemaining() > 2) {
-        const task = this.queue.shift()!
-        task.run()
+    const flush = (deadline: IdleDeadline) =&gt; {
+      while (this.queue.length &gt; 0 &amp;&amp; deadline.timeRemaining() &gt; 2) {
+        const task = this.queue.shift()!;
+        task.run();
       }
 
-      this.idleId = null
-      if (this.queue.length > 0) this.requestFlush()
-    }
+      this.idleId = null;
+      if (this.queue.length &gt; 0) this.requestFlush();
+    };
 
     if ('requestIdleCallback' in window) {
-      this.idleId = window.requestIdleCallback(flush)
+      this.idleId = window.requestIdleCallback(flush);
     } else {
-      this.idleId = window.setTimeout(() => {
+      this.idleId = window.setTimeout(() =&gt; {
         flush({
           didTimeout: false,
-          timeRemaining: () => 8
-        } as IdleDeadline)
-      }, 16)
+          timeRemaining: () =&gt; 8,
+        } as IdleDeadline);
+      }, 16);
     }
   }
 
   private renderShell() {
-    this.textContent = 'Feed ready'
+    this.textContent = 'Feed ready';
   }
 
   private buildSearchIndex() {}
@@ -551,7 +545,7 @@ class SmartFeed extends HTMLElement {
   private sendAnalytics() {}
 }
 
-customElements.define('smart-feed', SmartFeed)</code></pre>
+customElements.define('smart-feed', SmartFeed);</code></pre>
 </dsa-code-block>
 
 <p><strong>實際應用場景</strong>：文件站建立目錄索引、商城頁預抓下一頁商品、文章頁延後高亮 code block、Dashboard 背景建立 filter index。原則很簡單：<strong>會影響點擊、輸入、scroll 的工作先不要搶</strong>，能 idle 做的就 idle 做。</p>

@@ -29,44 +29,49 @@ export const content = `
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// Two Sum II — 有序陣列 LC #167
 function twoSumSorted(numbers: number[], target: number): number[] {
-  let lo = 0, hi = numbers.length - 1
-  while (lo < hi) {
-    const sum = numbers[lo] + numbers[hi]
-    if (sum === target) return [lo + 1, hi + 1]
-    else if (sum < target) lo++
-    else hi--
+  let lo = 0,
+    hi = numbers.length - 1;
+  while (lo &lt; hi) {
+    const sum = numbers[lo] + numbers[hi];
+    if (sum === target) return [lo + 1, hi + 1];
+    else if (sum &lt; target) lo++;
+    else hi--;
   }
-  return []
+  return [];
 }
 
 // 反轉字串 — LC #344
 function reverseString(s: string[]): void {
-  let lo = 0, hi = s.length - 1
-  while (lo < hi) {
-    ;[s[lo], s[hi]] = [s[hi], s[lo]]
-    lo++; hi--
+  let lo = 0,
+    hi = s.length - 1;
+  while (lo &lt; hi) {
+    [s[lo], s[hi]] = [s[hi], s[lo]];
+    lo++;
+    hi--;
   }
 }
 
 // 三數之和 — LC #15
 function threeSum(nums: number[]): number[][] {
-  nums.sort((a, b) => a - b)
-  const result: number[][] = []
-  for (let i = 0; i < nums.length - 2; i++) {
-    if (i > 0 && nums[i] === nums[i - 1]) continue  // skip duplicates
-    let lo = i + 1, hi = nums.length - 1
-    while (lo < hi) {
-      const sum = nums[i] + nums[lo] + nums[hi]
+  nums.sort((a, b) =&gt; a - b);
+  const result: number[][] = [];
+  for (let i = 0; i &lt; nums.length - 2; i++) {
+    if (i &gt; 0 &amp;&amp; nums[i] === nums[i - 1]) continue; // skip duplicates
+    let lo = i + 1,
+      hi = nums.length - 1;
+    while (lo &lt; hi) {
+      const sum = nums[i] + nums[lo] + nums[hi];
       if (sum === 0) {
-        result.push([nums[i], nums[lo], nums[hi]])
-        while (lo < hi && nums[lo] === nums[lo + 1]) lo++
-        while (lo < hi && nums[hi] === nums[hi - 1]) hi--
-        lo++; hi--
-      } else if (sum < 0) lo++
-      else hi--
+        result.push([nums[i], nums[lo], nums[hi]]);
+        while (lo &lt; hi &amp;&amp; nums[lo] === nums[lo + 1]) lo++;
+        while (lo &lt; hi &amp;&amp; nums[hi] === nums[hi - 1]) hi--;
+        lo++;
+        hi--;
+      } else if (sum &lt; 0) lo++;
+      else hi--;
     }
   }
-  return result
+  return result;
 }</code></pre>
   <pre slot="python"><code class="language-python">def two_sum_sorted(numbers: list[int], target: int) -> list[int]:
     lo, hi = 0, len(numbers) - 1
@@ -102,26 +107,26 @@ def three_sum(nums: list[int]) -> list[list[int]]:
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// 移除重複元素 — LC #26
 function removeDuplicates(nums: number[]): number {
-  let slow = 0
-  for (let fast = 1; fast < nums.length; fast++) {
+  let slow = 0;
+  for (let fast = 1; fast &lt; nums.length; fast++) {
     if (nums[fast] !== nums[slow]) {
-      slow++
-      nums[slow] = nums[fast]
+      slow++;
+      nums[slow] = nums[fast];
     }
   }
-  return slow + 1
+  return slow + 1;
 }
 
 // 移動零到末尾 — LC #283
 function moveZeroes(nums: number[]): void {
-  let slow = 0
-  for (let fast = 0; fast < nums.length; fast++) {
+  let slow = 0;
+  for (let fast = 0; fast &lt; nums.length; fast++) {
     if (nums[fast] !== 0) {
-      nums[slow] = nums[fast]
-      slow++
+      nums[slow] = nums[fast];
+      slow++;
     }
   }
-  for (; slow < nums.length; slow++) nums[slow] = 0
+  for (; slow &lt; nums.length; slow++) nums[slow] = 0;
 }</code></pre>
   <pre slot="python"><code class="language-python">def remove_duplicates(nums: list[int]) -> int:
     slow = 0
@@ -148,16 +153,19 @@ def move_zeroes(nums: list[int]) -> None:
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// Sort Colors (0, 1, 2) — LC #75
 function sortColors(nums: number[]): void {
-  let lo = 0, mid = 0, hi = nums.length - 1
-  while (mid <= hi) {
+  let lo = 0,
+    mid = 0,
+    hi = nums.length - 1;
+  while (mid &lt;= hi) {
     if (nums[mid] === 0) {
-      ;[nums[lo], nums[mid]] = [nums[mid], nums[lo]]
-      lo++; mid++
+      [nums[lo], nums[mid]] = [nums[mid], nums[lo]];
+      lo++;
+      mid++;
     } else if (nums[mid] === 1) {
-      mid++
+      mid++;
     } else {
-      ;[nums[mid], nums[hi]] = [nums[hi], nums[mid]]
-      hi--
+      [nums[mid], nums[hi]] = [nums[hi], nums[mid]];
+      hi--;
       // 注意：此處不移動 mid，因為換過來的值未驗證
     }
   }

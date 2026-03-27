@@ -30,54 +30,54 @@ export const content = `
 
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">class LRUCache {
-  private capacity: number
-  private map: Map<number, DoublyNode> = new Map()
-  private head = new DoublyNode(0, 0)  // dummy
-  private tail = new DoublyNode(0, 0)  // dummy
+  private capacity: number;
+  private map: Map&lt;number, DoublyNode&gt; = new Map();
+  private head = new DoublyNode(0, 0); // dummy
+  private tail = new DoublyNode(0, 0); // dummy
 
   constructor(capacity: number) {
-    this.capacity = capacity
-    this.head.next = this.tail
-    this.tail.prev = this.head
+    this.capacity = capacity;
+    this.head.next = this.tail;
+    this.tail.prev = this.head;
   }
 
   get(key: number): number {
-    if (!this.map.has(key)) return -1
-    const node = this.map.get(key)!
-    this.moveToFront(node)
-    return node.val
+    if (!this.map.has(key)) return -1;
+    const node = this.map.get(key)!;
+    this.moveToFront(node);
+    return node.val;
   }
 
   put(key: number, value: number): void {
     if (this.map.has(key)) {
-      const node = this.map.get(key)!
-      node.val = value
-      this.moveToFront(node)
+      const node = this.map.get(key)!;
+      node.val = value;
+      this.moveToFront(node);
     } else {
-      const node = new DoublyNode(key, value)
-      this.map.set(key, node)
-      this.insertFront(node)
-      if (this.map.size > this.capacity) {
-        const lru = this.tail.prev!
-        this.removeNode(lru)
-        this.map.delete(lru.key)
+      const node = new DoublyNode(key, value);
+      this.map.set(key, node);
+      this.insertFront(node);
+      if (this.map.size &gt; this.capacity) {
+        const lru = this.tail.prev!;
+        this.removeNode(lru);
+        this.map.delete(lru.key);
       }
     }
   }
 
   private moveToFront(node: DoublyNode) {
-    this.removeNode(node)
-    this.insertFront(node)
+    this.removeNode(node);
+    this.insertFront(node);
   }
   private insertFront(node: DoublyNode) {
-    node.next = this.head.next
-    node.prev = this.head
-    this.head.next!.prev = node
-    this.head.next = node
+    node.next = this.head.next;
+    node.prev = this.head;
+    this.head.next!.prev = node;
+    this.head.next = node;
   }
   private removeNode(node: DoublyNode) {
-    node.prev!.next = node.next
-    node.next!.prev = node.prev
+    node.prev!.next = node.next;
+    node.next!.prev = node.prev;
   }
 }
 
@@ -86,7 +86,7 @@ class DoublyNode {
     public key: number,
     public val: number,
     public prev: DoublyNode | null = null,
-    public next: DoublyNode | null = null
+    public next: DoublyNode | null = null,
   ) {}
 }</code></pre>
   <pre slot="python"><code class="language-python">from collections import OrderedDict
@@ -122,26 +122,26 @@ class LRUCache:
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// Sliding Window Rate Limiter
 class RateLimiter {
-  private requests: Map<string, number[]> = new Map()
+  private requests: Map&lt;string, number[]&gt; = new Map();
 
   constructor(
     private maxRequests: number,
-    private windowMs: number
+    private windowMs: number,
   ) {}
 
   isAllowed(userId: string): boolean {
-    const now = Date.now()
-    const times = this.requests.get(userId) ?? []
+    const now = Date.now();
+    const times = this.requests.get(userId) ?? [];
 
     // 清除視窗外的時間戳
-    const windowStart = now - this.windowMs
-    const validTimes = times.filter(t => t > windowStart)
+    const windowStart = now - this.windowMs;
+    const validTimes = times.filter((t) =&gt; t &gt; windowStart);
 
-    if (validTimes.length >= this.maxRequests) return false
+    if (validTimes.length &gt;= this.maxRequests) return false;
 
-    validTimes.push(now)
-    this.requests.set(userId, validTimes)
-    return true
+    validTimes.push(now);
+    this.requests.set(userId, validTimes);
+    return true;
   }
 }</code></pre>
   <pre slot="python"><code class="language-python">import time

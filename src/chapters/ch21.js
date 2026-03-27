@@ -40,38 +40,41 @@ export const content = `
 
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// 常用位元操作一覽
-const n = 13  // 0b1101
+const n = 13; // 0b1101
 
 // 判斷第 i 位是否為 1
-const isBitSet = (n: number, i: number) => (n >> i & 1) === 1
+const isBitSet = (n: number, i: number) =&gt; ((n &gt;&gt; i) &amp; 1) === 1;
 
 // 設置第 i 位為 1
-const setBit = (n: number, i: number) => n | (1 << i)
+const setBit = (n: number, i: number) =&gt; n | (1 &lt;&lt; i);
 
 // 清除第 i 位
-const clearBit = (n: number, i: number) => n & ~(1 << i)
+const clearBit = (n: number, i: number) =&gt; n &amp; ~(1 &lt;&lt; i);
 
 // 翻轉第 i 位
-const toggleBit = (n: number, i: number) => n ^ (1 << i)
+const toggleBit = (n: number, i: number) =&gt; n ^ (1 &lt;&lt; i);
 
 // 清除最低的 1-bit（Brian Kernighan）
-const clearLowestBit = (n: number) => n & (n - 1)
+const clearLowestBit = (n: number) =&gt; n &amp; (n - 1);
 
 // 只保留最低的 1-bit
-const lowestBit = (n: number) => n & (-n)
+const lowestBit = (n: number) =&gt; n &amp; -n;
 
 // 判斷是否為 2 的冪
-const isPowerOf2 = (n: number) => n > 0 && (n & (n - 1)) === 0
+const isPowerOf2 = (n: number) =&gt; n &gt; 0 &amp;&amp; (n &amp; (n - 1)) === 0;
 
 // 計算 1-bit 個數（Hamming Weight）
 function countBits(n: number): number {
-  let count = 0
-  while (n) { n &= n - 1; count++ }
-  return count
+  let count = 0;
+  while (n) {
+    n &amp;= n - 1;
+    count++;
+  }
+  return count;
 }
 
 // 中點（避免溢位）
-const mid = (lo: number, hi: number) => lo + ((hi - lo) >> 1)</code></pre>
+const mid = (lo: number, hi: number) =&gt; lo + ((hi - lo) &gt;&gt; 1);</code></pre>
   <pre slot="python"><code class="language-python">n = 13  # 0b1101
 
 # 判斷第 i 位
@@ -124,14 +127,14 @@ bin(13).count('1')  # 3
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// 找出只出現一次的數字 — LC #136
 function singleNumber(nums: number[]): number {
-  return nums.reduce((xor, n) => xor ^ n, 0)
+  return nums.reduce((xor, n) =&gt; xor ^ n, 0);
 }
 
 // 不用額外空間交換兩個數
 function swapXOR(arr: number[], i: number, j: number): void {
-  arr[i] ^= arr[j]
-  arr[j] ^= arr[i]
-  arr[i] ^= arr[j]
+  arr[i] ^= arr[j];
+  arr[j] ^= arr[i];
+  arr[i] ^= arr[j];
 }</code></pre>
   <pre slot="python"><code class="language-python">from functools import reduce
 import operator

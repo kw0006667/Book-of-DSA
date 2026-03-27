@@ -30,14 +30,15 @@ export const content = `
 
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">function binarySearch(arr: number[], target: number): number {
-  let lo = 0, hi = arr.length - 1
-  while (lo <= hi) {
-    const mid = lo + ((hi - lo) >> 1)  // 避免 (lo+hi) 溢位
-    if (arr[mid] === target) return mid
-    else if (arr[mid] < target) lo = mid + 1
-    else hi = mid - 1
+  let lo = 0,
+    hi = arr.length - 1;
+  while (lo &lt;= hi) {
+    const mid = lo + ((hi - lo) &gt;&gt; 1); // 避免 (lo+hi) 溢位
+    if (arr[mid] === target) return mid;
+    else if (arr[mid] &lt; target) lo = mid + 1;
+    else hi = mid - 1;
   }
-  return -1
+  return -1;
 }</code></pre>
   <pre slot="python"><code class="language-python">import bisect
 
@@ -61,26 +62,28 @@ idx = bisect.bisect_left(arr, target)  # lower bound</code></pre>
 <p>找第一個 ≥ target（lower bound）或第一個 > target（upper bound）的位置：</p>
 
 <dsa-code-block>
-  <pre slot="typescript"><code class="language-typescript">// Lower bound: 第一個 >= target 的 index
+  <pre slot="typescript"><code class="language-typescript">// Lower bound: 第一個 &gt;= target 的 index
 function lowerBound(arr: number[], target: number): number {
-  let lo = 0, hi = arr.length
-  while (lo < hi) {
-    const mid = lo + ((hi - lo) >> 1)
-    if (arr[mid] < target) lo = mid + 1
-    else hi = mid
+  let lo = 0,
+    hi = arr.length;
+  while (lo &lt; hi) {
+    const mid = lo + ((hi - lo) &gt;&gt; 1);
+    if (arr[mid] &lt; target) lo = mid + 1;
+    else hi = mid;
   }
-  return lo  // [0, n]，n 表示找不到
+  return lo; // [0, n]，n 表示找不到
 }
 
-// Upper bound: 第一個 > target 的 index
+// Upper bound: 第一個 &gt; target 的 index
 function upperBound(arr: number[], target: number): number {
-  let lo = 0, hi = arr.length
-  while (lo < hi) {
-    const mid = lo + ((hi - lo) >> 1)
-    if (arr[mid] <= target) lo = mid + 1
-    else hi = mid
+  let lo = 0,
+    hi = arr.length;
+  while (lo &lt; hi) {
+    const mid = lo + ((hi - lo) &gt;&gt; 1);
+    if (arr[mid] &lt;= target) lo = mid + 1;
+    else hi = mid;
   }
-  return lo
+  return lo;
 }</code></pre>
   <pre slot="python"><code class="language-python">import bisect
 
@@ -108,21 +111,22 @@ def lower_bound(arr: list[int], target: int) -> int:
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// LC #33 — Search in Rotated Sorted Array
 function searchRotated(nums: number[], target: number): number {
-  let lo = 0, hi = nums.length - 1
-  while (lo <= hi) {
-    const mid = lo + ((hi - lo) >> 1)
-    if (nums[mid] === target) return mid
+  let lo = 0,
+    hi = nums.length - 1;
+  while (lo &lt;= hi) {
+    const mid = lo + ((hi - lo) &gt;&gt; 1);
+    if (nums[mid] === target) return mid;
     // 左半有序
-    if (nums[lo] <= nums[mid]) {
-      if (nums[lo] <= target && target < nums[mid]) hi = mid - 1
-      else lo = mid + 1
+    if (nums[lo] &lt;= nums[mid]) {
+      if (nums[lo] &lt;= target &amp;&amp; target &lt; nums[mid]) hi = mid - 1;
+      else lo = mid + 1;
     } else {
       // 右半有序
-      if (nums[mid] < target && target <= nums[hi]) lo = mid + 1
-      else hi = mid - 1
+      if (nums[mid] &lt; target &amp;&amp; target &lt;= nums[hi]) lo = mid + 1;
+      else hi = mid - 1;
     }
   }
-  return -1
+  return -1;
 }</code></pre>
   <pre slot="python"><code class="language-python">def search_rotated(nums: list[int], target: int) -> int:
     lo, hi = 0, len(nums) - 1
@@ -149,14 +153,15 @@ function searchRotated(nums: number[], target: number): number {
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// 最小化最大值：Koko Eating Bananas (LC #875)
 function minEatingSpeed(piles: number[], h: number): number {
-  let lo = 1, hi = Math.max(...piles)
-  while (lo < hi) {
-    const mid = lo + ((hi - lo) >> 1)
-    const hours = piles.reduce((sum, p) => sum + Math.ceil(p / mid), 0)
-    if (hours <= h) hi = mid
-    else lo = mid + 1
+  let lo = 1,
+    hi = Math.max(...piles);
+  while (lo &lt; hi) {
+    const mid = lo + ((hi - lo) &gt;&gt; 1);
+    const hours = piles.reduce((sum, p) =&gt; sum + Math.ceil(p / mid), 0);
+    if (hours &lt;= h) hi = mid;
+    else lo = mid + 1;
   }
-  return lo
+  return lo;
 }</code></pre>
   <pre slot="python"><code class="language-python">import math
 
@@ -175,18 +180,20 @@ def min_eating_speed(piles: list[int], h: int) -> int:
 <h2 id="matrix-search">Matrix Search</h2>
 
 <dsa-code-block>
-  <pre slot="typescript"><code class="language-typescript">// 每行有序、行首 > 上行行尾 — LC #74
+  <pre slot="typescript"><code class="language-typescript">// 每行有序、行首 &gt; 上行行尾 — LC #74
 function searchMatrix(matrix: number[][], target: number): boolean {
-  const m = matrix.length, n = matrix[0].length
-  let lo = 0, hi = m * n - 1
-  while (lo <= hi) {
-    const mid = lo + ((hi - lo) >> 1)
-    const val = matrix[Math.floor(mid / n)][mid % n]
-    if (val === target) return true
-    else if (val < target) lo = mid + 1
-    else hi = mid - 1
+  const m = matrix.length,
+    n = matrix[0].length;
+  let lo = 0,
+    hi = m * n - 1;
+  while (lo &lt;= hi) {
+    const mid = lo + ((hi - lo) &gt;&gt; 1);
+    const val = matrix[Math.floor(mid / n)][mid % n];
+    if (val === target) return true;
+    else if (val &lt; target) lo = mid + 1;
+    else hi = mid - 1;
   }
-  return false
+  return false;
 }</code></pre>
   <pre slot="python"><code class="language-python">def search_matrix(matrix: list[list[int]], target: int) -> bool:
     m, n = len(matrix), len(matrix[0])

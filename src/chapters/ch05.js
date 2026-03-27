@@ -30,25 +30,25 @@ export const content = `
 
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// JS 用 Array 模擬 Stack
-const stack: number[] = []
-stack.push(1)       // [1]
-stack.push(2)       // [1, 2]
-stack.push(3)       // [1, 2, 3]
-stack.pop()         // returns 3, stack = [1, 2]
-stack[stack.length - 1]  // peek = 2
+const stack: number[] = [];
+stack.push(1); // [1]
+stack.push(2); // [1, 2]
+stack.push(3); // [1, 2, 3]
+stack.pop(); // returns 3, stack = [1, 2]
+stack[stack.length - 1]; // peek = 2
 
 // 經典應用：括號匹配
 function isValid(s: string): boolean {
-  const stack: string[] = []
-  const pairs: Record<string, string> = { ')': '(', ']': '[', '}': '{' }
+  const stack: string[] = [];
+  const pairs: Record&lt;string, string&gt; = { ')': '(', ']': '[', '}': '{' };
   for (const ch of s) {
     if ('([{'.includes(ch)) {
-      stack.push(ch)
+      stack.push(ch);
     } else {
-      if (stack.pop() !== pairs[ch]) return false
+      if (stack.pop() !== pairs[ch]) return false;
     }
   }
-  return stack.length === 0
+  return stack.length === 0;
 }</code></pre>
   <pre slot="python"><code class="language-python"># Python list 模擬 Stack
 stack = []
@@ -81,26 +81,34 @@ def is_valid(s: str) -> bool:
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// BFS 通常用 Array 當 Queue（面試可接受，效能非最優）
 function bfs(root: TreeNode | null): number[] {
-  if (!root) return []
-  const result: number[] = []
-  const queue: TreeNode[] = [root]
+  if (!root) return [];
+  const result: number[] = [];
+  const queue: TreeNode[] = [root];
   while (queue.length) {
-    const node = queue.shift()!  // O(n) — 面試可接受
-    result.push(node.val)
-    if (node.left)  queue.push(node.left)
-    if (node.right) queue.push(node.right)
+    const node = queue.shift()!; // O(n) — 面試可接受
+    result.push(node.val);
+    if (node.left) queue.push(node.left);
+    if (node.right) queue.push(node.right);
   }
-  return result
+  return result;
 }
 
 // 高效 Queue 用兩個指標避免 shift
-class Queue<T> {
-  private data: T[] = []
-  private head = 0
-  enqueue(val: T) { this.data.push(val) }
-  dequeue(): T | undefined { return this.data[this.head++] }
-  get size() { return this.data.length - this.head }
-  isEmpty() { return this.size === 0 }
+class Queue&lt;T&gt; {
+  private data: T[] = [];
+  private head = 0;
+  enqueue(val: T) {
+    this.data.push(val);
+  }
+  dequeue(): T | undefined {
+    return this.data[this.head++];
+  }
+  get size() {
+    return this.data.length - this.head;
+  }
+  isEmpty() {
+    return this.size === 0;
+  }
 }</code></pre>
   <pre slot="python"><code class="language-python">from collections import deque
 
@@ -135,35 +143,35 @@ def bfs(root) -> list[int]:
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// 下一個更大的元素 — Next Greater Element
 function nextGreaterElement(nums: number[]): number[] {
-  const result = new Array(nums.length).fill(-1)
-  const stack: number[] = []  // 存 index，維持單調遞減
+  const result = new Array(nums.length).fill(-1);
+  const stack: number[] = []; // 存 index，維持單調遞減
 
-  for (let i = 0; i < nums.length; i++) {
-    // 當前元素 > 堆頂元素，堆頂找到了「下一個更大」
-    while (stack.length && nums[i] > nums[stack[stack.length - 1]]) {
-      const idx = stack.pop()!
-      result[idx] = nums[i]
+  for (let i = 0; i &lt; nums.length; i++) {
+    // 當前元素 &gt; 堆頂元素，堆頂找到了「下一個更大」
+    while (stack.length &amp;&amp; nums[i] &gt; nums[stack[stack.length - 1]]) {
+      const idx = stack.pop()!;
+      result[idx] = nums[i];
     }
-    stack.push(i)
+    stack.push(i);
   }
-  return result
+  return result;
 }
 
 // 柱狀圖中的最大矩形 (LC #84)
 function largestRectangleArea(heights: number[]): number {
-  const stack: number[] = []
-  let maxArea = 0
-  const h = [...heights, 0]  // sentinel
+  const stack: number[] = [];
+  let maxArea = 0;
+  const h = [...heights, 0]; // sentinel
 
-  for (let i = 0; i < h.length; i++) {
-    while (stack.length && h[i] < h[stack[stack.length - 1]]) {
-      const height = h[stack.pop()!]
-      const width = stack.length ? i - stack[stack.length - 1] - 1 : i
-      maxArea = Math.max(maxArea, height * width)
+  for (let i = 0; i &lt; h.length; i++) {
+    while (stack.length &amp;&amp; h[i] &lt; h[stack[stack.length - 1]]) {
+      const height = h[stack.pop()!];
+      const width = stack.length ? i - stack[stack.length - 1] - 1 : i;
+      maxArea = Math.max(maxArea, height * width);
     }
-    stack.push(i)
+    stack.push(i);
   }
-  return maxArea
+  return maxArea;
 }</code></pre>
   <pre slot="python"><code class="language-python">def next_greater_element(nums: list[int]) -> list[int]:
     result = [-1] * len(nums)
@@ -196,31 +204,31 @@ def largest_rectangle_area(heights: list[int]) -> int:
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// 用兩個 Stack 實作 Queue — LC #232
 class MyQueue {
-  private inbox: number[] = []   // push stack
-  private outbox: number[] = []  // pop stack
+  private inbox: number[] = []; // push stack
+  private outbox: number[] = []; // pop stack
 
   push(x: number): void {
-    this.inbox.push(x)
+    this.inbox.push(x);
   }
 
   pop(): number {
-    this.move()
-    return this.outbox.pop()!
+    this.move();
+    return this.outbox.pop()!;
   }
 
   peek(): number {
-    this.move()
-    return this.outbox[this.outbox.length - 1]
+    this.move();
+    return this.outbox[this.outbox.length - 1];
   }
 
   empty(): boolean {
-    return !this.inbox.length && !this.outbox.length
+    return !this.inbox.length &amp;&amp; !this.outbox.length;
   }
 
   private move(): void {
     if (!this.outbox.length) {
       while (this.inbox.length) {
-        this.outbox.push(this.inbox.pop()!)
+        this.outbox.push(this.inbox.pop()!);
       }
     }
   }

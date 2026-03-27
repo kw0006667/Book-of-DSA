@@ -41,49 +41,53 @@ export const content = `
 
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">class UnionFind {
-  private parent: number[]
-  private rank: number[]
-  count: number  // 連通分量數
+  private parent: number[];
+  private rank: number[];
+  count: number; // 連通分量數
 
   constructor(n: number) {
-    this.parent = Array.from({ length: n }, (_, i) => i)
-    this.rank = new Array(n).fill(0)
-    this.count = n
+    this.parent = Array.from({ length: n }, (_, i) =&gt; i);
+    this.rank = new Array(n).fill(0);
+    this.count = n;
   }
 
   find(x: number): number {
     if (this.parent[x] !== x) {
-      this.parent[x] = this.find(this.parent[x])  // path compression
+      this.parent[x] = this.find(this.parent[x]); // path compression
     }
-    return this.parent[x]
+    return this.parent[x];
   }
 
   union(x: number, y: number): boolean {
-    const px = this.find(x), py = this.find(y)
-    if (px === py) return false  // already connected
+    const px = this.find(x),
+      py = this.find(y);
+    if (px === py) return false; // already connected
     // union by rank
-    if (this.rank[px] < this.rank[py]) this.parent[px] = py
-    else if (this.rank[px] > this.rank[py]) this.parent[py] = px
-    else { this.parent[py] = px; this.rank[px]++ }
-    this.count--
-    return true
+    if (this.rank[px] &lt; this.rank[py]) this.parent[px] = py;
+    else if (this.rank[px] &gt; this.rank[py]) this.parent[py] = px;
+    else {
+      this.parent[py] = px;
+      this.rank[px]++;
+    }
+    this.count--;
+    return true;
   }
 
   connected(x: number, y: number): boolean {
-    return this.find(x) === this.find(y)
+    return this.find(x) === this.find(y);
   }
 }
 
 // 範例：Number of Provinces (LC #547)
 function findCircleNum(isConnected: number[][]): number {
-  const n = isConnected.length
-  const uf = new UnionFind(n)
-  for (let i = 0; i < n; i++) {
-    for (let j = i + 1; j < n; j++) {
-      if (isConnected[i][j]) uf.union(i, j)
+  const n = isConnected.length;
+  const uf = new UnionFind(n);
+  for (let i = 0; i &lt; n; i++) {
+    for (let j = i + 1; j &lt; n; j++) {
+      if (isConnected[i][j]) uf.union(i, j);
     }
   }
-  return uf.count
+  return uf.count;
 }</code></pre>
   <pre slot="python"><code class="language-python">class UnionFind:
     def __init__(self, n: int):

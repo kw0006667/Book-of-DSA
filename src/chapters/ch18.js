@@ -47,36 +47,37 @@ export const content = `
   <pre slot="typescript"><code class="language-typescript">// 最多不重疊區間數 — LC #435（等同 Activity Selection）
 // Greedy：按結束時間排序，貪心選擇結束最早的
 function eraseOverlapIntervals(intervals: number[][]): number {
-  intervals.sort((a, b) => a[1] - b[1])  // sort by end time
-  let count = 0, prevEnd = -Infinity
+  intervals.sort((a, b) =&gt; a[1] - b[1]); // sort by end time
+  let count = 0,
+    prevEnd = -Infinity;
   for (const [start, end] of intervals) {
-    if (start >= prevEnd) {
-      prevEnd = end  // 選這個區間
+    if (start &gt;= prevEnd) {
+      prevEnd = end; // 選這個區間
     } else {
-      count++  // 移除這個重疊的
+      count++; // 移除這個重疊的
     }
   }
-  return count
+  return count;
 }
 
 // 跳躍遊戲 — LC #55
 function canJump(nums: number[]): boolean {
-  let maxReach = 0
-  for (let i = 0; i < nums.length; i++) {
-    if (i > maxReach) return false
-    maxReach = Math.max(maxReach, i + nums[i])
+  let maxReach = 0;
+  for (let i = 0; i &lt; nums.length; i++) {
+    if (i &gt; maxReach) return false;
+    maxReach = Math.max(maxReach, i + nums[i]);
   }
-  return true
+  return true;
 }
 
 // 任務調度器 — LC #621
 function leastInterval(tasks: string[], n: number): number {
-  const freq = new Array(26).fill(0)
-  for (const t of tasks) freq[t.charCodeAt(0) - 65]++
-  freq.sort((a, b) => b - a)
-  const maxFreq = freq[0]
-  const maxCount = freq.filter(f => f === maxFreq).length
-  return Math.max(tasks.length, (maxFreq - 1) * (n + 1) + maxCount)
+  const freq = new Array(26).fill(0);
+  for (const t of tasks) freq[t.charCodeAt(0) - 65]++;
+  freq.sort((a, b) =&gt; b - a);
+  const maxFreq = freq[0];
+  const maxCount = freq.filter((f) =&gt; f === maxFreq).length;
+  return Math.max(tasks.length, (maxFreq - 1) * (n + 1) + maxCount);
 }</code></pre>
   <pre slot="python"><code class="language-python">def erase_overlap_intervals(intervals: list[list[int]]) -> int:
     intervals.sort(key=lambda x: x[1])

@@ -29,13 +29,13 @@ export const content = `
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// 大小為 k 的子陣列最大和
 function maxSumSubarray(nums: number[], k: number): number {
-  let sum = nums.slice(0, k).reduce((a, b) => a + b, 0)
-  let maxSum = sum
-  for (let i = k; i < nums.length; i++) {
-    sum += nums[i] - nums[i - k]  // 進一個，出一個
-    maxSum = Math.max(maxSum, sum)
+  let sum = nums.slice(0, k).reduce((a, b) =&gt; a + b, 0);
+  let maxSum = sum;
+  for (let i = k; i &lt; nums.length; i++) {
+    sum += nums[i] - nums[i - k]; // 進一個，出一個
+    maxSum = Math.max(maxSum, sum);
   }
-  return maxSum
+  return maxSum;
 }</code></pre>
   <pre slot="python"><code class="language-python">def max_sum_subarray(nums: list[int], k: int) -> int:
     window_sum = sum(nums[:k])
@@ -52,17 +52,18 @@ function maxSumSubarray(nums: number[], k: number): number {
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// 最長不重複子字串 — LC #3
 function lengthOfLongestSubstring(s: string): number {
-  const lastSeen = new Map<string, number>()
-  let left = 0, maxLen = 0
-  for (let right = 0; right < s.length; right++) {
-    const ch = s[right]
-    if (lastSeen.has(ch) && lastSeen.get(ch)! >= left) {
-      left = lastSeen.get(ch)! + 1
+  const lastSeen = new Map&lt;string, number&gt;();
+  let left = 0,
+    maxLen = 0;
+  for (let right = 0; right &lt; s.length; right++) {
+    const ch = s[right];
+    if (lastSeen.has(ch) &amp;&amp; lastSeen.get(ch)! &gt;= left) {
+      left = lastSeen.get(ch)! + 1;
     }
-    lastSeen.set(ch, right)
-    maxLen = Math.max(maxLen, right - left + 1)
+    lastSeen.set(ch, right);
+    maxLen = Math.max(maxLen, right - left + 1);
   }
-  return maxLen
+  return maxLen;
 }</code></pre>
   <pre slot="python"><code class="language-python">def length_of_longest_substring(s: str) -> int:
     last_seen = {}
@@ -81,27 +82,33 @@ function lengthOfLongestSubstring(s: string): number {
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// 最小覆蓋子字串 — LC #76
 function minWindow(s: string, t: string): string {
-  const need = new Map<string, number>()
-  for (const ch of t) need.set(ch, (need.get(ch) ?? 0) + 1)
+  const need = new Map&lt;string, number&gt;();
+  for (const ch of t) need.set(ch, (need.get(ch) ?? 0) + 1);
 
-  let have = 0, required = need.size
-  let lo = 0, minLen = Infinity, minStart = 0
-  const window = new Map<string, number>()
+  let have = 0,
+    required = need.size;
+  let lo = 0,
+    minLen = Infinity,
+    minStart = 0;
+  const window = new Map&lt;string, number&gt;();
 
-  for (let hi = 0; hi < s.length; hi++) {
-    const ch = s[hi]
-    window.set(ch, (window.get(ch) ?? 0) + 1)
-    if (need.has(ch) && window.get(ch) === need.get(ch)) have++
+  for (let hi = 0; hi &lt; s.length; hi++) {
+    const ch = s[hi];
+    window.set(ch, (window.get(ch) ?? 0) + 1);
+    if (need.has(ch) &amp;&amp; window.get(ch) === need.get(ch)) have++;
 
     while (have === required) {
-      if (hi - lo + 1 < minLen) { minLen = hi - lo + 1; minStart = lo }
-      const leftCh = s[lo]
-      window.set(leftCh, window.get(leftCh)! - 1)
-      if (need.has(leftCh) && window.get(leftCh)! < need.get(leftCh)!) have--
-      lo++
+      if (hi - lo + 1 &lt; minLen) {
+        minLen = hi - lo + 1;
+        minStart = lo;
+      }
+      const leftCh = s[lo];
+      window.set(leftCh, window.get(leftCh)! - 1);
+      if (need.has(leftCh) &amp;&amp; window.get(leftCh)! &lt; need.get(leftCh)!) have--;
+      lo++;
     }
   }
-  return minLen === Infinity ? '' : s.slice(minStart, minStart + minLen)
+  return minLen === Infinity ? '' : s.slice(minStart, minStart + minLen);
 }</code></pre>
   <pre slot="python"><code class="language-python">from collections import Counter, defaultdict
 
@@ -135,19 +142,19 @@ def min_window(s: str, t: str) -> str:
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// Sliding Window Maximum — LC #239
 function maxSlidingWindow(nums: number[], k: number): number[] {
-  const deque: number[] = []  // 存 index，維持單調遞減
-  const result: number[] = []
-  for (let i = 0; i < nums.length; i++) {
+  const deque: number[] = []; // 存 index，維持單調遞減
+  const result: number[] = [];
+  for (let i = 0; i &lt; nums.length; i++) {
     // 移除超出視窗的元素
-    if (deque.length && deque[0] < i - k + 1) deque.shift()
+    if (deque.length &amp;&amp; deque[0] &lt; i - k + 1) deque.shift();
     // 維持單調遞減
-    while (deque.length && nums[deque[deque.length - 1]] < nums[i]) {
-      deque.pop()
+    while (deque.length &amp;&amp; nums[deque[deque.length - 1]] &lt; nums[i]) {
+      deque.pop();
     }
-    deque.push(i)
-    if (i >= k - 1) result.push(nums[deque[0]])
+    deque.push(i);
+    if (i &gt;= k - 1) result.push(nums[deque[0]]);
   }
-  return result
+  return result;
 }</code></pre>
   <pre slot="python"><code class="language-python">from collections import deque
 

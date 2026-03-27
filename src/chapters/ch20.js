@@ -35,45 +35,48 @@ export const content = `
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// Kahn's Algorithm — LC #207 Course Schedule
 function canFinish(numCourses: number, prerequisites: number[][]): boolean {
-  const inDegree = new Array(numCourses).fill(0)
-  const graph = Array.from({ length: numCourses }, () => [] as number[])
+  const inDegree = new Array(numCourses).fill(0);
+  const graph = Array.from({ length: numCourses }, () =&gt; [] as number[]);
 
   for (const [a, b] of prerequisites) {
-    graph[b].push(a)
-    inDegree[a]++
+    graph[b].push(a);
+    inDegree[a]++;
   }
 
-  const queue = []
-  for (let i = 0; i < numCourses; i++) {
-    if (inDegree[i] === 0) queue.push(i)
+  const queue = [];
+  for (let i = 0; i &lt; numCourses; i++) {
+    if (inDegree[i] === 0) queue.push(i);
   }
 
-  let completed = 0
+  let completed = 0;
   while (queue.length) {
-    const node = queue.shift()!
-    completed++
+    const node = queue.shift()!;
+    completed++;
     for (const neighbor of graph[node]) {
-      if (--inDegree[neighbor] === 0) queue.push(neighbor)
+      if (--inDegree[neighbor] === 0) queue.push(neighbor);
     }
   }
-  return completed === numCourses
+  return completed === numCourses;
 }
 
 // Topological Order — LC #210
 function findOrder(numCourses: number, prerequisites: number[][]): number[] {
-  const inDegree = new Array(numCourses).fill(0)
-  const graph: number[][] = Array.from({ length: numCourses }, () => [])
-  for (const [a, b] of prerequisites) { graph[b].push(a); inDegree[a]++ }
-  const queue = Array.from({ length: numCourses }, (_, i) => i).filter(i => inDegree[i] === 0)
-  const result: number[] = []
+  const inDegree = new Array(numCourses).fill(0);
+  const graph: number[][] = Array.from({ length: numCourses }, () =&gt; []);
+  for (const [a, b] of prerequisites) {
+    graph[b].push(a);
+    inDegree[a]++;
+  }
+  const queue = Array.from({ length: numCourses }, (_, i) =&gt; i).filter((i) =&gt; inDegree[i] === 0);
+  const result: number[] = [];
   while (queue.length) {
-    const node = queue.shift()!
-    result.push(node)
+    const node = queue.shift()!;
+    result.push(node);
     for (const next of graph[node]) {
-      if (--inDegree[next] === 0) queue.push(next)
+      if (--inDegree[next] === 0) queue.push(next);
     }
   }
-  return result.length === numCourses ? result : []
+  return result.length === numCourses ? result : [];
 }</code></pre>
   <pre slot="python"><code class="language-python">from collections import defaultdict, deque
 
@@ -102,29 +105,29 @@ def can_finish(num_courses: int, prerequisites: list[list[int]]) -> bool:
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// Dijkstra — LC #743 Network Delay Time
 function networkDelayTime(times: number[][], n: number, k: number): number {
-  const graph = new Map<number, [number, number][]>()
-  for (let i = 1; i <= n; i++) graph.set(i, [])
-  for (const [u, v, w] of times) graph.get(u)!.push([v, w])
+  const graph = new Map&lt;number, [number, number][]&gt;();
+  for (let i = 1; i &lt;= n; i++) graph.set(i, []);
+  for (const [u, v, w] of times) graph.get(u)!.push([v, w]);
 
-  const dist = new Array(n + 1).fill(Infinity)
-  dist[k] = 0
+  const dist = new Array(n + 1).fill(Infinity);
+  dist[k] = 0;
   // MinHeap: [dist, node]
-  const heap = new MinHeap<[number, number]>(([a], [b]) => a - b)
-  heap.push([0, k])
+  const heap = new MinHeap&lt;[number, number]&gt;(([a], [b]) =&gt; a - b);
+  heap.push([0, k]);
 
   while (heap.size) {
-    const [d, u] = heap.pop()!
-    if (d > dist[u]) continue
+    const [d, u] = heap.pop()!;
+    if (d &gt; dist[u]) continue;
     for (const [v, w] of graph.get(u)!) {
-      if (dist[u] + w < dist[v]) {
-        dist[v] = dist[u] + w
-        heap.push([dist[v], v])
+      if (dist[u] + w &lt; dist[v]) {
+        dist[v] = dist[u] + w;
+        heap.push([dist[v], v]);
       }
     }
   }
 
-  const maxDist = Math.max(...dist.slice(1))
-  return maxDist === Infinity ? -1 : maxDist
+  const maxDist = Math.max(...dist.slice(1));
+  return maxDist === Infinity ? -1 : maxDist;
 }</code></pre>
   <pre slot="python"><code class="language-python">import heapq
 from collections import defaultdict
