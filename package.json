@@ -1,0 +1,17 @@
+{
+  "name": "book-of-dsa",
+  "version": "1.0.0",
+  "description": "資料結構與演算法 — 前端工程師實戰指南",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "lit": "^3.2.0"
+  },
+  "devDependencies": {
+    "vite": "^5.4.0"
+  }
+}

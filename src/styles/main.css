@@ -1,0 +1,331 @@
+/* ============================================================
+   Book of DSA — Main CSS
+   Global layout, CSS variables, and base styles
+   ============================================================ */
+
+@import './nav.css';
+@import './content.css';
+@import './code.css';
+
+/* ---- CSS Variables (Light Theme) ---- */
+:root {
+  /* Backgrounds */
+  --color-bg:           #f8f5f0;
+  --color-bg-sidebar:   #efe9e1;
+  --color-bg-elevated:  #ffffff;
+  --color-bg-hover:     #e8e0d8;
+  --color-bg-code:      #f3ede6;
+
+  /* Text */
+  --color-text:           #2a2520;
+  --color-text-secondary: #6b5e52;
+  --color-text-muted:     #9b8b7e;
+
+  /* Accent (Crimson Red) */
+  --color-accent:       #c0392b;
+  --color-accent-hover: #922b21;
+  --color-accent-light: #e8d5d2;
+  --color-accent-dark:  #7b241c;
+  --color-accent-soft:  rgba(192, 57, 43, 0.1);
+
+  /* Borders & Shadows */
+  --color-border:       #d4ccc4;
+  --color-border-light: #e8e2da;
+  --color-border-strong:#b8afa8;
+  --color-shadow:       rgba(42, 37, 32, 0.08);
+  --color-shadow-strong:rgba(42, 37, 32, 0.15);
+  --shadow-sm:          0 1px 4px rgba(42, 37, 32, 0.08);
+  --shadow-md:          0 2px 12px rgba(42, 37, 32, 0.10);
+  --shadow-lg:          0 4px 24px rgba(42, 37, 32, 0.14);
+
+  /* Tags */
+  --tag-ds-text:     #2c6e49;  --tag-ds-bg:     #d4edda;
+  --tag-algo-text:   #1a5276;  --tag-algo-bg:   #d4e6f1;
+  --tag-fe-text:     #7d3c98;  --tag-fe-bg:     #e8daef;
+  --tag-lc-text:     #e67e22;  --tag-lc-bg:     #fde8d0;
+
+  /* Difficulty */
+  --diff-easy-text:   #27ae60; --diff-easy-bg:   #d5f5e3;
+  --diff-medium-text: #e67e22; --diff-medium-bg: #fde8d0;
+  --diff-hard-text:   #c0392b; --diff-hard-bg:   #f5d0cd;
+
+  /* Typography */
+  --font-sans:  'Noto Sans TC', 'Source Sans 3', system-ui, sans-serif;
+  --font-serif: 'Noto Serif TC', 'Playfair Display', Georgia, serif;
+  --font-mono:  'JetBrains Mono', 'Fira Code', monospace;
+  --font-ui:    system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* Layout */
+  --sidebar-width:        280px;
+  --desktop-sections-width: 220px;
+  --topbar-height:        52px;
+  --content-max-width:    920px;
+  --radius-sm:            4px;
+  --radius-md:            6px;
+  --radius-lg:            10px;
+  --transition:           220ms ease;
+}
+
+/* ---- Dark Theme ---- */
+html[data-theme="dark"] {
+  --color-bg:           #1c1917;
+  --color-bg-sidebar:   #141210;
+  --color-bg-elevated:  #292421;
+  --color-bg-hover:     #33302c;
+  --color-bg-code:      #211f1c;
+
+  --color-text:           #e8e0d8;
+  --color-text-secondary: #a89b8e;
+  --color-text-muted:     #6b5e52;
+
+  --color-accent:       #e05c4a;
+  --color-accent-hover: #f07060;
+  --color-accent-light: #3d1f1a;
+  --color-accent-dark:  #c0392b;
+  --color-accent-soft:  rgba(224, 92, 74, 0.12);
+
+  --color-border:       #3d3530;
+  --color-border-light: #2e2a26;
+  --color-border-strong:#5a4f48;
+  --color-shadow:       rgba(0, 0, 0, 0.25);
+  --color-shadow-strong:rgba(0, 0, 0, 0.4);
+  --shadow-sm:          0 1px 4px rgba(0, 0, 0, 0.3);
+  --shadow-md:          0 2px 12px rgba(0, 0, 0, 0.35);
+  --shadow-lg:          0 4px 24px rgba(0, 0, 0, 0.4);
+
+  --tag-ds-text:     #6fcf97;  --tag-ds-bg:     #1a3d2a;
+  --tag-algo-text:   #56ccf2;  --tag-algo-bg:   #1a2f3d;
+  --tag-fe-text:     #bb86fc;  --tag-fe-bg:     #2d1a3d;
+  --tag-lc-text:     #f2994a;  --tag-lc-bg:     #3d2a1a;
+
+  --diff-easy-text:   #6fcf97; --diff-easy-bg:   #1a3d2a;
+  --diff-medium-text: #f2994a; --diff-medium-bg: #3d2a1a;
+  --diff-hard-text:   #eb5757; --diff-hard-bg:   #3d1a1a;
+}
+
+/* ---- Reset & Base ---- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color var(--transition), color var(--transition);
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+a:hover { color: var(--color-accent-hover); text-decoration: underline; }
+
+/* ---- App Grid Layout ---- */
+#app {
+  display: grid;
+  grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
+  min-height: 100vh;
+  transition: grid-template-columns 220ms ease;
+}
+
+body.sidebar-collapsed #app {
+  grid-template-columns: 0 minmax(0, 1fr);
+}
+
+/* ---- Mobile Top Bar ---- */
+#top-bar {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--topbar-height);
+  background: var(--color-bg-sidebar);
+  border-bottom: 1px solid var(--color-border);
+  align-items: center;
+  padding: 0 12px;
+  gap: 12px;
+  z-index: 100;
+}
+
+.top-bar-title {
+  flex: 1;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ---- Overlay ---- */
+#overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(42, 37, 32, 0.45);
+  z-index: 150;
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+#overlay.active {
+  display: block;
+  opacity: 1;
+}
+
+/* ---- Loading Overlay ---- */
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--color-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 150ms ease;
+}
+.loading-overlay.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+.loading-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-accent);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ---- Home Screen ---- */
+.home-screen {
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 24px;
+}
+
+.home-hero {
+  max-width: 600px;
+  text-align: center;
+}
+
+.home-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 16px;
+}
+
+.home-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 900;
+  color: var(--color-text);
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+.home-subtitle {
+  font-size: 1.125rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+
+.home-stats {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.stat-num {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--color-accent);
+  line-height: 1;
+}
+.stat-label {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-family: var(--font-mono);
+}
+
+.home-cta {
+  display: inline-block;
+  padding: 12px 32px;
+  background: var(--color-accent);
+  color: #fff;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 1rem;
+  transition: background var(--transition), transform var(--transition);
+  text-decoration: none;
+}
+.home-cta:hover {
+  background: var(--color-accent-hover);
+  color: #fff;
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+/* ---- Desktop: sections panel padding when visible ---- */
+@media (min-width: 768px) {
+  body.sidebar-collapsed:not(.desktop-sections-collapsed) #content-area {
+    padding-right: calc(var(--desktop-sections-width) + 40px);
+  }
+}
+
+/* ---- Responsive: Mobile (≤767px) ---- */
+@media (max-width: 767px) {
+  body { padding-top: var(--topbar-height); overflow-x: hidden; }
+
+  #top-bar { display: flex; }
+
+  #app {
+    grid-template-columns: 1fr;
+  }
+
+  body.sidebar-collapsed #app {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- Scrollbar styling ---- */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-text-muted); }

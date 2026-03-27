@@ -1,0 +1,176 @@
+/* ============================================================
+   Book of DSA — Code CSS
+   dsa-code-block component styles + Prism overrides
+   ============================================================ */
+
+/* ---- dsa-code-block component ---- */
+dsa-code-block {
+  display: flex;
+  flex-direction: column;
+  margin: 24px 0;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+  background: var(--color-bg-elevated);
+}
+
+/* Tab bar — order: -1 ensures it appears above the <pre> elements
+   regardless of DOM order (Lit appends its template after existing children) */
+.code-tabs {
+  order: -1;
+  display: flex;
+  align-items: center;
+  background: var(--color-bg-sidebar);
+  border-bottom: 1px solid var(--color-border);
+  padding: 0 4px;
+  gap: 2px;
+}
+
+.code-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: color var(--transition), border-color var(--transition);
+  margin-bottom: -1px;
+  white-space: nowrap;
+}
+
+.code-tab:hover {
+  color: var(--color-text);
+}
+
+.code-tab.active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+.code-tab-icon {
+  font-size: 0.7rem;
+  opacity: 0.7;
+}
+
+/* Copy button */
+.code-copy-btn {
+  margin-left: auto;
+  padding: 4px 10px;
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  color: var(--color-text-muted);
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: color var(--transition), border-color var(--transition), background var(--transition);
+  white-space: nowrap;
+}
+.code-copy-btn:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+  background: var(--color-accent-light);
+}
+.code-copy-btn.copied {
+  color: var(--diff-easy-text);
+  border-color: var(--diff-easy-text);
+}
+
+/* Prism block inside dsa-code-block */
+dsa-code-block pre[class*="language-"] {
+  margin: 0 !important;
+  border-radius: 0 !important;
+  border: none !important;
+  max-height: 480px;
+  overflow: auto;
+  font-size: 0.875rem !important;
+  line-height: 1.65 !important;
+  background: var(--color-bg-code) !important;
+}
+
+/* Standalone pre blocks (not in dsa-code-block) */
+.chapter-content pre:not(dsa-code-block pre) {
+  margin: 24px 0;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  overflow: auto;
+  font-size: 0.875rem;
+  line-height: 1.65;
+  background: var(--color-bg-code) !important;
+}
+
+/* Prism theme overrides for light mode */
+:root .token.comment,
+:root .token.prolog,
+:root .token.doctype,
+:root .token.cdata { color: #8c7b70; }
+
+:root .token.keyword { color: var(--color-accent); font-weight: 500; }
+:root .token.string { color: #2c6e49; }
+:root .token.number { color: #1a5276; }
+:root .token.function { color: #7d3c98; }
+:root .token.class-name { color: #1a5276; }
+:root .token.operator { color: #c0392b; }
+:root .token.punctuation { color: #6b5e52; }
+
+/* Prism overrides for dark mode */
+html[data-theme="dark"] dsa-code-block pre[class*="language-"],
+html[data-theme="dark"] .chapter-content pre:not(dsa-code-block pre) {
+  background: #1c1917 !important;
+}
+
+html[data-theme="dark"] code[class*="language-"],
+html[data-theme="dark"] pre[class*="language-"] {
+  color: #e8e0d8;
+  text-shadow: none;
+}
+
+html[data-theme="dark"] .token.comment { color: #6b5e52; }
+html[data-theme="dark"] .token.keyword { color: #e05c4a; }
+html[data-theme="dark"] .token.string { color: #6fcf97; }
+html[data-theme="dark"] .token.number { color: #56ccf2; }
+html[data-theme="dark"] .token.function { color: #bb86fc; }
+html[data-theme="dark"] .token.class-name { color: #56ccf2; }
+html[data-theme="dark"] .token.operator { color: #f2994a; }
+html[data-theme="dark"] .token.punctuation { color: #a89b8e; }
+
+/* Complexity comparison grid */
+.complexity-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.complexity-card {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 16px;
+}
+.complexity-card-title {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--color-text);
+  margin-bottom: 8px;
+}
+.complexity-card-body {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  line-height: 1.8;
+}
+
+@media (max-width: 640px) {
+  dsa-code-block pre[class*="language-"] {
+    font-size: 0.8rem !important;
+    max-height: 360px;
+  }
+  .code-tabs { overflow-x: auto; }
+}

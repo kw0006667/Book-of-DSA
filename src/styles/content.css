@@ -1,0 +1,369 @@
+/* ============================================================
+   Book of DSA — Content CSS
+   Chapter layout, typography, callouts, problem cards, tags
+   ============================================================ */
+
+/* ---- Content Area ---- */
+#content-area {
+  min-height: 100vh;
+  min-width: 0;
+  background: var(--color-bg);
+  transition: background-color var(--transition), padding-right var(--transition);
+}
+
+.chapter-content {
+  min-width: 0;
+  padding: 48px max(24px, calc((100% - var(--content-max-width)) / 2));
+  max-width: calc(var(--content-max-width) + 96px);
+}
+
+/* ---- Chapter Typography ---- */
+.chapter-content h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 900;
+  color: var(--color-text);
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+.chapter-content h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.25rem, 3vw, 1.6rem);
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 48px 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--color-border);
+  scroll-margin-top: 80px;
+}
+
+.chapter-content h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 32px 0 12px;
+  scroll-margin-top: 80px;
+}
+
+.chapter-content h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  margin: 24px 0 8px;
+}
+
+.chapter-content p {
+  margin-bottom: 16px;
+  color: var(--color-text);
+  line-height: 1.8;
+}
+
+.chapter-content ul,
+.chapter-content ol {
+  margin: 0 0 16px 24px;
+  color: var(--color-text);
+  line-height: 1.8;
+}
+
+.chapter-content li { margin-bottom: 4px; }
+
+.chapter-content strong { color: var(--color-text); font-weight: 600; }
+
+.chapter-content em { color: var(--color-text-secondary); }
+
+.chapter-content a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.chapter-content a:hover { color: var(--color-accent-hover); }
+
+/* ---- Chapter Header Badge Area ---- */
+.chapter-header {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 2px solid var(--color-border);
+}
+
+.chapter-num {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--color-accent);
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+}
+
+.chapter-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+/* ---- Tag Badges ---- */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 100px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  font-family: var(--font-mono);
+}
+.tag-ds   { color: var(--tag-ds-text);   background: var(--tag-ds-bg); }
+.tag-algo { color: var(--tag-algo-text); background: var(--tag-algo-bg); }
+.tag-fe   { color: var(--tag-fe-text);   background: var(--tag-fe-bg); }
+.tag-lc   { color: var(--tag-lc-text);   background: var(--tag-lc-bg); }
+
+/* ---- Difficulty Badges ---- */
+.diff {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 8px;
+  border-radius: 100px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  font-family: var(--font-mono);
+}
+.diff-easy   { color: var(--diff-easy-text);   background: var(--diff-easy-bg); }
+.diff-medium { color: var(--diff-medium-text); background: var(--diff-medium-bg); }
+.diff-hard   { color: var(--diff-hard-text);   background: var(--diff-hard-bg); }
+
+/* ---- Callout Boxes ---- */
+.callout {
+  padding: 16px 20px;
+  border-radius: var(--radius-md);
+  border-left: 4px solid;
+  margin: 24px 0;
+  font-size: 0.925rem;
+}
+.callout > *:last-child { margin-bottom: 0; }
+
+.callout-title {
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.callout-info {
+  background: #e8f4fd;
+  border-color: #3498db;
+  color: #1a4a6b;
+}
+.callout-info .callout-title { color: #1a5276; }
+
+.callout-tip {
+  background: var(--tag-ds-bg);
+  border-color: var(--tag-ds-text);
+  color: #1a3d2a;
+}
+.callout-tip .callout-title { color: var(--tag-ds-text); }
+
+.callout-warning {
+  background: var(--tag-lc-bg);
+  border-color: var(--tag-lc-text);
+  color: #6b3a1a;
+}
+.callout-warning .callout-title { color: #c0611a; }
+
+.callout-fe {
+  background: var(--tag-fe-bg);
+  border-color: var(--tag-fe-text);
+  color: #3d1a5e;
+}
+.callout-fe .callout-title { color: var(--tag-fe-text); }
+
+html[data-theme="dark"] .callout-info {
+  background: #1a2d3d; color: #aad4f5; border-color: #56a3d9;
+}
+html[data-theme="dark"] .callout-info .callout-title { color: #7ec8f5; }
+html[data-theme="dark"] .callout-tip {
+  background: var(--tag-ds-bg); color: #a0ddb8;
+}
+html[data-theme="dark"] .callout-tip .callout-title { color: var(--tag-ds-text); }
+html[data-theme="dark"] .callout-warning {
+  background: var(--tag-lc-bg); color: #f5c18a;
+}
+html[data-theme="dark"] .callout-fe {
+  background: var(--tag-fe-bg); color: #d4a8f5;
+}
+html[data-theme="dark"] .callout-fe .callout-title { color: var(--tag-fe-text); }
+
+/* ---- LeetCode Problem Cards ---- */
+.problem-list {
+  list-style: none;
+  margin: 0 0 24px;
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.problem-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border-left: 3px solid var(--tag-lc-text);
+  background: var(--color-bg-elevated);
+  border-bottom: 1px solid var(--color-border-light);
+  transition: background var(--transition);
+}
+.problem-item:last-child { border-bottom: none; }
+.problem-item:hover { background: var(--color-bg-hover); }
+
+.problem-id {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  min-width: 36px;
+  flex-shrink: 0;
+}
+
+.problem-name {
+  flex: 1;
+  font-size: 0.9rem;
+  color: var(--color-text);
+}
+
+/* ---- Tables ---- */
+.chapter-content table {
+  display: block;
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+  font-size: 0.9rem;
+  background: var(--color-bg-elevated);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  overflow-y: hidden;
+  border: 1px solid var(--color-border);
+}
+
+.chapter-content th {
+  background: var(--color-bg-sidebar);
+  color: var(--color-text);
+  font-weight: 600;
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 2px solid var(--color-border);
+  font-size: 0.85rem;
+}
+
+.chapter-content td {
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--color-border-light);
+  vertical-align: top;
+  color: var(--color-text);
+}
+
+.chapter-content tr:last-child td { border-bottom: none; }
+.chapter-content tr:nth-child(even) td { background: var(--color-bg); }
+
+/* ---- Complexity Inline Badge ---- */
+.complexity {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  padding: 1px 6px;
+  background: var(--tag-fe-bg);
+  color: var(--tag-fe-text);
+  border-radius: var(--radius-sm);
+}
+
+/* ---- Inline Code ---- */
+.chapter-content code:not([class]) {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background: var(--color-bg-code);
+  color: var(--color-accent);
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
+/* ---- Chapter Footer Nav ---- */
+.chapter-footer {
+  margin-top: 60px;
+  padding-top: 24px;
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.chapter-footer a {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  flex: 1;
+  max-width: 220px;
+  transition: border-color var(--transition), background var(--transition);
+}
+.chapter-footer a:hover {
+  border-color: var(--color-accent);
+  background: var(--color-accent-light);
+  text-decoration: none;
+}
+.chapter-footer .footer-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+}
+.chapter-footer .footer-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+.chapter-footer a.next { text-align: right; margin-left: auto; }
+
+/* ---- Part Divider ---- */
+.part-divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 48px 0 32px;
+}
+.part-divider::before,
+.part-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
+}
+.part-divider-text {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .chapter-content {
+    padding: 24px 20px 40px;
+    max-width: 100%;
+  }
+
+  .chapter-content h2 { margin-top: 36px; }
+
+  .chapter-footer {
+    flex-direction: column;
+  }
+  .chapter-footer a { max-width: 100%; }
+  .chapter-footer a.next { text-align: left; margin-left: 0; }
+}

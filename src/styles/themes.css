@@ -1,0 +1,54 @@
+/* ============================================================
+   Book of DSA — Themes CSS
+   Additional dark theme overrides (supplemental to main.css)
+   ============================================================ */
+
+html[data-theme="dark"] body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+html[data-theme="dark"] .sidebar {
+  background: var(--color-bg-sidebar);
+  border-right-color: var(--color-border);
+}
+
+html[data-theme="dark"] .mobile-header {
+  background: var(--color-bg-sidebar);
+  border-bottom-color: var(--color-border);
+}
+
+html[data-theme="dark"] .home-screen {
+  background: var(--color-bg);
+}
+
+html[data-theme="dark"] .chapter-content h1,
+html[data-theme="dark"] .chapter-content h2,
+html[data-theme="dark"] .chapter-content h3 {
+  color: var(--color-text);
+}
+
+html[data-theme="dark"] .chapter-content table th {
+  background: var(--color-bg-sidebar);
+}
+
+html[data-theme="dark"] .chapter-content tr:nth-child(even) td {
+  background: var(--color-bg-elevated);
+}
+
+html[data-theme="dark"] .problem-item {
+  background: var(--color-bg-elevated);
+}
+
+html[data-theme="dark"] dsa-code-block {
+  border-color: var(--color-border);
+}
+
+html[data-theme="dark"] .code-tabs {
+  background: var(--color-bg-sidebar);
+  border-bottom-color: var(--color-border);
+}
+
+/* Prism light stylesheet hidden in dark mode */
+html[data-theme="dark"] #prism-light { display: none; }
+html:not([data-theme="dark"]) #prism-dark { display: none; }
