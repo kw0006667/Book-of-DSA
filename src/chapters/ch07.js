@@ -1,3 +1,5 @@
+import { getChapterProblemIds, renderProblemList } from '../leetcode/problem-catalog.js'
+
 export const metadata = {
   id: 7, part: 3,
   slug: 'binary-tree-bst',
@@ -199,17 +201,7 @@ def max_depth(root: Optional[TreeNode]) -> int:
 </div>
 
 <h3>精選 LeetCode 題目</h3>
-<ul class="problem-list">
-  <li class="problem-item"><span class="problem-id">#104</span><span class="problem-name">Maximum Depth of Binary Tree</span><span class="diff diff-easy">Easy</span></li>
-  <li class="problem-item"><span class="problem-id">#226</span><span class="problem-name">Invert Binary Tree</span><span class="diff diff-easy">Easy</span></li>
-  <li class="problem-item"><span class="problem-id">#102</span><span class="problem-name">Binary Tree Level Order Traversal</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#98</span><span class="problem-name">Validate Binary Search Tree</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#230</span><span class="problem-name">Kth Smallest Element in a BST</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#105</span><span class="problem-name">Construct Binary Tree from Preorder and Inorder Traversal</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#297</span><span class="problem-name">Serialize and Deserialize Binary Tree</span><span class="diff diff-hard">Hard</span></li>
-  <li class="problem-item"><span class="problem-id">#124</span><span class="problem-name">Binary Tree Maximum Path Sum</span><span class="diff diff-hard">Hard</span></li>
-  <li class="problem-item"><span class="problem-id">#543</span><span class="problem-name">Diameter of Binary Tree</span><span class="diff diff-easy">Easy</span></li>
-</ul>
+${renderProblemList(getChapterProblemIds(7))}
 
 <div class="chapter-footer">
   <a href="#ch6">

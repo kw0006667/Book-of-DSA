@@ -1,3 +1,5 @@
+import { getChapterProblemIds, renderProblemList } from '../leetcode/problem-catalog.js'
+
 export const metadata = {
   id: 17, part: 6,
   slug: 'dynamic-programming',
@@ -245,18 +247,7 @@ def length_of_lis(nums: list[int]) -> int:
 </div>
 
 <h3>精選 LeetCode 題目</h3>
-<ul class="problem-list">
-  <li class="problem-item"><span class="problem-id">#70</span><span class="problem-name">Climbing Stairs</span><span class="diff diff-easy">Easy</span></li>
-  <li class="problem-item"><span class="problem-id">#198</span><span class="problem-name">House Robber</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#322</span><span class="problem-name">Coin Change</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#1143</span><span class="problem-name">Longest Common Subsequence</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#300</span><span class="problem-name">Longest Increasing Subsequence</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#416</span><span class="problem-name">Partition Equal Subset Sum</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#72</span><span class="problem-name">Edit Distance</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#312</span><span class="problem-name">Burst Balloons</span><span class="diff diff-hard">Hard</span></li>
-  <li class="problem-item"><span class="problem-id">#132</span><span class="problem-name">Palindrome Partitioning II</span><span class="diff diff-hard">Hard</span></li>
-  <li class="problem-item"><span class="problem-id">#188</span><span class="problem-name">Best Time to Buy and Sell Stock IV</span><span class="diff diff-hard">Hard</span></li>
-</ul>
+${renderProblemList(getChapterProblemIds(17))}
 
 <div class="chapter-footer">
   <a href="#ch16"><span class="footer-label">← 上一章</span><span class="footer-title">Recursion & Backtracking</span></a>

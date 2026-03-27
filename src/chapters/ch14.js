@@ -1,3 +1,5 @@
+import { getChapterProblemIds, renderProblemList } from '../leetcode/problem-catalog.js'
+
 export const metadata = {
   id: 14, part: 5,
   slug: 'two-pointers',
@@ -186,13 +188,7 @@ function sortColors(nums: number[]): void {
 </div>
 
 <h3>精選 LeetCode 題目</h3>
-<ul class="problem-list">
-  <li class="problem-item"><span class="problem-id">#167</span><span class="problem-name">Two Sum II - Input Array Is Sorted</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#15</span><span class="problem-name">3Sum</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#11</span><span class="problem-name">Container With Most Water</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#42</span><span class="problem-name">Trapping Rain Water</span><span class="diff diff-hard">Hard</span></li>
-  <li class="problem-item"><span class="problem-id">#75</span><span class="problem-name">Sort Colors</span><span class="diff diff-medium">Medium</span></li>
-</ul>
+${renderProblemList(getChapterProblemIds(14))}
 
 <div class="chapter-footer">
   <a href="#ch13"><span class="footer-label">← 上一章</span><span class="footer-title">Binary Search</span></a>

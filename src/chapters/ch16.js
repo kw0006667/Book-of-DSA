@@ -1,3 +1,5 @@
+import { getChapterProblemIds, renderProblemList } from '../leetcode/problem-catalog.js'
+
 export const metadata = {
   id: 16, part: 5,
   slug: 'recursion-backtracking',
@@ -201,15 +203,7 @@ def combination_sum(candidates: list[int], target: int) -> list[list[int]]:
 </ul>
 
 <h3>精選 LeetCode 題目</h3>
-<ul class="problem-list">
-  <li class="problem-item"><span class="problem-id">#46</span><span class="problem-name">Permutations</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#78</span><span class="problem-name">Subsets</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#39</span><span class="problem-name">Combination Sum</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#40</span><span class="problem-name">Combination Sum II</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#51</span><span class="problem-name">N-Queens</span><span class="diff diff-hard">Hard</span></li>
-  <li class="problem-item"><span class="problem-id">#131</span><span class="problem-name">Palindrome Partitioning</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#79</span><span class="problem-name">Word Search</span><span class="diff diff-medium">Medium</span></li>
-</ul>
+${renderProblemList(getChapterProblemIds(16))}
 
 <div class="chapter-footer">
   <a href="#ch15"><span class="footer-label">← 上一章</span><span class="footer-title">Sliding Window</span></a>

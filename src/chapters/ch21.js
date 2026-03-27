@@ -1,3 +1,5 @@
+import { getChapterProblemIds, renderProblemList } from '../leetcode/problem-catalog.js'
+
 export const metadata = {
   id: 21, part: 6,
   slug: 'bit-manipulation',
@@ -144,14 +146,7 @@ def single_number(nums: list[int]) -> int:
 </dsa-code-block>
 
 <h3>精選 LeetCode 題目</h3>
-<ul class="problem-list">
-  <li class="problem-item"><span class="problem-id">#136</span><span class="problem-name">Single Number</span><span class="diff diff-easy">Easy</span></li>
-  <li class="problem-item"><span class="problem-id">#191</span><span class="problem-name">Number of 1 Bits</span><span class="diff diff-easy">Easy</span></li>
-  <li class="problem-item"><span class="problem-id">#338</span><span class="problem-name">Counting Bits</span><span class="diff diff-easy">Easy</span></li>
-  <li class="problem-item"><span class="problem-id">#268</span><span class="problem-name">Missing Number</span><span class="diff diff-easy">Easy</span></li>
-  <li class="problem-item"><span class="problem-id">#137</span><span class="problem-name">Single Number II</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#371</span><span class="problem-name">Sum of Two Integers</span><span class="diff diff-medium">Medium</span></li>
-</ul>
+${renderProblemList(getChapterProblemIds(21))}
 
 <div class="chapter-footer">
   <a href="#ch20"><span class="footer-label">← 上一章</span><span class="footer-title">Graph 進階演算法</span></a>

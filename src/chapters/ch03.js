@@ -1,3 +1,5 @@
+import { getChapterProblemIds, renderProblemList } from '../leetcode/problem-catalog.js'
+
 export const metadata = {
   id: 3, part: 2,
   slug: 'array-string',
@@ -216,14 +218,7 @@ DIRS = [(0, 1), (0, -1), (1, 0), (-1, 0)]</code></pre>
 </div>
 
 <h3>精選 LeetCode 題目</h3>
-<ul class="problem-list">
-  <li class="problem-item"><span class="problem-id">#1</span><span class="problem-name">Two Sum</span><span class="diff diff-easy">Easy</span></li>
-  <li class="problem-item"><span class="problem-id">#238</span><span class="problem-name">Product of Array Except Self</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#48</span><span class="problem-name">Rotate Image</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#54</span><span class="problem-name">Spiral Matrix</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#128</span><span class="problem-name">Longest Consecutive Sequence</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#41</span><span class="problem-name">First Missing Positive</span><span class="diff diff-hard">Hard</span></li>
-</ul>
+${renderProblemList(getChapterProblemIds(3))}
 
 <div class="chapter-footer">
   <a href="#ch2">

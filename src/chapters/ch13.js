@@ -1,3 +1,5 @@
+import { getChapterProblemIds, renderProblemList } from '../leetcode/problem-catalog.js'
+
 export const metadata = {
   id: 13, part: 4,
   slug: 'binary-search',
@@ -209,14 +211,7 @@ function searchMatrix(matrix: number[][], target: number): boolean {
 </div>
 
 <h3>精選 LeetCode 題目</h3>
-<ul class="problem-list">
-  <li class="problem-item"><span class="problem-id">#704</span><span class="problem-name">Binary Search</span><span class="diff diff-easy">Easy</span></li>
-  <li class="problem-item"><span class="problem-id">#33</span><span class="problem-name">Search in Rotated Sorted Array</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#153</span><span class="problem-name">Find Minimum in Rotated Sorted Array</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#875</span><span class="problem-name">Koko Eating Bananas</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#74</span><span class="problem-name">Search a 2D Matrix</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#4</span><span class="problem-name">Median of Two Sorted Arrays</span><span class="diff diff-hard">Hard</span></li>
-</ul>
+${renderProblemList(getChapterProblemIds(13))}
 
 <div class="chapter-footer">
   <a href="#ch12"><span class="footer-label">← 上一章</span><span class="footer-title">Sorting Algorithms</span></a>

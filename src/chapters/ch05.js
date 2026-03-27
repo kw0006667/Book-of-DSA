@@ -1,3 +1,5 @@
+import { getChapterProblemIds, renderProblemList } from '../leetcode/problem-catalog.js'
+
 export const metadata = {
   id: 5, part: 2,
   slug: 'stack-queue',
@@ -261,15 +263,7 @@ class MyQueue {
 </div>
 
 <h3>精選 LeetCode 題目</h3>
-<ul class="problem-list">
-  <li class="problem-item"><span class="problem-id">#20</span><span class="problem-name">Valid Parentheses</span><span class="diff diff-easy">Easy</span></li>
-  <li class="problem-item"><span class="problem-id">#155</span><span class="problem-name">Min Stack</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#232</span><span class="problem-name">Implement Queue using Stacks</span><span class="diff diff-easy">Easy</span></li>
-  <li class="problem-item"><span class="problem-id">#739</span><span class="problem-name">Daily Temperatures</span><span class="diff diff-medium">Medium</span></li>
-  <li class="problem-item"><span class="problem-id">#239</span><span class="problem-name">Sliding Window Maximum</span><span class="diff diff-hard">Hard</span></li>
-  <li class="problem-item"><span class="problem-id">#84</span><span class="problem-name">Largest Rectangle in Histogram</span><span class="diff diff-hard">Hard</span></li>
-  <li class="problem-item"><span class="problem-id">#496</span><span class="problem-name">Next Greater Element I</span><span class="diff diff-easy">Easy</span></li>
-</ul>
+${renderProblemList(getChapterProblemIds(5))}
 
 <div class="chapter-footer">
   <a href="#ch4">

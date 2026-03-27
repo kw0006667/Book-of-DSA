@@ -1,60 +1,7 @@
-const approach = (name, idea, time, space, recommended = false) => ({
-  name,
-  idea,
-  time,
-  space,
-  recommended,
-})
+import { additionalProblemDetails } from './problem-data-extended.js'
+import { approach, detailedApproach, problem } from './problem-helpers.js'
 
-const detailedApproach = ({
-  name,
-  idea,
-  time,
-  space,
-  recommended = false,
-  pros = [],
-  cons = [],
-  whenToUse = '',
-}) => ({
-  name,
-  idea,
-  time,
-  space,
-  recommended,
-  pros,
-  cons,
-  whenToUse,
-})
-
-const problem = ({
-  id,
-  title,
-  difficulty,
-  statement,
-  focus,
-  dataStructureChoice,
-  strategy,
-  examples,
-  techniques,
-  approaches,
-  python,
-  typescript,
-}) => ({
-  id,
-  title,
-  difficulty,
-  statement,
-  focus,
-  dataStructureChoice,
-  strategy,
-  examples,
-  techniques,
-  approaches,
-  python,
-  typescript,
-})
-
-export const problemDetails = {
+const baseProblemDetails = {
   1: problem({
     id: 1,
     title: 'Two Sum',
@@ -4043,6 +3990,11 @@ class Solution:
                     dist = abs(points[u][0] - points[v][0]) + abs(points[u][1] - points[v][1])
                     min_dist[v] = min(min_dist[v], dist)
         return ans`, typescript: String.raw`function minCostConnectPoints(points: number[][]): number { return 0 }` }),
+}
+
+export const problemDetails = {
+  ...baseProblemDetails,
+  ...additionalProblemDetails,
 }
 
 export function getProblemDetail(id, fallback = {}) {
