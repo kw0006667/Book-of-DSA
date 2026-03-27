@@ -5,6 +5,7 @@
 
 // Register Lit custom elements
 import './components/dsa-code-block.js'
+import './components/leetcode-problem-modal.js'
 
 // Core modules
 import { initTheme, toggleTheme } from './theme.js'
