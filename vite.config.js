@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite'
 
 export default defineConfig({
-  base: '/BookOfDSA/',
+  base: '/Book-of-DSA/',
   build: {
     outDir: 'dist',
     rollupOptions: {
