@@ -45,10 +45,12 @@ export const content = `
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// 最常見的節點定義
 class TreeNode {
-  val: number
-  left: TreeNode | null = null
-  right: TreeNode | null = null
-  constructor(val: number) { this.val = val }
+  val: number;
+  left: TreeNode | null = null;
+  right: TreeNode | null = null;
+  constructor(val: number) {
+    this.val = val;
+  }
 }
 
 // Array 表示（Heap / Complete Binary Tree 常用）
@@ -72,34 +74,37 @@ class TreeNode:
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// Preorder: Root → Left → Right
 function preorder(root: TreeNode | null): number[] {
-  if (!root) return []
-  return [root.val, ...preorder(root.left), ...preorder(root.right)]
+  if (!root) return [];
+  return [root.val, ...preorder(root.left), ...preorder(root.right)];
 }
 
 // Inorder: Left → Root → Right (BST 中序 = 升序)
 function inorder(root: TreeNode | null): number[] {
-  if (!root) return []
-  return [...inorder(root.left), root.val, ...inorder(root.right)]
+  if (!root) return [];
+  return [...inorder(root.left), root.val, ...inorder(root.right)];
 }
 
 // Postorder: Left → Right → Root
 function postorder(root: TreeNode | null): number[] {
-  if (!root) return []
-  return [...postorder(root.left), ...postorder(root.right), root.val]
+  if (!root) return [];
+  return [...postorder(root.left), ...postorder(root.right), root.val];
 }
 
 // Iterative Inorder（避免遞迴 stack overflow）
 function inorderIterative(root: TreeNode | null): number[] {
-  const result: number[] = []
-  const stack: TreeNode[] = []
-  let curr: TreeNode | null = root
+  const result: number[] = [];
+  const stack: TreeNode[] = [];
+  let curr: TreeNode | null = root;
   while (curr || stack.length) {
-    while (curr) { stack.push(curr); curr = curr.left }
-    curr = stack.pop()!
-    result.push(curr.val)
-    curr = curr.right
+    while (curr) {
+      stack.push(curr);
+      curr = curr.left;
+    }
+    curr = stack.pop()!;
+    result.push(curr.val);
+    curr = curr.right;
   }
-  return result
+  return result;
 }</code></pre>
   <pre slot="python"><code class="language-python">def preorder(root: Optional[TreeNode]) -> list[int]:
     if not root: return []
@@ -131,28 +136,28 @@ def inorder_iterative(root: Optional[TreeNode]) -> list[int]:
 
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">function levelOrder(root: TreeNode | null): number[][] {
-  if (!root) return []
-  const result: number[][] = []
-  const queue: TreeNode[] = [root]
+  if (!root) return [];
+  const result: number[][] = [];
+  const queue: TreeNode[] = [root];
 
   while (queue.length) {
-    const levelSize = queue.length
-    const level: number[] = []
-    for (let i = 0; i < levelSize; i++) {
-      const node = queue.shift()!
-      level.push(node.val)
-      if (node.left)  queue.push(node.left)
-      if (node.right) queue.push(node.right)
+    const levelSize = queue.length;
+    const level: number[] = [];
+    for (let i = 0; i &lt; levelSize; i++) {
+      const node = queue.shift()!;
+      level.push(node.val);
+      if (node.left) queue.push(node.left);
+      if (node.right) queue.push(node.right);
     }
-    result.push(level)
+    result.push(level);
   }
-  return result
+  return result;
 }
 
 // 樹的最大深度
 function maxDepth(root: TreeNode | null): number {
-  if (!root) return 0
-  return 1 + Math.max(maxDepth(root.left), maxDepth(root.right))
+  if (!root) return 0;
+  return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
 }</code></pre>
   <pre slot="python"><code class="language-python">from collections import deque
 

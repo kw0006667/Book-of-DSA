@@ -83,46 +83,51 @@ heapq.nlargest(3, nums)
 heapq.nsmallest(3, nums)</code></pre>
   <pre slot="typescript"><code class="language-typescript">// TypeScript: 需自行實作 MinHeap
 class MinHeap {
-  private data: number[] = []
+  private data: number[] = [];
 
   push(val: number): void {
-    this.data.push(val)
-    this._siftUp(this.data.length - 1)
+    this.data.push(val);
+    this._siftUp(this.data.length - 1);
   }
 
   pop(): number | undefined {
-    if (!this.data.length) return undefined
-    const top = this.data[0]
-    const last = this.data.pop()!
+    if (!this.data.length) return undefined;
+    const top = this.data[0];
+    const last = this.data.pop()!;
     if (this.data.length) {
-      this.data[0] = last
-      this._siftDown(0)
+      this.data[0] = last;
+      this._siftDown(0);
     }
-    return top
+    return top;
   }
 
-  peek(): number | undefined { return this.data[0] }
-  get size() { return this.data.length }
+  peek(): number | undefined {
+    return this.data[0];
+  }
+  get size() {
+    return this.data.length;
+  }
 
   private _siftUp(i: number): void {
-    while (i > 0) {
-      const parent = (i - 1) >> 1
-      if (this.data[parent] <= this.data[i]) break
-      ;[this.data[parent], this.data[i]] = [this.data[i], this.data[parent]]
-      i = parent
+    while (i &gt; 0) {
+      const parent = (i - 1) &gt;&gt; 1;
+      if (this.data[parent] &lt;= this.data[i]) break;
+      [this.data[parent], this.data[i]] = [this.data[i], this.data[parent]];
+      i = parent;
     }
   }
 
   private _siftDown(i: number): void {
-    const n = this.data.length
+    const n = this.data.length;
     while (true) {
-      let smallest = i
-      const l = 2 * i + 1, r = 2 * i + 2
-      if (l < n && this.data[l] < this.data[smallest]) smallest = l
-      if (r < n && this.data[r] < this.data[smallest]) smallest = r
-      if (smallest === i) break
-      ;[this.data[smallest], this.data[i]] = [this.data[i], this.data[smallest]]
-      i = smallest
+      let smallest = i;
+      const l = 2 * i + 1,
+        r = 2 * i + 2;
+      if (l &lt; n &amp;&amp; this.data[l] &lt; this.data[smallest]) smallest = l;
+      if (r &lt; n &amp;&amp; this.data[r] &lt; this.data[smallest]) smallest = r;
+      if (smallest === i) break;
+      [this.data[smallest], this.data[i]] = [this.data[i], this.data[smallest]];
+      i = smallest;
     }
   }
 }</code></pre>
@@ -132,53 +137,61 @@ class MinHeap {
 
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// 泛型 Heap — 支援自訂 comparator
-class Heap<T> {
-  private data: T[] = []
-  constructor(private compare: (a: T, b: T) => number) {}
+class Heap&lt;T&gt; {
+  private data: T[] = [];
+  constructor(private compare: (a: T, b: T) =&gt; number) {}
 
   push(val: T) {
-    this.data.push(val)
-    this._up(this.data.length - 1)
+    this.data.push(val);
+    this._up(this.data.length - 1);
   }
 
   pop(): T | undefined {
-    if (!this.size) return undefined
-    const top = this.data[0]
-    const last = this.data.pop()!
-    if (this.size) { this.data[0] = last; this._down(0) }
-    return top
+    if (!this.size) return undefined;
+    const top = this.data[0];
+    const last = this.data.pop()!;
+    if (this.size) {
+      this.data[0] = last;
+      this._down(0);
+    }
+    return top;
   }
 
-  peek() { return this.data[0] }
-  get size() { return this.data.length }
+  peek() {
+    return this.data[0];
+  }
+  get size() {
+    return this.data.length;
+  }
 
   private _up(i: number) {
-    while (i > 0) {
-      const p = (i - 1) >> 1
-      if (this.compare(this.data[p], this.data[i]) <= 0) break
-      ;[this.data[p], this.data[i]] = [this.data[i], this.data[p]]
-      i = p
+    while (i &gt; 0) {
+      const p = (i - 1) &gt;&gt; 1;
+      if (this.compare(this.data[p], this.data[i]) &lt;= 0) break;
+      [this.data[p], this.data[i]] = [this.data[i], this.data[p]];
+      i = p;
     }
   }
 
   private _down(i: number) {
-    const n = this.size
+    const n = this.size;
     while (true) {
-      let best = i
-      const l = 2*i+1, r = 2*i+2
-      if (l < n && this.compare(this.data[l], this.data[best]) < 0) best = l
-      if (r < n && this.compare(this.data[r], this.data[best]) < 0) best = r
-      if (best === i) break
-      ;[this.data[best], this.data[i]] = [this.data[i], this.data[best]]
-      i = best
+      let best = i;
+      const l = 2 * i + 1,
+        r = 2 * i + 2;
+      if (l &lt; n &amp;&amp; this.compare(this.data[l], this.data[best]) &lt; 0) best = l;
+      if (r &lt; n &amp;&amp; this.compare(this.data[r], this.data[best]) &lt; 0) best = r;
+      if (best === i) break;
+      [this.data[best], this.data[i]] = [this.data[i], this.data[best]];
+      i = best;
     }
   }
 }
 
 // Usage
-const minH = new Heap<number>((a, b) => a - b)
-const maxH = new Heap<number>((a, b) => b - a)
-const taskH = new Heap<[number, string]>(([a], [b]) => a - b)</code></pre>
+const minH = new Heap&lt;number&gt;((a, b) =&gt; a - b);
+const maxH = new Heap&lt;number&gt;((a, b) =&gt; b - a);
+const taskH = new Heap&lt;[number, string]&gt;(([a], [b]) =&gt; a - b);</code></pre>
   <pre slot="python"><code class="language-python">import heapq
 from dataclasses import dataclass, field
 from typing import Any
@@ -201,12 +214,12 @@ top = heapq.heappop(heap)  # PrioritizedItem(priority=0, item='task_b')</code></
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// K 個最大元素 — LC #215 (Kth Largest)
 function findKthLargest(nums: number[], k: number): number {
-  const heap = new Heap<number>((a, b) => a - b)  // min-heap
+  const heap = new Heap&lt;number&gt;((a, b) =&gt; a - b); // min-heap
   for (const n of nums) {
-    heap.push(n)
-    if (heap.size > k) heap.pop()
+    heap.push(n);
+    if (heap.size &gt; k) heap.pop();
   }
-  return heap.peek()!
+  return heap.peek()!;
 }</code></pre>
   <pre slot="python"><code class="language-python">def find_kth_largest(nums: list[int], k: int) -> int:
     heap = []

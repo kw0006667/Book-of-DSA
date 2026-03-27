@@ -50,51 +50,51 @@ export const content = `
 
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// Adjacency List — 最常用
-type Graph = Map<number, number[]>
+type Graph = Map&lt;number, number[]&gt;;
 
 function buildGraph(edges: number[][], n: number): Graph {
-  const graph: Graph = new Map()
-  for (let i = 0; i < n; i++) graph.set(i, [])
+  const graph: Graph = new Map();
+  for (let i = 0; i &lt; n; i++) graph.set(i, []);
   for (const [u, v] of edges) {
-    graph.get(u)!.push(v)
-    graph.get(v)!.push(u)  // undirected
+    graph.get(u)!.push(v);
+    graph.get(v)!.push(u); // undirected
   }
-  return graph
+  return graph;
 }
 
 // DFS — iterative
 function dfs(graph: Graph, start: number): number[] {
-  const visited = new Set<number>()
-  const stack = [start]
-  const result: number[] = []
+  const visited = new Set&lt;number&gt;();
+  const stack = [start];
+  const result: number[] = [];
   while (stack.length) {
-    const node = stack.pop()!
-    if (visited.has(node)) continue
-    visited.add(node)
-    result.push(node)
+    const node = stack.pop()!;
+    if (visited.has(node)) continue;
+    visited.add(node);
+    result.push(node);
     for (const neighbor of graph.get(node) ?? []) {
-      if (!visited.has(neighbor)) stack.push(neighbor)
+      if (!visited.has(neighbor)) stack.push(neighbor);
     }
   }
-  return result
+  return result;
 }
 
 // BFS
 function bfs(graph: Graph, start: number): number[] {
-  const visited = new Set<number>([start])
-  const queue = [start]
-  const result: number[] = []
+  const visited = new Set&lt;number&gt;([start]);
+  const queue = [start];
+  const result: number[] = [];
   while (queue.length) {
-    const node = queue.shift()!
-    result.push(node)
+    const node = queue.shift()!;
+    result.push(node);
     for (const neighbor of graph.get(node) ?? []) {
       if (!visited.has(neighbor)) {
-        visited.add(neighbor)
-        queue.push(neighbor)
+        visited.add(neighbor);
+        queue.push(neighbor);
       }
     }
   }
-  return result
+  return result;
 }</code></pre>
   <pre slot="python"><code class="language-python">from collections import defaultdict, deque
 from typing import List

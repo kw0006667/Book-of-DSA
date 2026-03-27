@@ -52,33 +52,36 @@ export const content = `
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// 爬樓梯 — LC #70
 function climbStairs(n: number): number {
-  if (n <= 2) return n
-  const dp = new Array(n + 1).fill(0)
-  dp[1] = 1; dp[2] = 2
-  for (let i = 3; i <= n; i++) dp[i] = dp[i - 1] + dp[i - 2]
-  return dp[n]
+  if (n &lt;= 2) return n;
+  const dp = new Array(n + 1).fill(0);
+  dp[1] = 1;
+  dp[2] = 2;
+  for (let i = 3; i &lt;= n; i++) dp[i] = dp[i - 1] + dp[i - 2];
+  return dp[n];
   // Space optimized: O(1)
 }
 
 // 最大子陣列和 (Kadane's Algorithm) — LC #53
 function maxSubArray(nums: number[]): number {
-  let curr = nums[0], best = nums[0]
-  for (let i = 1; i < nums.length; i++) {
-    curr = Math.max(nums[i], curr + nums[i])
-    best = Math.max(best, curr)
+  let curr = nums[0],
+    best = nums[0];
+  for (let i = 1; i &lt; nums.length; i++) {
+    curr = Math.max(nums[i], curr + nums[i]);
+    best = Math.max(best, curr);
   }
-  return best
+  return best;
 }
 
 // 打家劫舍 — LC #198
 function rob(nums: number[]): number {
-  let prev2 = 0, prev1 = 0
+  let prev2 = 0,
+    prev1 = 0;
   for (const n of nums) {
-    const curr = Math.max(prev1, prev2 + n)
-    prev2 = prev1
-    prev1 = curr
+    const curr = Math.max(prev1, prev2 + n);
+    prev2 = prev1;
+    prev1 = curr;
   }
-  return prev1
+  return prev1;
 }</code></pre>
   <pre slot="python"><code class="language-python">def climb_stairs(n: int) -> int:
     if n <= 2: return n
@@ -107,17 +110,18 @@ def rob(nums: list[int]) -> int:
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// 最小路徑和 — LC #64
 function minPathSum(grid: number[][]): number {
-  const m = grid.length, n = grid[0].length
-  const dp = Array.from({ length: m }, () => new Array(n).fill(0))
-  dp[0][0] = grid[0][0]
-  for (let i = 1; i < m; i++) dp[i][0] = dp[i-1][0] + grid[i][0]
-  for (let j = 1; j < n; j++) dp[0][j] = dp[0][j-1] + grid[0][j]
-  for (let i = 1; i < m; i++) {
-    for (let j = 1; j < n; j++) {
-      dp[i][j] = Math.min(dp[i-1][j], dp[i][j-1]) + grid[i][j]
+  const m = grid.length,
+    n = grid[0].length;
+  const dp = Array.from({ length: m }, () =&gt; new Array(n).fill(0));
+  dp[0][0] = grid[0][0];
+  for (let i = 1; i &lt; m; i++) dp[i][0] = dp[i - 1][0] + grid[i][0];
+  for (let j = 1; j &lt; n; j++) dp[0][j] = dp[0][j - 1] + grid[0][j];
+  for (let i = 1; i &lt; m; i++) {
+    for (let j = 1; j &lt; n; j++) {
+      dp[i][j] = Math.min(dp[i - 1][j], dp[i][j - 1]) + grid[i][j];
     }
   }
-  return dp[m-1][n-1]
+  return dp[m - 1][n - 1];
 }</code></pre>
   <pre slot="python"><code class="language-python">def min_path_sum(grid: list[list[int]]) -> int:
     m, n = len(grid), len(grid[0])
@@ -137,27 +141,27 @@ function minPathSum(grid: number[][]): number {
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// Coin Change (Unbounded) — LC #322
 function coinChange(coins: number[], amount: number): number {
-  const dp = new Array(amount + 1).fill(Infinity)
-  dp[0] = 0
-  for (let i = 1; i <= amount; i++) {
+  const dp = new Array(amount + 1).fill(Infinity);
+  dp[0] = 0;
+  for (let i = 1; i &lt;= amount; i++) {
     for (const coin of coins) {
-      if (coin <= i) dp[i] = Math.min(dp[i], dp[i - coin] + 1)
+      if (coin &lt;= i) dp[i] = Math.min(dp[i], dp[i - coin] + 1);
     }
   }
-  return dp[amount] === Infinity ? -1 : dp[amount]
+  return dp[amount] === Infinity ? -1 : dp[amount];
 }
 
 // 0/1 Knapsack
 function knapsack(weights: number[], values: number[], W: number): number {
-  const n = weights.length
-  const dp = new Array(W + 1).fill(0)
-  for (let i = 0; i < n; i++) {
+  const n = weights.length;
+  const dp = new Array(W + 1).fill(0);
+  for (let i = 0; i &lt; n; i++) {
     // 倒序遍歷避免同一物品選多次
-    for (let w = W; w >= weights[i]; w--) {
-      dp[w] = Math.max(dp[w], dp[w - weights[i]] + values[i])
+    for (let w = W; w &gt;= weights[i]; w--) {
+      dp[w] = Math.max(dp[w], dp[w - weights[i]] + values[i]);
     }
   }
-  return dp[W]
+  return dp[W];
 }</code></pre>
   <pre slot="python"><code class="language-python">def coin_change(coins: list[int], amount: int) -> int:
     dp = [float('inf')] * (amount + 1)
@@ -174,31 +178,33 @@ function knapsack(weights: number[], values: number[], W: number): number {
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// Longest Common Subsequence — LC #1143
 function longestCommonSubsequence(text1: string, text2: string): number {
-  const m = text1.length, n = text2.length
-  const dp = Array.from({ length: m + 1 }, () => new Array(n + 1).fill(0))
-  for (let i = 1; i <= m; i++) {
-    for (let j = 1; j <= n; j++) {
-      if (text1[i-1] === text2[j-1]) dp[i][j] = dp[i-1][j-1] + 1
-      else dp[i][j] = Math.max(dp[i-1][j], dp[i][j-1])
+  const m = text1.length,
+    n = text2.length;
+  const dp = Array.from({ length: m + 1 }, () =&gt; new Array(n + 1).fill(0));
+  for (let i = 1; i &lt;= m; i++) {
+    for (let j = 1; j &lt;= n; j++) {
+      if (text1[i - 1] === text2[j - 1]) dp[i][j] = dp[i - 1][j - 1] + 1;
+      else dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
     }
   }
-  return dp[m][n]
+  return dp[m][n];
 }
 
 // Longest Increasing Subsequence — LC #300
 // O(n log n) solution
 function lengthOfLIS(nums: number[]): number {
-  const tails: number[] = []
+  const tails: number[] = [];
   for (const n of nums) {
-    let lo = 0, hi = tails.length
-    while (lo < hi) {
-      const mid = (lo + hi) >> 1
-      if (tails[mid] < n) lo = mid + 1
-      else hi = mid
+    let lo = 0,
+      hi = tails.length;
+    while (lo &lt; hi) {
+      const mid = (lo + hi) &gt;&gt; 1;
+      if (tails[mid] &lt; n) lo = mid + 1;
+      else hi = mid;
     }
-    tails[lo] = n
+    tails[lo] = n;
   }
-  return tails.length
+  return tails.length;
 }</code></pre>
   <pre slot="python"><code class="language-python">import bisect
 

@@ -31,17 +31,17 @@ export const content = `
   <pre slot="typescript"><code class="language-typescript">// Fibonacci — 分析遞迴的複雜度
 // naive: O(2^n) time, O(n) space
 function fib(n: number): number {
-  if (n <= 1) return n
-  return fib(n - 1) + fib(n - 2)
+  if (n &lt;= 1) return n;
+  return fib(n - 1) + fib(n - 2);
 }
 
 // with memoization: O(n) time, O(n) space
-function fibMemo(n: number, memo = new Map<number, number>()): number {
-  if (n <= 1) return n
-  if (memo.has(n)) return memo.get(n)!
-  const result = fibMemo(n - 1, memo) + fibMemo(n - 2, memo)
-  memo.set(n, result)
-  return result
+function fibMemo(n: number, memo = new Map&lt;number, number&gt;()): number {
+  if (n &lt;= 1) return n;
+  if (memo.has(n)) return memo.get(n)!;
+  const result = fibMemo(n - 1, memo) + fibMemo(n - 2, memo);
+  memo.set(n, result);
+  return result;
 }</code></pre>
   <pre slot="python"><code class="language-python">from functools import lru_cache
 
@@ -72,29 +72,25 @@ def fib_memo(n: int) -> int:
 
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// 通用 Backtracking 框架
-function backtrack(
-  path: number[],
-  choices: number[],
-  result: number[][]
-): void {
+function backtrack(path: number[], choices: number[], result: number[][]): void {
   // 終止條件
   if (/* 滿足條件 */ path.length === choices.length) {
-    result.push([...path])
-    return
+    result.push([...path]);
+    return;
   }
 
   for (const choice of choices) {
     // 剪枝
-    if (/* 無效選擇 */ false) continue
+    if (/* 無效選擇 */ false) continue;
 
     // 做選擇
-    path.push(choice)
+    path.push(choice);
 
     // 遞迴
-    backtrack(path, choices, result)
+    backtrack(path, choices, result);
 
     // 撤銷選擇（回溯）
-    path.pop()
+    path.pop();
   }
 }</code></pre>
   <pre slot="python"><code class="language-python">def backtrack(path: list, choices: list, result: list) -> None:
@@ -123,40 +119,46 @@ function backtrack(
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// 全排列 — LC #46
 function permute(nums: number[]): number[][] {
-  const result: number[][] = []
-  const used = new Array(nums.length).fill(false)
+  const result: number[][] = [];
+  const used = new Array(nums.length).fill(false);
 
   function bt(path: number[]): void {
-    if (path.length === nums.length) { result.push([...path]); return }
-    for (let i = 0; i < nums.length; i++) {
-      if (used[i]) continue
-      used[i] = true
-      path.push(nums[i])
-      bt(path)
-      path.pop()
-      used[i] = false
+    if (path.length === nums.length) {
+      result.push([...path]);
+      return;
+    }
+    for (let i = 0; i &lt; nums.length; i++) {
+      if (used[i]) continue;
+      used[i] = true;
+      path.push(nums[i]);
+      bt(path);
+      path.pop();
+      used[i] = false;
     }
   }
-  bt([])
-  return result
+  bt([]);
+  return result;
 }
 
 // 組合總和 — LC #39
 function combinationSum(candidates: number[], target: number): number[][] {
-  const result: number[][] = []
+  const result: number[][] = [];
 
   function bt(start: number, path: number[], remain: number): void {
-    if (remain === 0) { result.push([...path]); return }
-    for (let i = start; i < candidates.length; i++) {
-      if (candidates[i] > remain) break  // sorted + pruning
-      path.push(candidates[i])
-      bt(i, path, remain - candidates[i])  // i: 允許重複使用
-      path.pop()
+    if (remain === 0) {
+      result.push([...path]);
+      return;
+    }
+    for (let i = start; i &lt; candidates.length; i++) {
+      if (candidates[i] &gt; remain) break; // sorted + pruning
+      path.push(candidates[i]);
+      bt(i, path, remain - candidates[i]); // i: 允許重複使用
+      path.pop();
     }
   }
-  candidates.sort((a, b) => a - b)
-  bt(0, [], target)
-  return result
+  candidates.sort((a, b) =&gt; a - b);
+  bt(0, [], target);
+  return result;
 }</code></pre>
   <pre slot="python"><code class="language-python">def permute(nums: list[int]) -> list[list[int]]:
     result = []

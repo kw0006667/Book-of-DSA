@@ -54,30 +54,31 @@ export const content = `
 
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// Map — 任意 key 類型，有序（插入順序）
-const map = new Map<string, number>()
-map.set('a', 1)
-map.set('b', 2)
-for (const [k, v] of map) console.log(k, v)  // 按插入順序
+const map = new Map&lt;string, number&gt;();
+map.set('a', 1);
+map.set('b', 2);
+for (const [k, v] of map) console.log(k, v); // 按插入順序
 
 // Set
-const seen = new Set<number>()
-seen.add(1); seen.has(1)  // true
+const seen = new Set&lt;number&gt;();
+seen.add(1);
+seen.has(1); // true
 
 // Object as Map — key 只能是 string / symbol
-const freq: Record<string, number> = {}
+const freq: Record&lt;string, number&gt; = {};
 for (const ch of 'hello') {
-  freq[ch] = (freq[ch] ?? 0) + 1
+  freq[ch] = (freq[ch] ?? 0) + 1;
 }
 
 // 常用 pattern：Two Sum
 function twoSum(nums: number[], target: number): number[] {
-  const map = new Map<number, number>()
-  for (let i = 0; i < nums.length; i++) {
-    const complement = target - nums[i]
-    if (map.has(complement)) return [map.get(complement)!, i]
-    map.set(nums[i], i)
+  const map = new Map&lt;number, number&gt;();
+  for (let i = 0; i &lt; nums.length; i++) {
+    const complement = target - nums[i];
+    if (map.has(complement)) return [map.get(complement)!, i];
+    map.set(nums[i], i);
   }
-  return []
+  return [];
 }</code></pre>
   <pre slot="python"><code class="language-python">from collections import defaultdict, Counter
 
@@ -117,26 +118,27 @@ def two_sum(nums: list[int], target: int) -> list[int]:
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// 分組 Anagram — LC #49
 function groupAnagrams(strs: string[]): string[][] {
-  const map = new Map<string, string[]>()
+  const map = new Map&lt;string, string[]&gt;();
   for (const s of strs) {
-    const key = s.split('').sort().join('')
-    const group = map.get(key) ?? []
-    group.push(s)
-    map.set(key, group)
+    const key = s.split('').sort().join('');
+    const group = map.get(key) ?? [];
+    group.push(s);
+    map.set(key, group);
   }
-  return [...map.values()]
+  return [...map.values()];
 }
 
 // Subarray Sum Equals K — prefix sum + hash map — LC #560
 function subarraySum(nums: number[], k: number): number {
-  const prefixCount = new Map<number, number>([[0, 1]])
-  let sum = 0, count = 0
+  const prefixCount = new Map&lt;number, number&gt;([[0, 1]]);
+  let sum = 0,
+    count = 0;
   for (const num of nums) {
-    sum += num
-    count += prefixCount.get(sum - k) ?? 0
-    prefixCount.set(sum, (prefixCount.get(sum) ?? 0) + 1)
+    sum += num;
+    count += prefixCount.get(sum - k) ?? 0;
+    prefixCount.set(sum, (prefixCount.get(sum) ?? 0) + 1);
   }
-  return count
+  return count;
 }</code></pre>
   <pre slot="python"><code class="language-python">from collections import defaultdict
 

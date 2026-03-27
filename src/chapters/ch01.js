@@ -59,20 +59,20 @@ export const content = `
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// O(1) space — 只用固定幾個變數
 function sum(arr: number[]): number {
-  let total = 0
-  for (const x of arr) total += x
-  return total
+  let total = 0;
+  for (const x of arr) total += x;
+  return total;
 }
 
 // O(n) space — 建了一個同等大小的陣列
 function doubled(arr: number[]): number[] {
-  return arr.map(x => x * 2)
+  return arr.map((x) =&gt; x * 2);
 }
 
 // O(n) space — 遞迴呼叫堆疊深度 = n
 function factorial(n: number): number {
-  if (n <= 1) return 1
-  return n * factorial(n - 1)
+  if (n &lt;= 1) return 1;
+  return n * factorial(n - 1);
 }</code></pre>
   <pre slot="python"><code class="language-python"># O(1) space
 def sum_array(arr: list[int]) -> int:
@@ -120,15 +120,15 @@ def factorial(n: int) -> int:
 
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">function analyze(arr: number[]): void {
-  const n = arr.length
+  const n = arr.length;
 
   // O(n) — single loop
-  for (const x of arr) console.log(x)
+  for (const x of arr) console.log(x);
 
   // O(n²) — nested loops
-  for (let i = 0; i < n; i++) {
-    for (let j = 0; j < n; j++) {
-      console.log(arr[i] + arr[j])
+  for (let i = 0; i &lt; n; i++) {
+    for (let j = 0; j &lt; n; j++) {
+      console.log(arr[i] + arr[j]);
     }
   }
   // Total: O(n) + O(n²) = O(n²)
@@ -136,14 +136,15 @@ def factorial(n: int) -> int:
 
 // O(log n) — divides problem in half each time
 function binarySearch(arr: number[], target: number): number {
-  let lo = 0, hi = arr.length - 1
-  while (lo <= hi) {
-    const mid = (lo + hi) >> 1
-    if (arr[mid] === target) return mid
-    else if (arr[mid] < target) lo = mid + 1
-    else hi = mid - 1
+  let lo = 0,
+    hi = arr.length - 1;
+  while (lo &lt;= hi) {
+    const mid = (lo + hi) &gt;&gt; 1;
+    if (arr[mid] === target) return mid;
+    else if (arr[mid] &lt; target) lo = mid + 1;
+    else hi = mid - 1;
   }
-  return -1
+  return -1;
 }</code></pre>
   <pre slot="python"><code class="language-python">def analyze(arr: list) -> None:
     n = len(arr)

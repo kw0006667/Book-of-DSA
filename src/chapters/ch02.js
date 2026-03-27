@@ -75,29 +75,29 @@ graph['a'].append('b')</code></pre>
 
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// Array — Dynamic Array
-const arr: number[] = [1, 2, 3]
-arr.push(4)          // O(1) amortized
-arr.pop()            // O(1)
-arr.unshift(0)       // O(n) — 避免
-arr[0]               // O(1)
+const arr: number[] = [1, 2, 3];
+arr.push(4); // O(1) amortized
+arr.pop(); // O(1)
+arr.unshift(0); // O(n) — 避免
+arr[0]; // O(1)
 
 // Map — Hash Map (有序，保留插入順序)
-const map = new Map<string, number>()
-map.set('a', 1)      // O(1)
-map.get('a')         // O(1)
-map.has('a')         // O(1)
-map.delete('a')      // O(1)
-map.size             // O(1)
+const map = new Map&lt;string, number&gt;();
+map.set('a', 1); // O(1)
+map.get('a'); // O(1)
+map.has('a'); // O(1)
+map.delete('a'); // O(1)
+map.size; // O(1)
 
 // Set — Hash Set
-const set = new Set<number>([1, 2, 3])
-set.add(4)           // O(1)
-set.has(3)           // O(1)
-set.delete(3)        // O(1)
+const set = new Set&lt;number&gt;([1, 2, 3]);
+set.add(4); // O(1)
+set.has(3); // O(1)
+set.delete(3); // O(1)
 
 // Object as Map (key 只能是 string/symbol)
-const obj: Record<string, number> = {}
-obj['key'] = 1       // O(1)
+const obj: Record&lt;string, number&gt; = {};
+obj['key'] = 1; // O(1)
 
 // 模擬 Priority Queue（需自行實作或用 sorted insert）
 // JS 沒有內建 heap，面試中常需手寫 MinHeap
@@ -106,11 +106,11 @@ obj['key'] = 1       // O(1)
 // 高效 Deque 需自行用 Doubly Linked List 實作
 
 // 字串處理
-const s = 'hello'
-s.split('')          // O(n) — 轉成字元陣列
-[...s]               // O(n)
-s.charCodeAt(0)      // O(1)
-String.fromCharCode(104) // O(1)</code></pre>
+const s = 'hello';
+s.split(''); // O(n) — 轉成字元陣列
+[...s]; // O(n)
+s.charCodeAt(0); // O(1)
+String.fromCharCode(104); // O(1)</code></pre>
   <pre slot="python"><code class="language-python"># Python equivalent
 lst = [1, 2, 3]
 lst.append(4)        # O(1)

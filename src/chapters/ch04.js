@@ -38,45 +38,51 @@ export const content = `
 
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">class ListNode {
-  val: number
-  next: ListNode | null = null
-  constructor(val: number) { this.val = val }
+  val: number;
+  next: ListNode | null = null;
+  constructor(val: number) {
+    this.val = val;
+  }
 }
 
 class DoublyNode {
-  val: number
-  prev: DoublyNode | null = null
-  next: DoublyNode | null = null
-  constructor(val: number) { this.val = val }
+  val: number;
+  prev: DoublyNode | null = null;
+  next: DoublyNode | null = null;
+  constructor(val: number) {
+    this.val = val;
+  }
 }
 
 // 反轉 Linked List — O(n) time, O(1) space
 function reverseList(head: ListNode | null): ListNode | null {
-  let prev: ListNode | null = null
-  let curr = head
+  let prev: ListNode | null = null;
+  let curr = head;
   while (curr) {
-    const next = curr.next
-    curr.next = prev
-    prev = curr
-    curr = next
+    const next = curr.next;
+    curr.next = prev;
+    prev = curr;
+    curr = next;
   }
-  return prev
+  return prev;
 }
 
 // 合併兩個有序 Linked List
-function mergeTwoLists(
-  l1: ListNode | null,
-  l2: ListNode | null
-): ListNode | null {
-  const dummy = new ListNode(0)
-  let cur = dummy
-  while (l1 && l2) {
-    if (l1.val <= l2.val) { cur.next = l1; l1 = l1.next }
-    else                   { cur.next = l2; l2 = l2.next }
-    cur = cur.next!
+function mergeTwoLists(l1: ListNode | null, l2: ListNode | null): ListNode | null {
+  const dummy = new ListNode(0);
+  let cur = dummy;
+  while (l1 &amp;&amp; l2) {
+    if (l1.val &lt;= l2.val) {
+      cur.next = l1;
+      l1 = l1.next;
+    } else {
+      cur.next = l2;
+      l2 = l2.next;
+    }
+    cur = cur.next!;
   }
-  cur.next = l1 ?? l2
-  return dummy.next
+  cur.next = l1 ?? l2;
+  return dummy.next;
 }</code></pre>
   <pre slot="python"><code class="language-python">from typing import Optional
 
@@ -122,22 +128,22 @@ def merge_two_lists(
   <pre slot="typescript"><code class="language-typescript">// 刪除倒數第 N 個節點
 // 有了 dummy node，不需要特判 head 被刪除的情況
 function removeNthFromEnd(head: ListNode | null, n: number): ListNode | null {
-  const dummy = new ListNode(0)
-  dummy.next = head
-  let fast: ListNode | null = dummy
-  let slow: ListNode | null = dummy
+  const dummy = new ListNode(0);
+  dummy.next = head;
+  let fast: ListNode | null = dummy;
+  let slow: ListNode | null = dummy;
 
   // fast 先走 n+1 步
-  for (let i = 0; i <= n; i++) fast = fast!.next
+  for (let i = 0; i &lt;= n; i++) fast = fast!.next;
 
   while (fast) {
-    fast = fast.next
-    slow = slow!.next
+    fast = fast.next;
+    slow = slow!.next;
   }
 
   // slow 此時指向待刪節點的前一個
-  slow!.next = slow!.next!.next
-  return dummy.next
+  slow!.next = slow!.next!.next;
+  return dummy.next;
 }</code></pre>
   <pre slot="python"><code class="language-python">def remove_nth_from_end(head: Optional[ListNode], n: int) -> Optional[ListNode]:
     dummy = ListNode(0)
@@ -161,23 +167,25 @@ function removeNthFromEnd(head: ListNode | null, n: number): ListNode | null {
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// 偵測環路
 function hasCycle(head: ListNode | null): boolean {
-  let slow = head, fast = head
-  while (fast && fast.next) {
-    slow = slow!.next
-    fast = fast.next.next
-    if (slow === fast) return true
+  let slow = head,
+    fast = head;
+  while (fast &amp;&amp; fast.next) {
+    slow = slow!.next;
+    fast = fast.next.next;
+    if (slow === fast) return true;
   }
-  return false
+  return false;
 }
 
 // 找到 Linked List 中點
 function findMiddle(head: ListNode | null): ListNode | null {
-  let slow = head, fast = head
-  while (fast && fast.next) {
-    slow = slow!.next
-    fast = fast.next.next
+  let slow = head,
+    fast = head;
+  while (fast &amp;&amp; fast.next) {
+    slow = slow!.next;
+    fast = fast.next.next;
   }
-  return slow  // 奇數長度 → 正中間；偶數長度 → 後半段的第一個
+  return slow; // 奇數長度 → 正中間；偶數長度 → 後半段的第一個
 }</code></pre>
   <pre slot="python"><code class="language-python">def has_cycle(head: Optional[ListNode]) -> bool:
     slow = fast = head

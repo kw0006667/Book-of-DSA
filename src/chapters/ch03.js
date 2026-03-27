@@ -45,28 +45,28 @@ export const content = `
 
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// JS Array — sparse array, mixed types allowed (avoid in practice)
-const arr: number[] = [1, 2, 3, 4, 5]
+const arr: number[] = [1, 2, 3, 4, 5];
 
 // Slice (non-destructive) — O(k)
-arr.slice(1, 3)          // [2, 3]
+arr.slice(1, 3); // [2, 3]
 
 // Splice (in-place) — O(n)
-arr.splice(1, 2)         // removes 2 elements at index 1
+arr.splice(1, 2); // removes 2 elements at index 1
 
 // Spread / concat — O(n)
-const merged = [...arr, ...arr]
+const merged = [...arr, ...arr];
 
 // Fill — O(n)
-new Array(5).fill(0)     // [0, 0, 0, 0, 0]
+new Array(5).fill(0); // [0, 0, 0, 0, 0]
 
 // 2D array
-const matrix: number[][] = Array.from({ length: 3 }, () => new Array(3).fill(0))
+const matrix: number[][] = Array.from({ length: 3 }, () =&gt; new Array(3).fill(0));
 
 // Destructuring
-const [first, second, ...rest] = arr
+const [first, second, ...rest] = arr;
 
 // TypedArray — for binary data / performance
-const typed = new Int32Array(1000)  // 固定大小，比 Array 更省記憶體</code></pre>
+const typed = new Int32Array(1000); // 固定大小，比 Array 更省記憶體</code></pre>
   <pre slot="python"><code class="language-python">arr = [1, 2, 3, 4, 5]
 
 # Slice — O(k)
@@ -97,22 +97,22 @@ for x, y in zip(a, b):
 
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// 錯誤：在迴圈中用 + 串接 — O(n²) 總計
-let result = ''
+let result = '';
 for (const ch of 'hello world') {
-  result += ch  // 每次都建新字串
+  result += ch; // 每次都建新字串
 }
 
 // 正確：收集後一次 join — O(n)
-const parts: string[] = []
+const parts: string[] = [];
 for (const ch of 'hello world') {
-  parts.push(ch)
+  parts.push(ch);
 }
-const finalStr = parts.join('')
+const finalStr = parts.join('');
 
 // 字元轉換
-'a'.charCodeAt(0)             // 97
-String.fromCharCode(97)       // 'a'
-'A'.charCodeAt(0) - 'A'.charCodeAt(0)  // 0 (index in alphabet)</code></pre>
+'a'.charCodeAt(0); // 97
+String.fromCharCode(97); // 'a'
+'A'.charCodeAt(0) - 'A'.charCodeAt(0); // 0 (index in alphabet)</code></pre>
   <pre slot="python"><code class="language-python"># 錯誤：O(n²)
 result = ''
 for ch in 'hello world':
@@ -143,21 +143,21 @@ s[::-1]          # 反轉 — O(n)</code></pre>
 <dsa-code-block>
   <pre slot="typescript"><code class="language-typescript">// Prefix Sum
 function buildPrefixSum(arr: number[]): number[] {
-  const prefix = new Array(arr.length + 1).fill(0)
-  for (let i = 0; i < arr.length; i++) {
-    prefix[i + 1] = prefix[i] + arr[i]
+  const prefix = new Array(arr.length + 1).fill(0);
+  for (let i = 0; i &lt; arr.length; i++) {
+    prefix[i + 1] = prefix[i] + arr[i];
   }
-  return prefix
+  return prefix;
 }
 
 // Range sum [l, r] in O(1)
 function rangeSum(prefix: number[], l: number, r: number): number {
-  return prefix[r + 1] - prefix[l]
+  return prefix[r + 1] - prefix[l];
 }
 
-const arr = [1, 2, 3, 4, 5]
-const prefix = buildPrefixSum(arr)
-rangeSum(prefix, 1, 3)  // 2+3+4 = 9</code></pre>
+const arr = [1, 2, 3, 4, 5];
+const prefix = buildPrefixSum(arr);
+rangeSum(prefix, 1, 3); // 2+3+4 = 9</code></pre>
   <pre slot="python"><code class="language-python">def build_prefix_sum(arr: list[int]) -> list[int]:
     prefix = [0] * (len(arr) + 1)
     for i, x in enumerate(arr):
@@ -179,19 +179,24 @@ print(range_sum(prefix, 1, 3))  # 9</code></pre>
   <pre slot="typescript"><code class="language-typescript">// 順時針旋轉 90 度（in-place）
 // 步驟：先 transpose，再 reverse 每一列
 function rotate(matrix: number[][]): void {
-  const n = matrix.length
+  const n = matrix.length;
   // Transpose
-  for (let i = 0; i < n; i++) {
-    for (let j = i + 1; j < n; j++) {
-      [matrix[i][j], matrix[j][i]] = [matrix[j][i], matrix[i][j]]
+  for (let i = 0; i &lt; n; i++) {
+    for (let j = i + 1; j &lt; n; j++) {
+      [matrix[i][j], matrix[j][i]] = [matrix[j][i], matrix[i][j]];
     }
   }
   // Reverse each row
-  for (const row of matrix) row.reverse()
+  for (const row of matrix) row.reverse();
 }
 
 // 四個方向遍歷常數
-const DIRS = [[0,1],[0,-1],[1,0],[-1,0]]  // right, left, down, up</code></pre>
+const DIRS = [
+  [0, 1],
+  [0, -1],
+  [1, 0],
+  [-1, 0],
+]; // right, left, down, up</code></pre>
   <pre slot="python"><code class="language-python">from typing import List
 
 def rotate(matrix: List[List[int]]) -> None:
