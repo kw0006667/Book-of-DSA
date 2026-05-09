@@ -47,29 +47,56 @@
       <button id="drawer-close" aria-label="關閉目錄">✕</button>
     </div>
     <div class="drawer-toolbar">
-      <div class="language-menu-wrap" data-language-menu>
-        <button
-          type="button"
-          class="language-menu-trigger"
-          aria-label="選擇語言"
-          aria-haspopup="true"
-          aria-expanded="false"
-          title="語言選項（即將推出）"
-          disabled
-        >
-          <span class="language-label">繁體中文</span>
-          <span class="language-caret" aria-hidden="true">▾</span>
-        </button>
-        <div class="language-menu" role="menu" aria-label="語言選單" hidden>
-          <button type="button" class="language-menu-item" role="menuitemradio" aria-checked="true" disabled>
-            <span>繁體中文</span>
+      <div class="toolbar-select-group">
+        <span class="toolbar-select-label">語言</span>
+        <div class="language-menu-wrap" data-language-menu>
+          <button
+            type="button"
+            class="language-menu-trigger"
+            aria-label="選擇語言"
+            aria-haspopup="true"
+            aria-expanded="false"
+            title="語言選項（即將推出）"
+            disabled
+          >
+            <span class="language-label">繁體中文</span>
+            <span class="language-caret" aria-hidden="true">▾</span>
           </button>
-          <button type="button" class="language-menu-item" role="menuitemradio" aria-checked="false" disabled>
-            <span>English</span>
+          <div class="language-menu" role="menu" aria-label="語言選單" hidden>
+            <button type="button" class="language-menu-item" role="menuitemradio" aria-checked="true" disabled>
+              <span>繁體中文</span>
+            </button>
+            <button type="button" class="language-menu-item" role="menuitemradio" aria-checked="false" disabled>
+              <span>English</span>
+            </button>
+            <button type="button" class="language-menu-item" role="menuitemradio" aria-checked="false" disabled>
+              <span>日本語</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="toolbar-select-group">
+        <span class="toolbar-select-label">程式碼</span>
+        <div class="language-menu-wrap" data-code-language-menu>
+          <button
+            type="button"
+            class="language-menu-trigger"
+            aria-label="選擇預設程式碼語言"
+            aria-haspopup="true"
+            aria-expanded="false"
+            title="選擇預設程式碼語言"
+          >
+            <span class="language-label" data-code-language-label>Python</span>
+            <span class="language-caret" aria-hidden="true">▾</span>
           </button>
-          <button type="button" class="language-menu-item" role="menuitemradio" aria-checked="false" disabled>
-            <span>日本語</span>
-          </button>
+          <div class="language-menu" role="menu" aria-label="程式碼語言選單" hidden>
+            <button type="button" class="language-menu-item is-active" role="menuitemradio" aria-checked="true" data-code-language="python">
+              <span>Python</span>
+            </button>
+            <button type="button" class="language-menu-item" role="menuitemradio" aria-checked="false" data-code-language="typescript">
+              <span>TypeScript</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -116,29 +143,56 @@
       </div>
 
       <div class="sidebar-toolbar">
-        <div class="language-menu-wrap" data-language-menu>
-          <button
-            type="button"
-            class="language-menu-trigger"
-            aria-label="選擇語言"
-            aria-haspopup="true"
-            aria-expanded="false"
-            title="語言選項（即將推出）"
-            disabled
-          >
-            <span class="language-label">繁體中文</span>
-            <span class="language-caret" aria-hidden="true">▾</span>
-          </button>
-          <div class="language-menu" role="menu" aria-label="語言選單" hidden>
-            <button type="button" class="language-menu-item is-active" role="menuitemradio" aria-checked="true" disabled>
-              <span>繁體中文</span>
+        <div class="toolbar-select-group">
+          <span class="toolbar-select-label">語言</span>
+          <div class="language-menu-wrap" data-language-menu>
+            <button
+              type="button"
+              class="language-menu-trigger"
+              aria-label="選擇語言"
+              aria-haspopup="true"
+              aria-expanded="false"
+              title="語言選項（即將推出）"
+              disabled
+            >
+              <span class="language-label">繁體中文</span>
+              <span class="language-caret" aria-hidden="true">▾</span>
             </button>
-            <button type="button" class="language-menu-item" role="menuitemradio" aria-checked="false" disabled>
-              <span>English</span>
+            <div class="language-menu" role="menu" aria-label="語言選單" hidden>
+              <button type="button" class="language-menu-item is-active" role="menuitemradio" aria-checked="true" disabled>
+                <span>繁體中文</span>
+              </button>
+              <button type="button" class="language-menu-item" role="menuitemradio" aria-checked="false" disabled>
+                <span>English</span>
+              </button>
+              <button type="button" class="language-menu-item" role="menuitemradio" aria-checked="false" disabled>
+                <span>日本語</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="toolbar-select-group">
+          <span class="toolbar-select-label">程式碼</span>
+          <div class="language-menu-wrap" data-code-language-menu>
+            <button
+              type="button"
+              class="language-menu-trigger"
+              aria-label="選擇預設程式碼語言"
+              aria-haspopup="true"
+              aria-expanded="false"
+              title="選擇預設程式碼語言"
+            >
+              <span class="language-label" data-code-language-label>Python</span>
+              <span class="language-caret" aria-hidden="true">▾</span>
             </button>
-            <button type="button" class="language-menu-item" role="menuitemradio" aria-checked="false" disabled>
-              <span>日本語</span>
-            </button>
+            <div class="language-menu" role="menu" aria-label="程式碼語言選單" hidden>
+              <button type="button" class="language-menu-item is-active" role="menuitemradio" aria-checked="true" data-code-language="python">
+                <span>Python</span>
+              </button>
+              <button type="button" class="language-menu-item" role="menuitemradio" aria-checked="false" data-code-language="typescript">
+                <span>TypeScript</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>

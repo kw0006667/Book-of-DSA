@@ -352,7 +352,7 @@ body.leetcode-modal-open {
 
 .leetcode-modal {
   width: min(920px, calc(100vw - 40px));
-  max-height: min(90vh, 960px);
+  max-height: 90vh;
   background:
     radial-gradient(circle at top right, color-mix(in srgb, var(--tag-lc-bg) 42%, transparent) 0, transparent 30%),
     linear-gradient(180deg,
@@ -392,7 +392,7 @@ body.leetcode-modal-open {
 
 .leetcode-modal-scroll {
   overflow: auto;
-  max-height: min(90vh, 960px);
+  max-height: 90vh;
   position: relative;
   scroll-padding-top: 132px;
 }
@@ -724,13 +724,13 @@ body.leetcode-modal-open {
 
   .leetcode-modal {
     width: 100%;
-    max-height: 92vh;
+    max-height: 90vh;
     border-radius: 24px 24px 0 0;
     border-bottom: none;
   }
 
   .leetcode-modal-scroll {
-    max-height: 92vh;
+    max-height: 90vh;
   }
 
   .leetcode-modal-content {

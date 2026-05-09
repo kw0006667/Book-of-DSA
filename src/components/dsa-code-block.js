@@ -1,5 +1,14 @@
 import { LitElement, html } from 'lit'
 
+const CODE_LANGUAGE_CHANGE_EVENT = 'dsa-code-language-change'
+const CODE_LANGUAGE_STORAGE_KEY = 'dsa-code-language'
+const SUPPORTED_CODE_LANGUAGES = ['python', 'typescript']
+
+function getDefaultCodeLanguage() {
+  const stored = window.localStorage?.getItem(CODE_LANGUAGE_STORAGE_KEY)
+  return SUPPORTED_CODE_LANGUAGES.includes(stored) ? stored : 'python'
+}
+
 /**
  * <dsa-code-block> — per-block Python / TypeScript switcher
  *
@@ -23,15 +32,35 @@ class DsaCodeBlock extends LitElement {
 
   constructor() {
     super()
-    this._lang = 'typescript'
+    this._lang = getDefaultCodeLanguage()
     this._copied = false
+    this._hasLocalSelection = false
+    this._handleDefaultLanguageChange = (event) => {
+      if (this._hasLocalSelection) return
+      this._setLang(event.detail?.language ?? getDefaultCodeLanguage())
+    }
   }
 
   _switchLang(lang) {
+    this._hasLocalSelection = true
+    this._setLang(lang)
+  }
+
+  _setLang(lang) {
+    if (!this._hasLanguage(lang)) {
+      lang = lang === 'python' ? 'typescript' : 'python'
+    }
+
+    if (!this._hasLanguage(lang)) return
+
     this._lang = lang
     this.updateComplete.then(() => {
       if (window.Prism) window.Prism.highlightAllUnder(this)
     })
+  }
+
+  _hasLanguage(lang) {
+    return !!this.querySelector(`[slot="${lang}"]`)
   }
 
   _copy() {
@@ -47,6 +76,10 @@ class DsaCodeBlock extends LitElement {
   // After each render, directly show/hide the <pre> children.
   // Slots don't work in light DOM, so we manage visibility ourselves.
   updated() {
+    if (!this._hasLanguage(this._lang)) {
+      this._setLang(getDefaultCodeLanguage())
+    }
+
     ;['typescript', 'python'].forEach(lang => {
       const el = this.querySelector(`[slot="${lang}"]`)
       if (el) el.style.display = lang === this._lang ? 'block' : 'none'
@@ -59,20 +92,20 @@ class DsaCodeBlock extends LitElement {
 
     return html`
       <div class="code-tabs">
-        ${hasTs ? html`
-          <button
-            class="code-tab ${this._lang === 'typescript' ? 'active' : ''}"
-            @click=${() => this._switchLang('typescript')}
-          >
-            <span class="code-tab-icon">TS</span> TypeScript
-          </button>
-        ` : ''}
         ${hasPython ? html`
           <button
             class="code-tab ${this._lang === 'python' ? 'active' : ''}"
             @click=${() => this._switchLang('python')}
           >
             <span class="code-tab-icon">Py</span> Python
+          </button>
+        ` : ''}
+        ${hasTs ? html`
+          <button
+            class="code-tab ${this._lang === 'typescript' ? 'active' : ''}"
+            @click=${() => this._switchLang('typescript')}
+          >
+            <span class="code-tab-icon">TS</span> TypeScript
           </button>
         ` : ''}
         <button class="code-copy-btn ${this._copied ? 'copied' : ''}" @click=${this._copy}>
@@ -84,9 +117,16 @@ class DsaCodeBlock extends LitElement {
 
   connectedCallback() {
     super.connectedCallback()
+    window.addEventListener(CODE_LANGUAGE_CHANGE_EVENT, this._handleDefaultLanguageChange)
     this.updateComplete.then(() => {
+      this._setLang(getDefaultCodeLanguage())
       if (window.Prism) window.Prism.highlightAllUnder(this)
     })
+  }
+
+  disconnectedCallback() {
+    window.removeEventListener(CODE_LANGUAGE_CHANGE_EVENT, this._handleDefaultLanguageChange)
+    super.disconnectedCallback()
   }
 }
 
